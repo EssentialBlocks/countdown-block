@@ -170,6 +170,297 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/attributes.js":
+/*!***************************!*\
+  !*** ./src/attributes.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var attributes = {
+  id: {
+    type: "string"
+  },
+  date: {
+    type: "string",
+    source: "attribute",
+    selector: ".eb-countdown-get-date",
+    attribute: "data-date"
+  },
+  days: {
+    type: "string",
+    source: "text",
+    selector: ".eb-countdown-digits-days",
+    default: "0"
+  },
+  months: {
+    type: "string",
+    source: "text",
+    selector: ".eb-countdown-digits-months",
+    default: "0"
+  },
+  hours: {
+    type: "string",
+    source: "text",
+    selector: ".eb-countdown-digits-hours",
+    default: "0"
+  },
+  minutes: {
+    type: "string",
+    source: "text",
+    selector: ".eb-countdown-digits-minutes",
+    default: "0"
+  },
+  seconds: {
+    type: "string",
+    source: "text",
+    selector: ".eb-countdown-digits-seconds",
+    default: "0"
+  },
+  showDays: {
+    type: "boolean",
+    default: true
+  },
+  showHours: {
+    type: "boolean",
+    default: true
+  },
+  showMinutes: {
+    type: "boolean",
+    default: true
+  },
+  showSeconds: {
+    type: "boolean",
+    default: true
+  },
+  daysLabel: {
+    type: "string",
+    default: "Days"
+  },
+  hoursLabel: {
+    type: "string",
+    default: "Hours"
+  },
+  minutesLabel: {
+    type: "string",
+    default: "Minutes"
+  },
+  secondsLabel: {
+    type: "string",
+    default: "Seconds"
+  },
+  boxHeight: {
+    type: "number"
+  },
+  boxWidth: {
+    type: "number"
+  },
+  boxSpace: {
+    type: "number"
+  },
+  justifyItems: {
+    type: "string",
+    default: "center"
+  },
+  linkedPadding: {
+    type: "boolean",
+    default: true
+  },
+  paddingTop: {
+    type: "number",
+    default: 0
+  },
+  paddingRight: {
+    type: "number",
+    default: 0
+  },
+  paddingBottom: {
+    type: "number",
+    default: 0
+  },
+  paddingLeft: {
+    type: "number",
+    default: 0
+  },
+  radiusTopLeft: {
+    type: "number",
+    default: 5
+  },
+  radiusTopRight: {
+    type: "number",
+    default: 5
+  },
+  radiusBottomRight: {
+    type: "number",
+    default: 5
+  },
+  radiusBottomLeft: {
+    type: "number",
+    default: 5
+  },
+  showBorder: {
+    type: "boolean",
+    default: true
+  },
+  borderColor: {
+    type: "string"
+  },
+  borderSize: {
+    type: "number"
+  },
+  borderStyle: {
+    type: "string",
+    default: "solid"
+  },
+  showBoxShadow: {
+    type: "boolean",
+    default: true
+  },
+  shadowColor: {
+    type: "string"
+  },
+  hOffset: {
+    type: "number"
+  },
+  vOffset: {
+    type: "number"
+  },
+  shadowBlur: {
+    type: "number"
+  },
+  shadowSpread: {
+    type: "number"
+  },
+  inlineItems: {
+    type: "boolean",
+    default: false
+  },
+  digitFontSize: {
+    type: "number"
+  },
+  digitFontWeight: {
+    type: "number"
+  },
+  labelTransform: {
+    type: "string",
+    default: "none"
+  },
+  labelFontStyle: {
+    type: "string",
+    default: "normal"
+  },
+  labelFontDecoration: {
+    type: "string",
+    default: "initial"
+  },
+  labelLineHeight: {
+    type: "number"
+  },
+  labelLeftPadding: {
+    type: "number"
+  },
+  boxBackground: {
+    type: "string"
+  },
+  digitColor: {
+    type: "string"
+  },
+  labelColor: {
+    type: "string"
+  },
+  daysBoxBackground: {
+    type: "string"
+  },
+  linkedMargin: {
+    type: "boolean",
+    default: true
+  },
+  marginTop: {
+    type: "number",
+    default: 0
+  },
+  marginRight: {
+    type: "number",
+    default: 0
+  },
+  marginBottom: {
+    type: "number",
+    default: 0
+  },
+  marginLeft: {
+    type: "number",
+    default: 0
+  },
+  boxTextAlign: {
+    type: "string",
+    default: "center"
+  },
+  labelFontSize: {
+    type: "number"
+  },
+  wrapMarginTop: {
+    type: "number"
+  },
+  wrapMarginRight: {
+    type: "number"
+  },
+  wrapMarginBottom: {
+    type: "number"
+  },
+  wrapMarginLeft: {
+    type: "number"
+  },
+  wrapPaddingTop: {
+    type: "number"
+  },
+  wrapPaddingRight: {
+    type: "number"
+  },
+  wrapPaddingBottom: {
+    type: "number"
+  },
+  wrapPaddingLeft: {
+    type: "number"
+  },
+  wrapMarginUnit: {
+    type: "string",
+    default: "px"
+  },
+  wrapPaddingUnit: {
+    type: "string",
+    default: "px"
+  },
+  boxMarginUnit: {
+    type: "string",
+    default: "px"
+  },
+  boxPaddingUnit: {
+    type: "string",
+    default: "px"
+  },
+  radiusUnit: {
+    type: "string",
+    default: "%"
+  },
+  digitSizeUnit: {
+    type: "string",
+    default: "px"
+  },
+  labelSizeUnit: {
+    type: "string",
+    default: "px"
+  },
+  lineHeightUnit: {
+    type: "string",
+    default: "%"
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (attributes);
+
+/***/ }),
+
 /***/ "./src/edit.js":
 /*!*********************!*\
   !*** ./src/edit.js ***!
@@ -182,55 +473,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Edit; });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_2__);
-
-
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
- */
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-
-
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#edit
- *
- * @param {Object} [props]           Properties passed from the editor.
- * @param {string} [props.className] Class name generated for the block.
- *
- * @return {WPElement} Element to render.
- */
 
 function Edit(_ref) {
-  var className = _ref.className;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-    className: className
-  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Countdown – hello from the editor!', 'create-block'));
+  var isSelected = _ref.isSelected,
+      attributes = _ref.attributes,
+      setAttributes = _ref.setAttributes;
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "Edit");
 }
-
-/***/ }),
-
-/***/ "./src/editor.scss":
-/*!*************************!*\
-  !*** ./src/editor.scss ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -344,6 +593,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/save.js");
 /* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icon */ "./src/icon.js");
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
+
 
 
 
@@ -354,6 +605,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("ess
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Countdown", "essential-blocks"),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("", "essential-blocks"),
   category: "widgets",
+  attributes: _attributes__WEBPACK_IMPORTED_MODULE_6__["default"],
   icon: _icon__WEBPACK_IMPORTED_MODULE_5__["default"],
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
