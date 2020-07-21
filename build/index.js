@@ -5831,28 +5831,201 @@ var Inspector = function Inspector(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return save; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
- */
+/* harmony import */ var _box_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./box-container */ "./src/box-container.js");
+/* harmony import */ var _box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./box */ "./src/box.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#save
- *
- * @return {WPElement} Element to render.
- */
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-function save() {
-  return /*#__PURE__*/React.createElement("p", null, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Countdown – hello from the saved content!', 'create-block'));
-}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var Save = function Save(_ref) {
+  var attributes = _ref.attributes;
+  var date = attributes.date,
+      days = attributes.days,
+      hours = attributes.hours,
+      minutes = attributes.minutes,
+      seconds = attributes.seconds,
+      showDays = attributes.showDays,
+      showHours = attributes.showHours,
+      showMinutes = attributes.showMinutes,
+      showSeconds = attributes.showSeconds,
+      daysLabel = attributes.daysLabel,
+      hoursLabel = attributes.hoursLabel,
+      minutesLabel = attributes.minutesLabel,
+      secondsLabel = attributes.secondsLabel,
+      boxHeight = attributes.boxHeight,
+      boxWidth = attributes.boxWidth,
+      boxSpace = attributes.boxSpace,
+      justifyItems = attributes.justifyItems,
+      paddingTop = attributes.paddingTop,
+      paddingRight = attributes.paddingRight,
+      paddingBottom = attributes.paddingBottom,
+      paddingLeft = attributes.paddingLeft,
+      radiusTopLeft = attributes.radiusTopLeft,
+      radiusTopRight = attributes.radiusTopRight,
+      radiusBottomRight = attributes.radiusBottomRight,
+      radiusBottomLeft = attributes.radiusBottomLeft,
+      showBorder = attributes.showBorder,
+      borderSize = attributes.borderSize,
+      borderStyle = attributes.borderStyle,
+      hOffset = attributes.hOffset,
+      vOffset = attributes.vOffset,
+      shadowBlur = attributes.shadowBlur,
+      shadowSpread = attributes.shadowSpread,
+      inlineItems = attributes.inlineItems,
+      digitFontSize = attributes.digitFontSize,
+      digitFontWeight = attributes.digitFontWeight,
+      labelTransform = attributes.labelTransform,
+      labelFontStyle = attributes.labelFontStyle,
+      labelFontDecoration = attributes.labelFontDecoration,
+      labelLineHeight = attributes.labelLineHeight,
+      labelLeftPadding = attributes.labelLeftPadding,
+      boxBackground = attributes.boxBackground,
+      digitColor = attributes.digitColor,
+      labelColor = attributes.labelColor,
+      marginTop = attributes.marginTop,
+      marginRight = attributes.marginRight,
+      marginBottom = attributes.marginBottom,
+      marginLeft = attributes.marginLeft,
+      boxTextAlign = attributes.boxTextAlign,
+      borderColor = attributes.borderColor,
+      showBoxShadow = attributes.showBoxShadow,
+      shadowColor = attributes.shadowColor,
+      labelFontSize = attributes.labelFontSize,
+      wrapMarginTop = attributes.wrapMarginTop,
+      wrapMarginRight = attributes.wrapMarginRight,
+      wrapMarginBottom = attributes.wrapMarginBottom,
+      wrapMarginLeft = attributes.wrapMarginLeft,
+      wrapPaddingTop = attributes.wrapPaddingTop,
+      wrapPaddingRight = attributes.wrapPaddingRight,
+      wrapPaddingBottom = attributes.wrapPaddingBottom,
+      wrapPaddingLeft = attributes.wrapPaddingLeft,
+      wrapMarginUnit = attributes.wrapMarginUnit,
+      wrapPaddingUnit = attributes.wrapPaddingUnit,
+      boxMarginUnit = attributes.boxMarginUnit,
+      boxPaddingUnit = attributes.boxPaddingUnit,
+      radiusUnit = attributes.radiusUnit,
+      digitSizeUnit = attributes.digitSizeUnit,
+      labelSizeUnit = attributes.labelSizeUnit,
+      lineHeightUnit = attributes.lineHeightUnit;
+  var defaultBoxColor = "#7967ff";
+  var defaultDigitColor = "#ffffff";
+  var defaultLabelColor = "#ffffff";
+  var wrapperStyle = {
+    marginTop: "".concat(wrapMarginTop || 0).concat(wrapMarginUnit),
+    marginRight: "".concat(wrapMarginRight || 0).concat(wrapMarginUnit),
+    marginBottom: "".concat(wrapMarginBottom || 0).concat(wrapMarginUnit),
+    marginLeft: "".concat(wrapMarginLeft || 0).concat(wrapMarginUnit),
+    paddingTop: "".concat(wrapPaddingTop || 0).concat(wrapPaddingUnit),
+    paddingRight: "".concat(wrapPaddingRight || 0).concat(wrapPaddingUnit),
+    paddingBottom: "".concat(wrapPaddingBottom || 0).concat(wrapPaddingUnit),
+    paddingLeft: "".concat(wrapPaddingLeft || 0).concat(wrapPaddingUnit)
+  };
+  var boxContainerStyle = {
+    justifyContent: justifyItems
+  };
+  var boxStyle = {
+    height: "".concat(boxHeight || 120, "px"),
+    width: "".concat(boxWidth || 120, "px"),
+    margin: "0px ".concat(boxSpace || 10, "px"),
+    padding: "".concat(paddingTop).concat(boxPaddingUnit, " ").concat(paddingRight).concat(boxPaddingUnit, " ").concat(paddingBottom).concat(boxPaddingUnit, " ").concat(paddingLeft).concat(boxPaddingUnit),
+    border: showBorder ? "".concat(borderSize || 0, "px ").concat(borderStyle, " ").concat(borderColor || "#000000") : "none",
+    boxShadow: showBoxShadow ? "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(shadowBlur || 0, "px ").concat(shadowSpread || 0, "px ").concat(shadowColor || "#000000") : "none",
+    borderRadius: "".concat(radiusTopLeft).concat(radiusUnit, " ").concat(radiusTopRight).concat(radiusUnit, " ").concat(radiusBottomRight).concat(radiusUnit, " ").concat(radiusBottomLeft).concat(radiusUnit),
+    backgroundColor: boxBackground ? boxBackground : defaultBoxColor
+  };
+  var boxItemStyle = {
+    marginTop: "".concat(marginTop).concat(boxMarginUnit),
+    marginRight: "".concat(marginRight).concat(boxMarginUnit),
+    marginBottom: "".concat(marginBottom).concat(boxMarginUnit),
+    marginLeft: "".concat(marginLeft).concat(boxMarginUnit),
+    textAlign: boxTextAlign,
+    // lineHeight: "normal", // Add this line to fix box line height
+    display: inlineItems ? "flex" : undefined,
+    justifyContent: inlineItems ? "center" : undefined,
+    alignItems: inlineItems ? "center" : undefined
+  };
+  var digitStyle = {
+    fontSize: "".concat(digitFontSize || 48).concat(digitSizeUnit),
+    fontWeight: "".concat(digitFontWeight || 400),
+    color: digitColor || defaultDigitColor,
+    display: inlineItems ? "flex" : "block",
+    flex: inlineItems ? 1 : undefined,
+    justifyContent: inlineItems ? "center" : undefined
+  };
+  var labelStyle = {
+    fontSize: "".concat(labelFontSize || 14).concat(labelSizeUnit),
+    textTransform: labelTransform,
+    fontStyle: labelFontStyle,
+    textDecoration: labelFontDecoration,
+    lineHeight: "".concat(labelLineHeight || 100).concat(lineHeightUnit),
+    paddingLeft: "".concat(labelLeftPadding || 0, "px"),
+    color: labelColor || defaultLabelColor,
+    display: inlineItems ? "flex" : "block",
+    flex: inlineItems ? 1 : undefined,
+    justifyContent: inlineItems ? "flex-start" : undefined
+  };
+  var displayDays = showDays ? "block" : "none";
+  var displayHours = showHours ? "block" : "none";
+  var displayMinutes = showMinutes ? "block" : "none";
+  var displaySeconds = showSeconds ? "block" : "none";
+  return /*#__PURE__*/React.createElement(_box_container__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    boxContainerStyle: boxContainerStyle,
+    wrapperStyle: wrapperStyle
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "eb-countdown-get-date",
+    style: {
+      display: "none"
+    },
+    "data-date": date ? date.toString() : ""
+  }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    boxName: "days",
+    boxStyle: _objectSpread(_objectSpread({}, boxStyle), {}, {
+      display: displayDays
+    }),
+    boxItemStyle: boxItemStyle,
+    label: daysLabel,
+    digit: days,
+    digitStyle: digitStyle,
+    labelStyle: labelStyle
+  }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    boxName: "hours",
+    boxStyle: _objectSpread(_objectSpread({}, boxStyle), {}, {
+      display: displayHours
+    }),
+    boxItemStyle: boxItemStyle,
+    label: hoursLabel,
+    digit: hours,
+    digitStyle: digitStyle,
+    labelStyle: labelStyle
+  }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    boxName: "minutes",
+    boxStyle: _objectSpread(_objectSpread({}, boxStyle), {}, {
+      display: displayMinutes
+    }),
+    boxItemStyle: boxItemStyle,
+    label: minutesLabel,
+    digit: minutes,
+    digitStyle: digitStyle,
+    labelStyle: labelStyle
+  }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    boxName: "seconds",
+    boxStyle: _objectSpread(_objectSpread({}, boxStyle), {}, {
+      display: displaySeconds
+    }),
+    boxItemStyle: boxItemStyle,
+    label: secondsLabel,
+    digit: seconds,
+    digitStyle: digitStyle,
+    labelStyle: labelStyle
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Save);
 
 /***/ }),
 
