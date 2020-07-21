@@ -15,6 +15,7 @@ import {
 	Dropdown,
 } from "@wordpress/components";
 import DateTime from "react-datetime";
+
 /**
  * Internal dependencies
  */
@@ -139,6 +140,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 				>
 					<DateTime
 						value={date}
+						dateFormat="YYYY-MM-DD"
+						timeFormat="h:mm:ss"
 						onChange={(momentObj) => onDateTimeChange(momentObj)}
 					/>
 				</BaseControl>

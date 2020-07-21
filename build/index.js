@@ -4627,10 +4627,12 @@ var FONT_STYLES = [{
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _box__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./box */ "./src/box.js");
-/* harmony import */ var _box_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./box-container */ "./src/box-container.js");
-/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
-/* harmony import */ var _util_uuid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/uuid */ "./util/uuid.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./box */ "./src/box.js");
+/* harmony import */ var _box_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./box-container */ "./src/box-container.js");
+/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
+/* harmony import */ var _util_uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/uuid */ "./util/uuid.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -4662,7 +4664,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 /**
  * WordPress dependencies
  */
-var Component = wp.element.Component;
+
 /**
  * Internal dependencies
  */
@@ -4687,7 +4689,7 @@ var Edit = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       // Generate unique id
-      var id = Object(_util_uuid__WEBPACK_IMPORTED_MODULE_3__["default"])().substr(0, 5);
+      var id = Object(_util_uuid__WEBPACK_IMPORTED_MODULE_4__["default"])().substr(0, 5);
       this.props.setAttributes({
         id: id
       });
@@ -4837,16 +4839,16 @@ var Edit = /*#__PURE__*/function (_Component) {
       var displayHours = showHours ? "block" : "none";
       var displayMinutes = showMinutes ? "block" : "none";
       var displaySeconds = showSeconds ? "block" : "none";
-      return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], {
         attributes: attributes,
         setAttributes: setAttributes
       }),
       /*#__PURE__*/
       // Edit view here
-      React.createElement(_box_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      React.createElement(_box_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
         boxContainerStyle: boxContainerStyle,
         wrapperStyle: wrapperStyle
-      }, /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_0__["default"], {
+      }, /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
         boxName: "days",
         boxStyle: _objectSpread(_objectSpread({}, boxStyle), {}, {
           display: displayDays
@@ -4856,7 +4858,7 @@ var Edit = /*#__PURE__*/function (_Component) {
         digit: days,
         digitStyle: digitStyle,
         labelStyle: labelStyle
-      }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_0__["default"], {
+      }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
         boxName: "hours",
         boxStyle: _objectSpread(_objectSpread({}, boxStyle), {}, {
           display: displayHours
@@ -4866,7 +4868,7 @@ var Edit = /*#__PURE__*/function (_Component) {
         digitStyle: digitStyle,
         label: hoursLabel,
         labelStyle: labelStyle
-      }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_0__["default"], {
+      }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
         boxName: "minutes",
         boxStyle: _objectSpread(_objectSpread({}, boxStyle), {}, {
           display: displayMinutes
@@ -4876,7 +4878,7 @@ var Edit = /*#__PURE__*/function (_Component) {
         digit: minutes,
         digitStyle: digitStyle,
         labelStyle: labelStyle
-      }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_0__["default"], {
+      }), /*#__PURE__*/React.createElement(_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
         boxName: "seconds",
         boxStyle: _objectSpread(_objectSpread({}, boxStyle), {}, {
           display: displaySeconds
@@ -4891,7 +4893,7 @@ var Edit = /*#__PURE__*/function (_Component) {
   }]);
 
   return Edit;
-}(Component);
+}(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Edit);
 
@@ -5174,6 +5176,8 @@ var Inspector = function Inspector(_ref) {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Countdown Due Date")
   }, /*#__PURE__*/React.createElement(react_datetime__WEBPACK_IMPORTED_MODULE_3___default.a, {
     value: date,
+    dateFormat: "YYYY-MM-DD",
+    timeFormat: "h:mm:ss",
     onChange: function onChange(momentObj) {
       return onDateTimeChange(momentObj);
     }
@@ -6441,6 +6445,17 @@ var uuid = function uuid() {
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["components"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!******************************************!*\
+  !*** external {"this":["wp","element"]} ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["element"]; }());
 
 /***/ }),
 
