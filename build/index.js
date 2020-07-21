@@ -4408,20 +4408,16 @@ var attributes = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
 var BoxContainer = function BoxContainer(_ref) {
   var wrapperStyle = _ref.wrapperStyle,
       boxContainerStyle = _ref.boxContainerStyle,
       children = _ref.children;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     className: "eb-countdown-wrapper",
     style: wrapperStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "eb-countdown-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, /*#__PURE__*/React.createElement("ul", {
     className: "eb-countdown-items",
     style: boxContainerStyle
   }, children)));
@@ -4440,10 +4436,6 @@ var BoxContainer = function BoxContainer(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
 var Box = function Box(_ref) {
   var boxName = _ref.boxName,
       boxStyle = _ref.boxStyle,
@@ -4452,16 +4444,16 @@ var Box = function Box(_ref) {
       digit = _ref.digit,
       digitStyle = _ref.digitStyle,
       labelStyle = _ref.labelStyle;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  return /*#__PURE__*/React.createElement("li", {
     className: "eb-countdown-item",
     style: boxStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "eb-countdown-".concat(boxName),
     style: boxItemStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     className: "eb-countdown-digits eb-countdown-digits-".concat(boxName),
     style: digitStyle
-  }, digit), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, digit), /*#__PURE__*/React.createElement("span", {
     className: "eb-countdown-label",
     style: labelStyle
   }, label)));
@@ -4475,7 +4467,7 @@ var Box = function Box(_ref) {
 /*!**************************!*\
   !*** ./src/constants.js ***!
   \**************************/
-/*! exports provided: BOX_JUSTIFY_CONTENT, BORDER_STYLES, DIGIT_FONT_WEIGHT, LABEL_TRANSFORM, FONT_STYLES, FONT_DECORATION, TEXT_ALIGN */
+/*! exports provided: BOX_JUSTIFY_CONTENT, BORDER_STYLES, DIGIT_FONT_WEIGHT, LABEL_TRANSFORM, FONT_DECORATION, TEXT_ALIGN, FONT_STYLES */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4484,9 +4476,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BORDER_STYLES", function() { return BORDER_STYLES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DIGIT_FONT_WEIGHT", function() { return DIGIT_FONT_WEIGHT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LABEL_TRANSFORM", function() { return LABEL_TRANSFORM; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FONT_STYLES", function() { return FONT_STYLES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FONT_DECORATION", function() { return FONT_DECORATION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEXT_ALIGN", function() { return TEXT_ALIGN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FONT_STYLES", function() { return FONT_STYLES; });
 var BOX_JUSTIFY_CONTENT = [{
   label: "Start",
   value: "flex-start"
@@ -4614,7 +4606,6 @@ var FONT_STYLES = [{
   label: "Oblique",
   value: "oblique"
 }];
-
 
 /***/ }),
 

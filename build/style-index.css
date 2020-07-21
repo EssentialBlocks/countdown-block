@@ -16,6 +16,10 @@
   height: 100%;
   width: 100%; }
 
+.eb-typography-base div {
+  display: flex;
+  justify-content: space-between; }
+
 .input-wrapper {
   width: 20%;
   display: flex;
