@@ -14,10 +14,10 @@ import {
 	BaseControl,
 	Dropdown,
 } from "@wordpress/components";
+import DateTime from "react-datetime";
 /**
  * Internal dependencies
  */
-import DateTime from "react-datetime";
 import {
 	BORDER_STYLES,
 	BOX_JUSTIFY_CONTENT,
@@ -110,6 +110,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 		const counter = () => {
 			let now = new Date().getTime();
+
 			let timer = new Date(time - now);
 
 			// Calculate days, hours, minutes and seconds

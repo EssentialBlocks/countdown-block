@@ -51,10 +51,18 @@ function create_block_countdown_block_init() {
 		filemtime( "$dir/$style_css" )
 	);
 
+	$datetime_css = 'src/css/react-datetime.css';
+	wp_enqueue_style(
+	   'react-datetime-style',
+	   plugins_url($datetime_css, __FILE__),
+	   array()
+   );
+
 	register_block_type( 'create-block/countdown', array(
 		'editor_script' => 'create-block-countdown-block-editor',
 		'editor_style'  => 'create-block-countdown-block-editor',
 		'style'         => 'create-block-countdown-block',
+		'datetime_style'=> 'react-datetime-style',
 	) );
 }
 add_action( 'init', 'create_block_countdown_block_init' );
