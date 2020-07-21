@@ -58,11 +58,22 @@ function create_block_countdown_block_init() {
 	   array()
    );
 
+
+	$frontend_js = 'src/frontend.js';
+	wp_enqueue_script(
+		'essential-blocks-countdown-frontend',
+		plugins_url($frontend_js, __FILE__),
+		array( "jquery","wp-editor"),
+		true
+	);
+
+
 	register_block_type( 'create-block/countdown', array(
 		'editor_script' => 'create-block-countdown-block-editor',
 		'editor_style'  => 'create-block-countdown-block-editor',
 		'style'         => 'create-block-countdown-block',
 		'datetime_style'=> 'react-datetime-style',
+		'countdown_frontend' => 'essential-blocks-countdown-frontend',
 	) );
 }
 add_action( 'init', 'create_block_countdown_block_init' );
