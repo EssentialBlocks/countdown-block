@@ -7,9 +7,9 @@ import save from "./save";
 import icon from "./icon";
 import attributes from "./attributes";
 
-registerBlockType("essential-blocks/countdown", {
-	title: __("Countdown", "essential-blocks"),
-	description: __("", "essential-blocks"),
+registerBlockType("block/countdown", {
+	title: __("Countdown", "block"),
+	description: __("", "block"),
 	category: "widgets",
 	attributes,
 	icon,

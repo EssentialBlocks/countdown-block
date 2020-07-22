@@ -1,14 +1,12 @@
 {
-	"name": "essential-blocks/countdown",
+	"name": "block/countdown",
 	"title": "Countdown",
 	"category": "widgets",
-	"icon": "smiley",
 	"description": "",
-	"textdomain": "essential-blocks",
+	"textdomain": "countdown",
 	"supports": {
 		"html": false
 	},
 	"editorScript": "file:./build/index.js",
-	"editorStyle": "file:./build/index.css",
 	"style": "file:./build/style-index.css"
 }
