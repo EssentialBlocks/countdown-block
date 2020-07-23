@@ -92,6 +92,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		boxTextAlign,
 		borderColor,
 		shadowColor,
+		labelFontFamily,
 		labelFontSize,
 		wrapMarginTop,
 		wrapMarginRight,
@@ -638,6 +639,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 							)}
 							renderContent={() => (
 								<div style={{ padding: "1rem" }}>
+									<FontPicker
+										label={__("Font Family")}
+										value={labelFontFamily}
+										onChange={(labelFontFamily) =>
+											setAttributes({ labelFontFamily })
+										}
+									/>
 									<UnitControl
 										selectedUnit={labelSizeUnit}
 										unitTypes={[

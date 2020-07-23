@@ -36,8 +36,13 @@ const Save = ({ attributes }) => {
 		shadowBlur,
 		shadowSpread,
 		inlineItems,
+		digitFontFamily,
 		digitFontSize,
 		digitFontWeight,
+		digitLetterSpacing,
+		digitLetterSpacingUnit,
+		digitLineHeight,
+		digitLineHeightUnit,
 		labelTransform,
 		labelFontStyle,
 		labelFontDecoration,
@@ -54,6 +59,7 @@ const Save = ({ attributes }) => {
 		borderColor,
 		showBoxShadow,
 		shadowColor,
+		labelFontFamily,
 		labelFontSize,
 		wrapMarginTop,
 		wrapMarginRight,
@@ -70,7 +76,7 @@ const Save = ({ attributes }) => {
 		radiusUnit,
 		digitSizeUnit,
 		labelSizeUnit,
-		lineHeightUnit
+		lineHeightUnit,
 	} = attributes;
 
 	const defaultBoxColor = "#7967ff";
@@ -85,11 +91,11 @@ const Save = ({ attributes }) => {
 		paddingTop: `${wrapPaddingTop || 0}${wrapPaddingUnit}`,
 		paddingRight: `${wrapPaddingRight || 0}${wrapPaddingUnit}`,
 		paddingBottom: `${wrapPaddingBottom || 0}${wrapPaddingUnit}`,
-		paddingLeft: `${wrapPaddingLeft || 0}${wrapPaddingUnit}`
+		paddingLeft: `${wrapPaddingLeft || 0}${wrapPaddingUnit}`,
 	};
 
 	const boxContainerStyle = {
-		justifyContent: justifyItems
+		justifyContent: justifyItems,
 	};
 
 	const boxStyle = {
@@ -101,11 +107,12 @@ const Save = ({ attributes }) => {
 			? `${borderSize || 0}px ${borderStyle} ${borderColor || "#000000"}`
 			: "none",
 		boxShadow: showBoxShadow
-			? `${hOffset || 0}px ${vOffset || 0}px ${shadowBlur ||
-					0}px ${shadowSpread || 0}px ${shadowColor || "#000000"}`
+			? `${hOffset || 0}px ${vOffset || 0}px ${shadowBlur || 0}px ${
+					shadowSpread || 0
+			  }px ${shadowColor || "#000000"}`
 			: "none",
 		borderRadius: `${radiusTopLeft}${radiusUnit} ${radiusTopRight}${radiusUnit} ${radiusBottomRight}${radiusUnit} ${radiusBottomLeft}${radiusUnit}`,
-		backgroundColor: boxBackground ? boxBackground : defaultBoxColor
+		backgroundColor: boxBackground ? boxBackground : defaultBoxColor,
 	};
 
 	const boxItemStyle = {
@@ -117,19 +124,27 @@ const Save = ({ attributes }) => {
 		// lineHeight: "normal", // Add this line to fix box line height
 		display: inlineItems ? "flex" : undefined,
 		justifyContent: inlineItems ? "center" : undefined,
-		alignItems: inlineItems ? "center" : undefined
+		alignItems: inlineItems ? "center" : undefined,
 	};
 
 	const digitStyle = {
+		fontFamily: digitFontFamily,
 		fontSize: `${digitFontSize || 48}${digitSizeUnit}`,
 		fontWeight: `${digitFontWeight || 400}`,
+		letterSpacing: digitLetterSpacing
+			? digitLetterSpacing + digitLetterSpacingUnit
+			: undefined,
+		lineHeight: digitLineHeight
+			? digitLineHeight + digitLineHeightUnit
+			: undefined,
 		color: digitColor || defaultDigitColor,
 		display: inlineItems ? "flex" : "block",
 		flex: inlineItems ? 1 : undefined,
-		justifyContent: inlineItems ? "center" : undefined
+		justifyContent: inlineItems ? "center" : undefined,
 	};
 
 	const labelStyle = {
+		fontFamily: labelFontFamily,
 		fontSize: `${labelFontSize || 14}${labelSizeUnit}`,
 		textTransform: labelTransform,
 		fontStyle: labelFontStyle,
@@ -139,7 +154,7 @@ const Save = ({ attributes }) => {
 		color: labelColor || defaultLabelColor,
 		display: inlineItems ? "flex" : "block",
 		flex: inlineItems ? 1 : undefined,
-		justifyContent: inlineItems ? "flex-start" : undefined
+		justifyContent: inlineItems ? "flex-start" : undefined,
 	};
 
 	const displayDays = showDays ? "block" : "none";

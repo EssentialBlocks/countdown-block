@@ -4352,6 +4352,9 @@ var attributes = {
     type: "string",
     "default": "center"
   },
+  labelFontFamily: {
+    type: "string"
+  },
   labelFontSize: {
     type: "number"
   },
@@ -4775,6 +4778,7 @@ var Edit = /*#__PURE__*/function (_Component) {
           boxTextAlign = attributes.boxTextAlign,
           borderColor = attributes.borderColor,
           shadowColor = attributes.shadowColor,
+          labelFontFamily = attributes.labelFontFamily,
           labelFontSize = attributes.labelFontSize,
           wrapMarginTop = attributes.wrapMarginTop,
           wrapMarginRight = attributes.wrapMarginRight,
@@ -4840,6 +4844,7 @@ var Edit = /*#__PURE__*/function (_Component) {
         justifyContent: inlineItems ? "center" : undefined
       };
       var labelStyle = {
+        fontFamily: labelFontFamily,
         fontSize: "".concat(labelFontSize || 14).concat(labelSizeUnit),
         textTransform: labelTransform,
         fontStyle: labelFontStyle,
@@ -5141,6 +5146,7 @@ var Inspector = function Inspector(_ref) {
       boxTextAlign = attributes.boxTextAlign,
       borderColor = attributes.borderColor,
       shadowColor = attributes.shadowColor,
+      labelFontFamily = attributes.labelFontFamily,
       labelFontSize = attributes.labelFontSize,
       wrapMarginTop = attributes.wrapMarginTop,
       wrapMarginRight = attributes.wrapMarginRight,
@@ -5821,7 +5827,15 @@ var Inspector = function Inspector(_ref) {
         style: {
           padding: "1rem"
         }
-      }, /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, /*#__PURE__*/React.createElement(_util_typography_control_FontPicker__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Font Family"),
+        value: labelFontFamily,
+        onChange: function onChange(labelFontFamily) {
+          return setAttributes({
+            labelFontFamily: labelFontFamily
+          });
+        }
+      }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
         selectedUnit: labelSizeUnit,
         unitTypes: [{
           label: "px",
@@ -5974,8 +5988,13 @@ var Save = function Save(_ref) {
       shadowBlur = attributes.shadowBlur,
       shadowSpread = attributes.shadowSpread,
       inlineItems = attributes.inlineItems,
+      digitFontFamily = attributes.digitFontFamily,
       digitFontSize = attributes.digitFontSize,
       digitFontWeight = attributes.digitFontWeight,
+      digitLetterSpacing = attributes.digitLetterSpacing,
+      digitLetterSpacingUnit = attributes.digitLetterSpacingUnit,
+      digitLineHeight = attributes.digitLineHeight,
+      digitLineHeightUnit = attributes.digitLineHeightUnit,
       labelTransform = attributes.labelTransform,
       labelFontStyle = attributes.labelFontStyle,
       labelFontDecoration = attributes.labelFontDecoration,
@@ -5992,6 +6011,7 @@ var Save = function Save(_ref) {
       borderColor = attributes.borderColor,
       showBoxShadow = attributes.showBoxShadow,
       shadowColor = attributes.shadowColor,
+      labelFontFamily = attributes.labelFontFamily,
       labelFontSize = attributes.labelFontSize,
       wrapMarginTop = attributes.wrapMarginTop,
       wrapMarginRight = attributes.wrapMarginRight,
@@ -6047,14 +6067,18 @@ var Save = function Save(_ref) {
     alignItems: inlineItems ? "center" : undefined
   };
   var digitStyle = {
+    fontFamily: digitFontFamily,
     fontSize: "".concat(digitFontSize || 48).concat(digitSizeUnit),
     fontWeight: "".concat(digitFontWeight || 400),
+    letterSpacing: digitLetterSpacing ? digitLetterSpacing + digitLetterSpacingUnit : undefined,
+    lineHeight: digitLineHeight ? digitLineHeight + digitLineHeightUnit : undefined,
     color: digitColor || defaultDigitColor,
     display: inlineItems ? "flex" : "block",
     flex: inlineItems ? 1 : undefined,
     justifyContent: inlineItems ? "center" : undefined
   };
   var labelStyle = {
+    fontFamily: labelFontFamily,
     fontSize: "".concat(labelFontSize || 14).concat(labelSizeUnit),
     textTransform: labelTransform,
     fontStyle: labelFontStyle,

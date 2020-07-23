@@ -88,6 +88,7 @@ class Edit extends Component {
 			boxTextAlign,
 			borderColor,
 			shadowColor,
+			labelFontFamily,
 			labelFontSize,
 			wrapMarginTop,
 			wrapMarginRight,
@@ -171,6 +172,7 @@ class Edit extends Component {
 		};
 
 		const labelStyle = {
+			fontFamily: labelFontFamily,
 			fontSize: `${labelFontSize || 14}${labelSizeUnit}`,
 			textTransform: labelTransform,
 			fontStyle: labelFontStyle,

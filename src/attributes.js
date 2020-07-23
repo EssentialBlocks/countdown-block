@@ -233,6 +233,9 @@ const attributes = {
 		type: "string",
 		default: "center",
 	},
+	labelFontFamily: {
+		type: "string",
+	},
 	labelFontSize: {
 		type: "number",
 	},
