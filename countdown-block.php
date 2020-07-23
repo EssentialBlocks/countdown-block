@@ -19,6 +19,14 @@
  *
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
+
+if( ! class_exists('EB_Font_Loader') ) {
+	require_once __DIR__ . '/includes/font-loader.php';
+}
+if( ! class_exists('EB_Post_Meta') ) {
+	require_once __DIR__ . '/includes/post-meta.php';
+}
+
 function create_block_countdown_block_init() {
 	$dir = dirname( __FILE__ );
 
@@ -63,11 +71,13 @@ function create_block_countdown_block_init() {
 	);
 
 
-	register_block_type( 'block/countdown', array(
-		'editor_script' => 'create-block-countdown-block-editor',
-		'style'         => 'create-block-countdown-block',
-		'datetime_style'=> 'react-datetime-style',
-		'countdown_frontend' => 'essential-blocks-countdown-frontend',
-	) );
+	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/countdown' ) ) {
+    register_block_type( 'block/countdown', array(
+      'editor_script' => 'create-block-countdown-block-editor',
+      'style'         => 'create-block-countdown-block',
+      'datetime_style'=> 'react-datetime-style',
+      'countdown_frontend' => 'essential-blocks-countdown-frontend',
+    ) );
+  }
 }
 add_action( 'init', 'create_block_countdown_block_init' );

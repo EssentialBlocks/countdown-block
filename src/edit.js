@@ -66,8 +66,13 @@ class Edit extends Component {
 			shadowBlur,
 			shadowSpread,
 			inlineItems,
+			digitFontFamily,
 			digitFontSize,
 			digitFontWeight,
+			digitLetterSpacing,
+			digitLetterSpacingUnit,
+			digitLineHeight,
+			digitLineHeightUnit,
 			labelTransform,
 			labelFontStyle,
 			labelFontDecoration,
@@ -150,8 +155,15 @@ class Edit extends Component {
 		};
 
 		const digitStyle = {
+			fontFamily: digitFontFamily,
 			fontSize: `${digitFontSize || 48}${digitSizeUnit}`,
 			fontWeight: `${digitFontWeight || 400}`,
+			letterSpacing: digitLetterSpacing
+				? digitLetterSpacing + digitLetterSpacingUnit
+				: undefined,
+			lineHeight: digitLineHeight
+				? digitLineHeight + digitLineHeightUnit
+				: undefined,
 			color: digitColor ? digitColor : defaultDigitColor,
 			display: inlineItems ? "flex" : "block",
 			flex: inlineItems ? 1 : undefined,

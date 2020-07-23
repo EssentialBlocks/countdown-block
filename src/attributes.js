@@ -156,11 +156,28 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	digitFontFamily: {
+		type: "string",
+	},
 	digitFontSize: {
 		type: "number",
 	},
 	digitFontWeight: {
 		type: "number",
+	},
+	digitLetterSpacing: {
+		type: "number",
+	},
+	digitLetterSpacingUnit: {
+		type: "string",
+		default: "px",
+	},
+	digitLineHeight: {
+		type: "number",
+	},
+	digitLineHeightUnit: {
+		type: "string",
+		default: "px",
 	},
 	labelTransform: {
 		type: "string",

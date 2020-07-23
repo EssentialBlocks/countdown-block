@@ -31,6 +31,7 @@ import {
 import DimensionsControl from "../util/dimensions-control";
 import UnitControl from "../util/unit-control";
 import ColorControl from "../util/color-control";
+import FontPicker from "../util/typography-control/FontPicker";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -69,8 +70,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		shadowBlur,
 		shadowSpread,
 		inlineItems,
+		digitFontFamily,
 		digitFontSize,
 		digitFontWeight,
+		digitLetterSpacing,
+		digitLetterSpacingUnit,
+		digitLineHeight,
+		digitLineHeightUnit,
 		labelTransform,
 		labelFontStyle,
 		labelFontDecoration,
@@ -130,6 +136,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 		window[id] = setInterval(counter, 1000);
 	};
+
+	const DIGIT_LINE_HEIGHT_MAX = digitLineHeightUnit === "em" ? 10 : 100;
+	const DIGIT_LINE_HEIGHT_STEP = digitLineHeightUnit === "em" ? 0.1 : 1;
+
+	const DIGIT_LETTER_SPACING_MAX = digitLetterSpacingUnit === "em" ? 10 : 100;
+	const DIGIT_LETTER_SPACING_STEP = digitLetterSpacingUnit === "em" ? 0.1 : 1;
 
 	return (
 		<InspectorControls key="controls">
@@ -510,6 +522,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 							)}
 							renderContent={() => (
 								<div style={{ padding: "1rem" }}>
+									<FontPicker
+										label={__("Font Family")}
+										value={digitFontFamily}
+										onChange={(digitFontFamily) =>
+											setAttributes({ digitFontFamily })
+										}
+									/>
+
 									<UnitControl
 										selectedUnit={digitSizeUnit}
 										unitTypes={[
@@ -541,6 +561,54 @@ const Inspector = ({ attributes, setAttributes }) => {
 										onChange={(newValue) =>
 											setAttributes({ digitFontWeight: newValue })
 										}
+									/>
+
+									<UnitControl
+										selectedUnit={digitLineHeightUnit}
+										unitTypes={[
+											{ label: "px", value: "px" },
+											{ label: "em", value: "em" },
+											{ label: "%", value: "%" },
+										]}
+										onClick={(digitLineHeightUnit) =>
+											setAttributes({ digitLineHeightUnit })
+										}
+									/>
+
+									<RangeControl
+										label={__("Line Height")}
+										value={digitLineHeight}
+										allowReset
+										onChange={(digitLineHeight) =>
+											setAttributes({ digitLineHeight })
+										}
+										min={0}
+										max={DIGIT_LINE_HEIGHT_MAX}
+										step={DIGIT_LINE_HEIGHT_STEP}
+									/>
+
+									<UnitControl
+										selectedUnit={digitLetterSpacingUnit}
+										unitTypes={[
+											{ label: "px", value: "px" },
+											{ label: "em", value: "em" },
+											{ label: "%", value: "%" },
+										]}
+										onClick={(digitLetterSpacingUnit) =>
+											setAttributes({ digitLetterSpacingUnit })
+										}
+									/>
+
+									<RangeControl
+										label={__("Letter Spacing")}
+										value={digitLetterSpacing}
+										allowReset
+										onChange={(digitLetterSpacing) =>
+											setAttributes({ digitLetterSpacing })
+										}
+										min={0}
+										max={DIGIT_LETTER_SPACING_MAX}
+										step={DIGIT_LETTER_SPACING_STEP}
 									/>
 								</div>
 							)}
