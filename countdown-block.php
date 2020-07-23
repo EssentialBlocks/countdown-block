@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     Countdown
+ * Plugin Name:     Countdown Block
  * Description:     Highlight Upcoming Events With Countdown Timer.
  * Version:         1.0.0
  * Author:          WPDeveloper

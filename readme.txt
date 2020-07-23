@@ -1,4 +1,4 @@
-=== Countdown ===
+=== Countdown Block ===
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, alam789
 Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg, gutenberg blocks
 Requires at least: 5.0
