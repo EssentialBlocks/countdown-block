@@ -2,7 +2,7 @@
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, alam789
 Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg, gutenberg blocks
 Requires at least: 5.0
-Tested up to: 5.4
+Tested up to: 5.5
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,10 +12,12 @@ Highlight Upcoming Events With Countdown Timer with Countdown Block.
 == Description ==
 
 Using **Countdown**, you can notify your visitors about the upcoming events or big days. This plugin will help you instantly create a countdown timer within the Gutenberg Block Editor.
-**Completely Customizable:** You can customize Countdown dates, colors, etc to make it just the way you need.
-**Super Light-weight:** No extra resources used and it's highly optimized for super fast loading & instant Live editing.
-**Dedicated Support:** We’ve an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
 
+**Completely Customizable:** You can customize Countdown dates, colors, etc to make it just the way you need.
+
+**Super Light-weight:** No extra resources used and it's highly optimized for super fast loading & instant Live editing.
+
+*Dedicated Support:** We’ve an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
 
 
 ## 🚀 BACKED BY A TRUSTED TEAM ## 
@@ -31,10 +33,11 @@ This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team
 
 ## 🙌 JOIN THE COMMUNITY ##
 
-- 🎦 Subscribe to our [Youtube Channel](https://www.youtube.com/wpdevelopernet/?sub_confirmation=1) to watch video tutorials on WordPress.
-- 🤝 Join our [Facebook Community](https://www.facebook.com/groups/wpdeveloper.net/) & get connected with expert web creators like yourself.
+🎦 Subscribe to our [Youtube Channel](https://www.youtube.com/wpdevelopernet/?sub_confirmation=1) to watch video tutorials on WordPress.
 
-🧡 LOVED Countdown Block? Rate us on WordPress Repository
+🤝 Join our [Facebook Community](https://www.facebook.com/groups/wpdeveloper.net/) & get connected with expert web creators like yourself.
+
+🧡 LOVED FLIPBOX? Rate us on [WordPress Repository](https://wordpress.org/support/plugin/countdown-block/reviews/#new-post)
 
 🔥 GET FREEBIES FOR YOUR WORDPRESS SITE
 
