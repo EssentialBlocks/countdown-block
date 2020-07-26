@@ -20,12 +20,8 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-if( ! class_exists('EB_Font_Loader') ) {
-	require_once __DIR__ . '/includes/font-loader.php';
-}
-if( ! class_exists('EB_Post_Meta') ) {
-	require_once __DIR__ . '/includes/post-meta.php';
-}
+require_once __DIR__ . '/includes/font-loader.php';
+require_once __DIR__ . '/includes/post-meta.php';
 
 function create_block_countdown_block_init() {
 	$dir = dirname( __FILE__ );
