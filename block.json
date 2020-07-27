@@ -2,7 +2,7 @@
 	"name": "block/countdown",
 	"title": "Countdown",
 	"category": "widgets",
-	"description": "",
+	"description": "Highlight Upcoming Events With Countdown Timer",
 	"textdomain": "countdown",
 	"supports": {
 		"html": false
