@@ -163,7 +163,7 @@ const attributes = {
 		type: "number",
 	},
 	digitFontWeight: {
-		type: "number",
+		type: "string",
 	},
 	digitLetterSpacing: {
 		type: "number",
