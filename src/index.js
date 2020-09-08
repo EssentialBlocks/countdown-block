@@ -11,6 +11,7 @@ registerBlockType("block/countdown", {
 	title: __("Countdown", "block"),
 	description: __("", "block"),
 	category: "widgets",
+	keywords: ["countdown", "counter", "timer"],
 	attributes,
 	icon,
 	edit: Edit,
