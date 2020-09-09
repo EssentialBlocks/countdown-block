@@ -84,6 +84,7 @@ Yes, it will work with any standard WordPress theme.
 
 = 1.0.1 =
 * Added: Keywords
+* Fixed: Missing css, js files
 
 = 1.0.0 =
 * Initial Release
