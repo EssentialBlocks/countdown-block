@@ -14,6 +14,7 @@ import {
 	BaseControl,
 	Dropdown,
 } from "@wordpress/components";
+import moment from "moment";
 import DateTime from "react-datetime";
 
 /**
@@ -113,6 +114,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	} = attributes;
 
 	const onDateTimeChange = (momentObj) => {
+		console.log(momentObj);
 		let date = momentObj._d;
 		let time = date.getTime();
 
@@ -138,6 +140,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 		window[id] = setInterval(counter, 1000);
 	};
 
+	const yesterday = moment().subtract(1, "day");
+
+	const valid = (current) => current.isAfter(yesterday);
+
 	const DIGIT_LINE_HEIGHT_MAX = digitLineHeightUnit === "em" ? 10 : 100;
 	const DIGIT_LINE_HEIGHT_STEP = digitLineHeightUnit === "em" ? 0.1 : 1;
 
@@ -156,6 +162,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						dateFormat="YYYY-MM-DD"
 						timeFormat="h:mm:ss"
 						onChange={(momentObj) => onDateTimeChange(momentObj)}
+						isValidDate={valid}
 					/>
 				</BaseControl>
 			</PanelBody>
