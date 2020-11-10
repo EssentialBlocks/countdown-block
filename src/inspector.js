@@ -114,7 +114,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 	} = attributes;
 
 	const onDateTimeChange = (momentObj) => {
-		console.log(momentObj);
 		let date = momentObj._d;
 		let time = date.getTime();
 
