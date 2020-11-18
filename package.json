@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"moment": "^2.27.0",
+		"moment-timezone": "^0.5.32",
 		"react-datetime": "^3.0.3"
 	}
 }

@@ -158,8 +158,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 				>
 					<DateTime
 						value={date}
-						dateFormat="YYYY-MM-DD"
-						timeFormat="h:mm:ss"
+						dateFormat="YYYY-MM-DD-A"
+						timeFormat="h:mm:ss A"
 						onChange={(momentObj) => onDateTimeChange(momentObj)}
 						isValidDate={valid}
 					/>

@@ -20,6 +20,9 @@
   display: flex;
   justify-content: space-between; }
 
+.rdt input {
+  width: 100%; }
+
 .input-wrapper {
   width: 20%;
   display: flex;

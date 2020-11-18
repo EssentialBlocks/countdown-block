@@ -19,7 +19,11 @@
 }
 
 // Typography style
-.eb-typography-base div{
-		display: flex;
-		justify-content: space-between;
+.eb-typography-base div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.rdt input {
+	width: 100%;
 }

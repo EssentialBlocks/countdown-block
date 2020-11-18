@@ -2405,8 +2405,8 @@ var Inspector = function Inspector(_ref) {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Countdown Due Date")
   }, /*#__PURE__*/React.createElement(react_datetime__WEBPACK_IMPORTED_MODULE_4___default.a, {
     value: date,
-    dateFormat: "YYYY-MM-DD",
-    timeFormat: "h:mm:ss",
+    dateFormat: "YYYY-MM-DD-A",
+    timeFormat: "h:mm:ss A",
     onChange: function onChange(momentObj) {
       return onDateTimeChange(momentObj);
     },
