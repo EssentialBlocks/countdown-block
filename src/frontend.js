@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			var date = dateNode[0].getAttribute("data-date");
 			var now = new Date().getTime();
 			var time = new Date(date);
-			var timer = new Date(time - now).getTimezoneOffset();
+			var currentUtcOffset = time.getTimezoneOffset() * 60 * 1000;
+			var timer = new Date(time - now + currentUtcOffset);
 
 			var oneDay = 24 * 60 * 60 * 1000;
 			var days = Math.round(timer / oneDay);
