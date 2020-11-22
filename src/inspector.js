@@ -119,8 +119,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 		const counter = () => {
 			let now = new Date().getTime();
+			let currentUtcOffset = moment(date).utcOffset() * 60 * 1000;
 
-			let timer = new Date(time - now);
+			let timer = new Date(time - now - currentUtcOffset);
+
+			if (time < now) {
+				setAttributes({ days: "0", hours: "0", minutes: "0", seconds: "0" });
+				return;
+			}
 
 			// Calculate days, hours, minutes and seconds
 			let oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * miliseconds
@@ -159,7 +165,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					<DateTime
 						value={date}
 						dateFormat="YYYY-MM-DD-A"
-						timeFormat="h:mm:ss A"
+						timeFormat="h:mm A"
 						onChange={(momentObj) => onDateTimeChange(momentObj)}
 						isValidDate={valid}
 					/>

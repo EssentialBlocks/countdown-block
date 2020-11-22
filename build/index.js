@@ -2361,7 +2361,19 @@ var Inspector = function Inspector(_ref) {
 
     var counter = function counter() {
       var now = new Date().getTime();
-      var timer = new Date(time - now); // Calculate days, hours, minutes and seconds
+      var currentUtcOffset = moment__WEBPACK_IMPORTED_MODULE_3___default()(date).utcOffset() * 60 * 1000;
+      var timer = new Date(time - now - currentUtcOffset);
+
+      if (time < now) {
+        setAttributes({
+          days: "0",
+          hours: "0",
+          minutes: "0",
+          seconds: "0"
+        });
+        return;
+      } // Calculate days, hours, minutes and seconds
+
 
       var oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * miliseconds
 
@@ -2406,7 +2418,7 @@ var Inspector = function Inspector(_ref) {
   }, /*#__PURE__*/React.createElement(react_datetime__WEBPACK_IMPORTED_MODULE_4___default.a, {
     value: date,
     dateFormat: "YYYY-MM-DD-A",
-    timeFormat: "h:mm:ss A",
+    timeFormat: "h:mm A",
     onChange: function onChange(momentObj) {
       return onDateTimeChange(momentObj);
     },
