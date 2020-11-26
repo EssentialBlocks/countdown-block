@@ -115,6 +115,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	const onDateTimeChange = (momentObj) => {
 		let date = momentObj._d;
+
+		// ignore invalid date
+		if (!date) return;
+
 		let time = date.getTime();
 
 		const counter = () => {

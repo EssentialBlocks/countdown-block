@@ -2356,7 +2356,9 @@ var Inspector = function Inspector(_ref) {
       lineHeightUnit = attributes.lineHeightUnit;
 
   var onDateTimeChange = function onDateTimeChange(momentObj) {
-    var date = momentObj._d;
+    var date = momentObj._d; // ignore invalid date
+
+    if (!date) return;
     var time = date.getTime();
 
     var counter = function counter() {
