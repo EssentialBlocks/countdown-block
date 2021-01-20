@@ -134,7 +134,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			// Calculate days, hours, minutes and seconds
 			let oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * miliseconds
-			let days = Math.round((time - now) / oneDay).toString();
+			let days = Math.floor((time - now) / oneDay).toString();
 			let hours = timer.getHours().toString();
 			let minutes = timer.getMinutes().toString();
 			let seconds = timer.getSeconds().toString();
