@@ -146,7 +146,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 		if (window[id]) {
 			clearInterval(window[id]);
 		}
-		window[id] = setInterval(counter, 1000);
+
+		if (id) {
+			window[id] = setInterval(counter, 1000);
+		}
 	};
 
 	const yesterday = moment().subtract(1, "day");

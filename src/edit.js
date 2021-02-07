@@ -14,7 +14,7 @@ import uuid from "../util/uuid";
 class Edit extends Component {
 	componentDidMount() {
 		// Generate unique id
-		let id = uuid().substr(0, 5);
+		let id = this.props.attributes.id || uuid().substr(0, 5);
 		this.props.setAttributes({ id });
 	}
 
