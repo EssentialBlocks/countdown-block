@@ -4,3 +4,6 @@
 [submodule "util/dimensions-control"]
 	path = util/dimensions-control
 	url = git@github.com:EssentialBlocks/dimensions-control.git
+[submodule "util/typography-control"]
+	path = util/typography-control
+	url = git@github.com:EssentialBlocks/typography-control.git
