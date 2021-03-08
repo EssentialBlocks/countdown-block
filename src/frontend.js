@@ -36,11 +36,17 @@ document.addEventListener("DOMContentLoaded", function () {
 				"eb-countdown-digits-seconds"
 			);
 
+			var isOver = Date.parse(timer) < Date.parse(new Date(currentUtcOffset));
+
 			// Change inner html
-			daysNode[0].innerHTML = days || 0;
-			hoursNode[0].innerHTML = hours || 0;
-			minutesNode[0].innerHTML = minutes || 0;
-			secondsNode[0].innerHTML = seconds || 0;
+			daysNode[0].innerHTML = isOver ? 0 : days;
+			hoursNode[0].innerHTML = isOver ? 0 : hours;
+			minutesNode[0].innerHTML = isOver ? 0 : minutes;
+			secondsNode[0].innerHTML = isOver ? 0 : seconds;
+
+			if (isOver) {
+				clearInterval(interval);
+			}
 		};
 
 		var interval = setInterval(function () {
