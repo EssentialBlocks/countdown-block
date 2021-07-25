@@ -1,43 +1,129 @@
+import * as typoPrefixs from "./constants/typographyPrefixConstants";
+
+import {
+	cdBoxsPaddingConst,
+	cdWrapMarginConst,
+	cdWrapPaddingConst,
+	cdDigitsPaddingConst,
+	cdLabelsPaddingConst,
+} from "./constants/dimensionsConstants";
+
+import {
+	cdBoxsBgConst,
+	cdDayBoxBgConst,
+	cdHourBoxBgConst,
+	cdMinuteBoxBgConst,
+	cdSecondBoxBgConst,
+	WrpBgConst,
+} from "./constants/backgroundsConstants";
+
+import {
+	cdBoxsBdShadowConst,
+	WrpBdShadowConst,
+} from "./constants/borderShadowConstants";
+
+import {
+	wrapperWidth,
+	boxsSpaceConst,
+	separatorPosTop,
+	separatorPosRight,
+} from "./constants/rangeNames";
+
+import {
+	generateDimensionsAttributes,
+	generateTypographyAttributes,
+	generateBackgroundAttributes,
+	generateBorderShadowAttributes,
+	generateResponsiveRangeAttributes,
+} from "../util/helpers";
+
 const attributes = {
-	id: {
+	// the following 4 attributes is must required for responsive options and asset generation for frontend
+	// responsive control attributes ⬇
+	resOption: {
+		type: "string",
+		default: "Desktop",
+	},
+
+	// blockId attribute for making unique className and other uniqueness ⬇
+	blockId: {
 		type: "string",
 	},
-	date: {
+	blockRoot: {
 		type: "string",
-		source: "attribute",
-		selector: ".eb-countdown-get-date",
-		attribute: "data-date",
+		default: "essential_block",
 	},
-	days: {
+
+	// blockMeta is for keeping all the styles ⬇
+	blockMeta: {
+		type: "object",
+	},
+
+	//
+	preset: {
 		type: "string",
-		source: "text",
-		selector: ".eb-countdown-digits-days",
-		default: "0",
+		default: "default",
 	},
-	months: {
+
+	//
+	flexDirection: {
 		type: "string",
-		source: "text",
-		selector: ".eb-countdown-digits-months",
-		default: "0",
+		default: "row",
 	},
-	hours: {
+
+	//
+	contentsAlign: {
 		type: "string",
-		source: "text",
-		selector: ".eb-countdown-digits-hours",
-		default: "0",
+		default: "center",
 	},
-	minutes: {
+
+	//
+	contentsJustify: {
 		type: "string",
-		source: "text",
-		selector: ".eb-countdown-digits-minutes",
-		default: "0",
+		default: "center",
 	},
-	seconds: {
+
+	//
+	contentsDirection: {
 		type: "string",
-		source: "text",
-		selector: ".eb-countdown-digits-seconds",
-		default: "0",
+		default: "column",
 	},
+
+	//
+	showSeparator: {
+		type: "boolean",
+		default: false,
+	},
+
+	//
+	separatorType: {
+		type: "string",
+		default: ":",
+	},
+
+	// //
+	// sepPositionRight: {
+	// 	type: "number",
+	// 	default: 48,
+	// },
+
+	// //
+	// sepPositionTop: {
+	// 	type: "number",
+	// 	default: 35,
+	// },
+
+	//
+	separatorColor: {
+		type: "string",
+	},
+
+	//  deadline Date timestamp
+	endTimeStamp: {
+		type: "number",
+	},
+
+	//
 	showDays: {
 		type: "boolean",
 		default: true,
@@ -54,6 +140,8 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
+
+	//
 	daysLabel: {
 		type: "string",
 		default: "Days",
@@ -70,231 +158,144 @@ const attributes = {
 		type: "string",
 		default: "Seconds",
 	},
-	boxHeight: {
-		type: "number",
-	},
-	boxWidth: {
-		type: "number",
-	},
-	boxSpace: {
-		type: "number",
-	},
-	justifyItems: {
-		type: "string",
-		default: "center",
-	},
-	linkedPadding: {
-		type: "boolean",
-		default: true,
-	},
-	paddingTop: {
-		type: "number",
-		default: 0,
-	},
-	paddingRight: {
-		type: "number",
-		default: 0,
-	},
-	paddingBottom: {
-		type: "number",
-		default: 0,
-	},
-	paddingLeft: {
-		type: "number",
-		default: 0,
-	},
-	radiusTopLeft: {
-		type: "number",
-		default: 5,
-	},
-	radiusTopRight: {
-		type: "number",
-		default: 5,
-	},
-	radiusBottomRight: {
-		type: "number",
-		default: 5,
-	},
-	radiusBottomLeft: {
-		type: "number",
-		default: 5,
-	},
-	showBorder: {
-		type: "boolean",
-		default: true,
-	},
-	borderColor: {
+
+	//
+	digitsColor: {
 		type: "string",
 	},
-	borderSize: {
-		type: "number",
-	},
-	borderStyle: {
-		type: "string",
-		default: "solid",
-	},
-	showBoxShadow: {
-		type: "boolean",
-		default: true,
-	},
-	shadowColor: {
+	dayDgColor: {
 		type: "string",
 	},
-	hOffset: {
-		type: "number",
-	},
-	vOffset: {
-		type: "number",
-	},
-	shadowBlur: {
-		type: "number",
-	},
-	shadowSpread: {
-		type: "number",
-	},
-	inlineItems: {
-		type: "boolean",
-		default: false,
-	},
-	digitFontFamily: {
+	hourDgColor: {
 		type: "string",
 	},
-	digitFontSize: {
-		type: "number",
-	},
-	digitFontWeight: {
+	minuteDgColor: {
 		type: "string",
 	},
-	digitLetterSpacing: {
-		type: "number",
-	},
-	digitLetterSpacingUnit: {
-		type: "string",
-		default: "px",
-	},
-	digitLineHeight: {
-		type: "number",
-	},
-	digitLineHeightUnit: {
-		type: "string",
-		default: "px",
-	},
-	labelTransform: {
-		type: "string",
-		default: "none",
-	},
-	labelFontStyle: {
-		type: "string",
-		default: "normal",
-	},
-	labelFontDecoration: {
-		type: "string",
-		default: "initial",
-	},
-	labelLineHeight: {
-		type: "number",
-	},
-	labelLeftPadding: {
-		type: "number",
-	},
-	boxBackground: {
+	secondDgColor: {
 		type: "string",
 	},
-	digitColor: {
+
+	labelsColor: {
 		type: "string",
 	},
-	labelColor: {
+	dayLbColor: {
 		type: "string",
 	},
-	daysBoxBackground: {
+	hourLbColor: {
 		type: "string",
 	},
-	linkedMargin: {
-		type: "boolean",
-		default: true,
-	},
-	marginTop: {
-		type: "number",
-		default: 0,
-	},
-	marginRight: {
-		type: "number",
-		default: 0,
-	},
-	marginBottom: {
-		type: "number",
-		default: 0,
-	},
-	marginLeft: {
-		type: "number",
-		default: 0,
-	},
-	boxTextAlign: {
-		type: "string",
-		default: "center",
-	},
-	labelFontFamily: {
+	minuteLbColor: {
 		type: "string",
 	},
-	labelFontSize: {
-		type: "number",
-	},
-	wrapMarginTop: {
-		type: "number",
-	},
-	wrapMarginRight: {
-		type: "number",
-	},
-	wrapMarginBottom: {
-		type: "number",
-	},
-	wrapMarginLeft: {
-		type: "number",
-	},
-	wrapPaddingTop: {
-		type: "number",
-	},
-	wrapPaddingRight: {
-		type: "number",
-	},
-	wrapPaddingBottom: {
-		type: "number",
-	},
-	wrapPaddingLeft: {
-		type: "number",
-	},
-	wrapMarginUnit: {
+	secondLbColor: {
 		type: "string",
-		default: "px",
 	},
-	wrapPaddingUnit: {
+
+	dayBdrColor: {
 		type: "string",
-		default: "px",
 	},
-	boxMarginUnit: {
+	hourBdrColor: {
 		type: "string",
-		default: "px",
 	},
-	boxPaddingUnit: {
+	minuteBdrColor: {
 		type: "string",
-		default: "px",
 	},
-	radiusUnit: {
+	secondBdrColor: {
 		type: "string",
-		default: "%",
 	},
-	digitSizeUnit: {
-		type: "string",
-		default: "px",
-	},
-	labelSizeUnit: {
-		type: "string",
-		default: "px",
-	},
-	lineHeightUnit: {
-		type: "string",
-		default: "%",
-	},
+
+	// typography attributes
+	...generateTypographyAttributes(Object.values(typoPrefixs)),
+
+	// Responsive Range Controller attributes
+	...generateResponsiveRangeAttributes(wrapperWidth, {
+		defaultRange: 600,
+	}),
+	...generateResponsiveRangeAttributes(boxsSpaceConst, {
+		defaultRange: 30,
+	}),
+	...generateResponsiveRangeAttributes(separatorPosTop, {
+		defaultRange: 63,
+	}),
+	...generateResponsiveRangeAttributes(separatorPosRight, {
+		defaultRange: 10,
+	}),
+
+	// boxs background attributes ⬇
+	...generateBackgroundAttributes(WrpBgConst, {
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	}),
+	...generateBackgroundAttributes(cdBoxsBgConst, {
+		// defaultFillColor: "#7967ff",
+		isBgDefaultGradient: true,
+		noOverlay: true,
+		noMainBgi: true,
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	}),
+	...generateBackgroundAttributes(cdDayBoxBgConst, {
+		noTransition: true,
+		noOverlay: true,
+		noMainBgi: true,
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	}),
+	...generateBackgroundAttributes(cdHourBoxBgConst, {
+		noTransition: true,
+		noOverlay: true,
+		noMainBgi: true,
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	}),
+	...generateBackgroundAttributes(cdMinuteBoxBgConst, {
+		noTransition: true,
+		noOverlay: true,
+		noMainBgi: true,
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	}),
+	...generateBackgroundAttributes(cdSecondBoxBgConst, {
+		noTransition: true,
+		noOverlay: true,
+		noMainBgi: true,
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	}),
+
+	// boxs BorderShadow attributes ⬇
+	...generateBorderShadowAttributes(WrpBdShadowConst, {
+		// noShadow: true,
+		// noBorder: true,
+	}),
+	...generateBorderShadowAttributes(cdBoxsBdShadowConst, {
+		// bdrDefaults: {
+		// 	top: 0,
+		// 	bottom: 0,
+		// 	right: 0,
+		// 	left: 0,
+		// },
+		rdsDefaults: {
+			top: 10,
+			bottom: 10,
+			right: 10,
+			left: 10,
+		},
+		// noShadow: true,
+		// noBorder: true,
+	}),
+
+	// dimensions Control related Attributes
+	...generateDimensionsAttributes(cdBoxsPaddingConst, {
+		top: 20,
+		bottom: 20,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(cdWrapMarginConst),
+	...generateDimensionsAttributes(cdWrapPaddingConst),
+	...generateDimensionsAttributes(cdDigitsPaddingConst),
+	...generateDimensionsAttributes(cdLabelsPaddingConst),
 };
 
 export default attributes;

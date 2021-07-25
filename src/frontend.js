@@ -1,56 +1,54 @@
 document.addEventListener("DOMContentLoaded", function () {
-	var countdowns = document.getElementsByClassName("eb-countdown-container");
+	const countdowns = document.querySelectorAll(".eb-cd-wrapper > .eb-cd-inner");
 
 	// Return if there is no countdown block
 	if (!countdowns) return;
 
-	// Set each countdown
 	for (let i = 0; i < countdowns.length; i++) {
-		let countdown = countdowns[i];
+		const element = countdowns[i];
 
-		let counter = function (countdown) {
-			var dateNode = countdown.getElementsByClassName("eb-countdown-get-date");
-			var date = dateNode[0].getAttribute("data-date");
-			var now = new Date().getTime();
-			var time = new Date(date);
-			var currentUtcOffset = time.getTimezoneOffset() * 60 * 1000;
-			var timer = new Date(time - now + currentUtcOffset);
+		const deadlineTimeStamp = parseInt(
+			element.getAttribute("data-deadline-time")
+		);
 
-			var oneDay = 24 * 60 * 60 * 1000;
-			var days = Math.round(timer / oneDay);
-			var hours = timer.getHours();
-			var minutes = timer.getMinutes();
-			var seconds = timer.getSeconds();
+		const fakeElement = { textContent: "3e" };
 
-			// Get values from html
-			var daysNode = countdown.getElementsByClassName(
-				"eb-countdown-digits-days"
-			);
-			var hoursNode = countdown.getElementsByClassName(
-				"eb-countdown-digits-hours"
-			);
-			var minutesNode = countdown.getElementsByClassName(
-				"eb-countdown-digits-minutes"
-			);
-			var secondsNode = countdown.getElementsByClassName(
-				"eb-countdown-digits-seconds"
-			);
+		const daySpan =
+			element.querySelector(".cd-box-day > .eb-cd-digit") || fakeElement;
+		const hourSpan =
+			element.querySelector(".cd-box-hour > .eb-cd-digit") || fakeElement;
+		const minuteSpan =
+			element.querySelector(".cd-box-minute > .eb-cd-digit") || fakeElement;
+		const secondSpan =
+			element.querySelector(".cd-box-second > .eb-cd-digit") || fakeElement;
 
-			var isOver = Date.parse(timer) < Date.parse(new Date(currentUtcOffset));
+		const timeLeft = (deadlineTimeStamp, intervalId = null) => {
+			const now = Date.now();
+			const secondsLeft = Math.round((deadlineTimeStamp - now) / 1000);
+			const seconds = secondsLeft % 60;
+			const minutes = Math.floor(secondsLeft / 60) % 60;
+			const hours = Math.floor(secondsLeft / 3600) % 24;
+			const days = Math.floor(secondsLeft / 86400);
 
-			// Change inner html
-			daysNode[0].innerHTML = isOver ? 0 : days;
-			hoursNode[0].innerHTML = isOver ? 0 : hours;
-			minutesNode[0].innerHTML = isOver ? 0 : minutes;
-			secondsNode[0].innerHTML = isOver ? 0 : seconds;
-
-			if (isOver) {
-				clearInterval(interval);
+			if (secondsLeft < 0) {
+				clearInterval(intervalId);
+				daySpan.textContent = "00";
+				hourSpan.textContent = "00";
+				minuteSpan.textContent = "00";
+				secondSpan.textContent = "00";
+				return;
 			}
+
+			daySpan.textContent = days < 10 ? `0${days}` : `${days}`;
+			hourSpan.textContent = hours < 10 ? `0${hours}` : `${hours}`;
+			minuteSpan.textContent = minutes < 10 ? `0${minutes}` : `${minutes}`;
+			secondSpan.textContent = seconds < 10 ? `0${seconds}` : `${seconds}`;
 		};
 
-		var interval = setInterval(function () {
-			counter(countdown);
+		timeLeft(deadlineTimeStamp || 0);
+
+		const intervalId = setInterval(() => {
+			timeLeft(deadlineTimeStamp || 0, intervalId);
 		}, 1000);
 	}
 });

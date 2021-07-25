@@ -1,19 +1,34 @@
-import { registerBlockType } from "@wordpress/blocks";
-import { __ } from "@wordpress/i18n";
+/**
+ * WordPress depencencies
+ */
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
+
+/**
+ * Internal dependencies
+ */
+import { CountdownIcon } from "../util/icons";
+import Edit from "./edit";
+import Save from "./save";
+// import example from "./example";
+import attributes from "./attributes";
 import "./style.scss";
 
-import Edit from "./edit";
-import save from "./save";
-import icon from "./icon";
-import attributes from "./attributes";
+import metadata from "../block.json";
 
-registerBlockType("block/countdown", {
-	title: __("Countdown", "block"),
-	description: __("", "block"),
-	category: "widgets",
-	keywords: ["countdown", "counter", "timer"],
+const { name, category } = metadata;
+
+registerBlockType(name, {
+	title: __("Countdown", "essential-blocks"),
+	icon: CountdownIcon,
+	category,
 	attributes,
-	icon,
+	keywords: [
+		__("countdown", "essential-blocks"),
+		__("eb counter", "essential-blocks"),
+		__("eb countdown", "essential-blocks"),
+	],
 	edit: Edit,
-	save,
+	save: Save,
+	// example: example,
 });

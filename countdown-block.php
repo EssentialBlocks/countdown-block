@@ -51,7 +51,15 @@ function create_block_countdown_block_init()
 		filemtime("$dir/$index_js")
 	);
 
-	$frontend_js = 'src/frontend.js';
+	$editor_css = 'build/index.css';
+	wp_register_style(
+		'create-block-countdown-block-editor',
+		plugins_url($editor_css, __FILE__),
+		array(),
+		filemtime("$dir/$editor_css")
+	);
+
+	$frontend_js = 'frontend/index.js';
 	wp_register_script(
 		'essential-blocks-countdown-frontend',
 		plugins_url($frontend_js, __FILE__),
@@ -60,10 +68,10 @@ function create_block_countdown_block_init()
 		true
 	);
 
-
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/countdown')) {
 		register_block_type('countdown-block/countdown', array(
 			'editor_script' => 'create-block-countdown-block-editor',
+			'editor_style' => 'create-block-countdown-block-editor',
 			'render_callback' => function ($attribs, $content) {
 				if (!is_admin()) {
 					wp_enqueue_script('essential-blocks-countdown-frontend');
