@@ -21,6 +21,7 @@ const { name, category } = metadata;
 
 registerBlockType(name, {
 	title: __("Countdown", "essential-blocks"),
+	description: __("Highlight Upcoming Events With Countdown Timer", "block"),
 	icon: CountdownIcon,
 	category,
 	attributes,

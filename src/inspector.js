@@ -860,42 +860,37 @@ function Inspector({ attributes, setAttributes }) {
 							)}
 							{tab.name === "advance" && (
 								<>
-									<>
-										<PanelBody
-											title={__("Margin & Padding")}
-											// initialOpen={true}
-										>
-											<ResponsiveDimensionsControl
-												resRequiredProps={resRequiredProps}
-												controlName={cdWrapMarginConst}
-												baseLabel="Margin"
-											/>
-											<ResponsiveDimensionsControl
-												resRequiredProps={resRequiredProps}
-												controlName={cdWrapPaddingConst}
-												baseLabel="Padding"
-											/>
-										</PanelBody>
+									<PanelBody
+										title={__("Margin & Padding")}
+										// initialOpen={true}
+									>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={cdWrapMarginConst}
+											baseLabel="Margin"
+										/>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={cdWrapPaddingConst}
+											baseLabel="Padding"
+										/>
+									</PanelBody>
 
-										<PanelBody title={__("Background ")} initialOpen={false}>
-											<BackgroundControl
-												controlName={WrpBgConst}
-												resRequiredProps={resRequiredProps}
-											/>
-										</PanelBody>
+									<PanelBody title={__("Background ")} initialOpen={false}>
+										<BackgroundControl
+											controlName={WrpBgConst}
+											resRequiredProps={resRequiredProps}
+										/>
+									</PanelBody>
 
-										<PanelBody
-											title={__("Border & Shadow")}
-											initialOpen={false}
-										>
-											<BorderShadowControl
-												controlName={WrpBdShadowConst}
-												resRequiredProps={resRequiredProps}
-												// noShadow
-												// noBorder
-											/>
-										</PanelBody>
-									</>
+									<PanelBody title={__("Border & Shadow")} initialOpen={false}>
+										<BorderShadowControl
+											controlName={WrpBdShadowConst}
+											resRequiredProps={resRequiredProps}
+											// noShadow
+											// noBorder
+										/>
+									</PanelBody>
 								</>
 							)}
 						</div>
