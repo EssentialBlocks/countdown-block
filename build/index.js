@@ -1153,6 +1153,24 @@ function Edit(_ref) {
 
 /***/ }),
 
+/***/ "./src/example.js":
+/*!************************!*\
+  !*** ./src/example.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var example = {
+  attributes: {
+    endTimeStamp: Date.now() + 462878000
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (example);
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -1168,8 +1186,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../block.json */ "./block.json");
-var _block_json__WEBPACK_IMPORTED_MODULE_5___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../block.json */ "./block.json", 1);
+/* harmony import */ var _example__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./example */ "./src/example.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../block.json */ "./block.json");
+var _block_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../block.json */ "./block.json", 1);
 /**
  * WordPress depencencies
  */
@@ -1181,13 +1200,13 @@ var registerBlockType = wp.blocks.registerBlockType;
 
 
 
- // import example from "./example";
 
 
 
 
-var name = _block_json__WEBPACK_IMPORTED_MODULE_5__.name,
-    category = _block_json__WEBPACK_IMPORTED_MODULE_5__.category;
+
+var name = _block_json__WEBPACK_IMPORTED_MODULE_6__.name,
+    category = _block_json__WEBPACK_IMPORTED_MODULE_6__.category;
 registerBlockType(name, {
   title: __("Countdown", "essential-blocks"),
   icon: _util_icons__WEBPACK_IMPORTED_MODULE_0__["CountdownIcon"],
@@ -1195,8 +1214,8 @@ registerBlockType(name, {
   attributes: _attributes__WEBPACK_IMPORTED_MODULE_3__["default"],
   keywords: [__("countdown", "essential-blocks"), __("eb counter", "essential-blocks"), __("eb countdown", "essential-blocks")],
   edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_2__["default"] // example: example,
-
+  save: _save__WEBPACK_IMPORTED_MODULE_2__["default"],
+  example: _example__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
 
 /***/ }),

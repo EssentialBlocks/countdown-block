@@ -10,9 +10,10 @@ const { registerBlockType } = wp.blocks;
 import { CountdownIcon } from "../util/icons";
 import Edit from "./edit";
 import Save from "./save";
-// import example from "./example";
 import attributes from "./attributes";
 import "./style.scss";
+
+import example from "./example";
 
 import metadata from "../block.json";
 
@@ -30,5 +31,5 @@ registerBlockType(name, {
 	],
 	edit: Edit,
 	save: Save,
-	// example: example,
+	example: example,
 });
