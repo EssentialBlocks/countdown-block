@@ -59,7 +59,7 @@ function create_block_countdown_block_init()
 		filemtime("$dir/$editor_css")
 	);
 
-	$frontend_js = 'frontend/index.js';
+	$frontend_js = 'build/frontend.js';
 	wp_register_script(
 		'essential-blocks-countdown-frontend',
 		plugins_url($frontend_js, __FILE__),
