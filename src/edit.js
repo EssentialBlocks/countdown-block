@@ -133,6 +133,9 @@ export default function Edit({
 		hourBdrColor,
 		minuteBdrColor,
 		secondBdrColor,
+
+		//
+		boxsBds_borderStyle,
 	} = attributes;
 
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
@@ -594,7 +597,11 @@ export default function Edit({
 				? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day{
 				${dayBoxBgStylesDesktop}
-				${dayBdrColor ? `border-color: ${dayBdrColor};` : " "}
+				${
+					boxsBds_borderStyle !== "none" && dayBdrColor
+						? `border-color: ${dayBdrColor};`
+						: " "
+				}
 			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day:hover{
@@ -617,7 +624,11 @@ export default function Edit({
 				? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour{
 				${hourBoxBgStylesDesktop}
-				${hourBdrColor ? `border-color: ${hourBdrColor};` : " "}
+				${
+					boxsBds_borderStyle !== "none" && hourBdrColor
+						? `border-color: ${hourBdrColor};`
+						: " "
+				}
 			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour:hover{
@@ -640,7 +651,11 @@ export default function Edit({
 				? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute{
 				${minuteBoxBgStylesDesktop}
-				${minuteBdrColor ? `border-color: ${minuteBdrColor};` : " "}
+				${
+					boxsBds_borderStyle !== "none" && minuteBdrColor
+						? `border-color: ${minuteBdrColor};`
+						: " "
+				}
 			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute:hover{
@@ -663,7 +678,11 @@ export default function Edit({
 				? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second{
 				${secondBoxBgStylesDesktop}
-				${secondBdrColor ? `border-color: ${secondBdrColor};` : " "}
+				${
+					boxsBds_borderStyle !== "none" && secondBdrColor
+						? `border-color: ${secondBdrColor};`
+						: " "
+				}
 			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second:hover{

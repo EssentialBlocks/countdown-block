@@ -623,25 +623,6 @@ function Inspector({ attributes, setAttributes }) {
 											step={1}
 										/>
 
-										{/* <BaseControl label={__("Contents Flex Direction")}>
-											<ButtonGroup>
-												{FLEX_DIRECTIONS.map(({ value, label }) => (
-													<Button
-														isLarge
-														isSecondary={contentsDirection !== value}
-														isPrimary={contentsDirection === value}
-														onClick={() =>
-															setAttributes({
-																contentsDirection: value,
-															})
-														}
-													>
-														{label}
-													</Button>
-												))}
-											</ButtonGroup>
-										</BaseControl> */}
-
 										<BaseControl label={__("Contents Direction")}>
 											<SelectControl
 												value={contentsDirection}
