@@ -696,52 +696,6 @@ function Inspector({ attributes, setAttributes }) {
 										</PanelBody>
 									</PanelBody>
 
-									<PanelBody
-										title={__("Individual Box Styling")}
-										initialOpen={false}
-									>
-										{showDays && (
-											<SingleBoxControl
-												resRequiredProps={resRequiredProps}
-												heading="Days"
-												bgControlName={cdDayBoxBgConst}
-												dgColorAttrString="dayDgColor"
-												lbColorAttrString="dayLbColor"
-												bdColorAttrString="dayBdrColor"
-											/>
-										)}
-										{showHours && (
-											<SingleBoxControl
-												resRequiredProps={resRequiredProps}
-												heading="Hours"
-												bgControlName={cdHourBoxBgConst}
-												dgColorAttrString="hourDgColor"
-												lbColorAttrString="hourLbColor"
-												bdColorAttrString="hourBdrColor"
-											/>
-										)}
-										{showMinutes && (
-											<SingleBoxControl
-												resRequiredProps={resRequiredProps}
-												heading="Minutes"
-												bgControlName={cdMinuteBoxBgConst}
-												dgColorAttrString="minuteDgColor"
-												lbColorAttrString="minuteLbColor"
-												bdColorAttrString="minuteBdrColor"
-											/>
-										)}
-										{showSeconds && (
-											<SingleBoxControl
-												resRequiredProps={resRequiredProps}
-												heading="Seconds"
-												bgControlName={cdSecondBoxBgConst}
-												dgColorAttrString="secondDgColor"
-												lbColorAttrString="secondLbColor"
-												bdColorAttrString="secondBdrColor"
-											/>
-										)}
-									</PanelBody>
-
 									<PanelBody title={__("Digits")} initialOpen={false}>
 										<ColorControl
 											label={__("Color")}
@@ -837,6 +791,52 @@ function Inspector({ attributes, setAttributes }) {
 											)}
 										</PanelBody>
 									)}
+
+									<PanelBody
+										title={__("Individual Box Styling")}
+										initialOpen={false}
+									>
+										{showDays && (
+											<SingleBoxControl
+												resRequiredProps={resRequiredProps}
+												heading="Days"
+												bgControlName={cdDayBoxBgConst}
+												dgColorAttrString="dayDgColor"
+												lbColorAttrString="dayLbColor"
+												bdColorAttrString="dayBdrColor"
+											/>
+										)}
+										{showHours && (
+											<SingleBoxControl
+												resRequiredProps={resRequiredProps}
+												heading="Hours"
+												bgControlName={cdHourBoxBgConst}
+												dgColorAttrString="hourDgColor"
+												lbColorAttrString="hourLbColor"
+												bdColorAttrString="hourBdrColor"
+											/>
+										)}
+										{showMinutes && (
+											<SingleBoxControl
+												resRequiredProps={resRequiredProps}
+												heading="Minutes"
+												bgControlName={cdMinuteBoxBgConst}
+												dgColorAttrString="minuteDgColor"
+												lbColorAttrString="minuteLbColor"
+												bdColorAttrString="minuteBdrColor"
+											/>
+										)}
+										{showSeconds && (
+											<SingleBoxControl
+												resRequiredProps={resRequiredProps}
+												heading="Seconds"
+												bgControlName={cdSecondBoxBgConst}
+												dgColorAttrString="secondDgColor"
+												lbColorAttrString="secondLbColor"
+												bdColorAttrString="secondBdrColor"
+											/>
+										)}
+									</PanelBody>
 								</>
 							)}
 							{tab.name === "advance" && (
