@@ -455,8 +455,11 @@ function Inspector({ attributes, setAttributes }) {
 												onChange={handlePresetChange}
 											/>
 										</BaseControl>
-
-										<BaseControl label={__("Countdown Due Date")}>
+										<style>{`.customDatePickerStyle .components-datetime__timezone{display:none;}`}</style>
+										<BaseControl
+											label={__("Countdown Due Date")}
+											className="customDatePickerStyle"
+										>
 											<DateTimePicker
 												currentDate={
 													endTimeStamp ? new Date(endTimeStamp) : new Date()

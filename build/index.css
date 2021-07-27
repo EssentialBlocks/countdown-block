@@ -182,10 +182,11 @@ option:hover {
 .components-button-group
 .components-button {
   flex: 1;
-  padding: 6px 0;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 6px; }
 
 .eb-panel-control .components-button-group .components-button:first-child {
   border-top-left-radius: 5px;

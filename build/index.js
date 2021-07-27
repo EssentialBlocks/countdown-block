@@ -1624,8 +1624,9 @@ function Inspector(_ref) {
       options: _constants__WEBPACK_IMPORTED_MODULE_19__["STYLE_PRESETS"] // onChange={(preset) => setAttributes({ preset })}
       ,
       onChange: handlePresetChange
-    })), /*#__PURE__*/React.createElement(BaseControl, {
-      label: __("Countdown Due Date")
+    })), /*#__PURE__*/React.createElement("style", null, ".customDatePickerStyle .components-datetime__timezone{display:none;}"), /*#__PURE__*/React.createElement(BaseControl, {
+      label: __("Countdown Due Date"),
+      className: "customDatePickerStyle"
     }, /*#__PURE__*/React.createElement(DateTimePicker, {
       currentDate: endTimeStamp ? new Date(endTimeStamp) : new Date(),
       onChange: function onChange(newDate) {
@@ -1813,37 +1814,6 @@ function Inspector(_ref) {
       // noBorder
 
     }))), /*#__PURE__*/React.createElement(PanelBody, {
-      title: __("Individual Box Styling"),
-      initialOpen: false
-    }, showDays && /*#__PURE__*/React.createElement(_singleBoxControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      resRequiredProps: resRequiredProps,
-      heading: "Days",
-      bgControlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_17__["cdDayBoxBgConst"],
-      dgColorAttrString: "dayDgColor",
-      lbColorAttrString: "dayLbColor",
-      bdColorAttrString: "dayBdrColor"
-    }), showHours && /*#__PURE__*/React.createElement(_singleBoxControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      resRequiredProps: resRequiredProps,
-      heading: "Hours",
-      bgControlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_17__["cdHourBoxBgConst"],
-      dgColorAttrString: "hourDgColor",
-      lbColorAttrString: "hourLbColor",
-      bdColorAttrString: "hourBdrColor"
-    }), showMinutes && /*#__PURE__*/React.createElement(_singleBoxControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      resRequiredProps: resRequiredProps,
-      heading: "Minutes",
-      bgControlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_17__["cdMinuteBoxBgConst"],
-      dgColorAttrString: "minuteDgColor",
-      lbColorAttrString: "minuteLbColor",
-      bdColorAttrString: "minuteBdrColor"
-    }), showSeconds && /*#__PURE__*/React.createElement(_singleBoxControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      resRequiredProps: resRequiredProps,
-      heading: "Seconds",
-      bgControlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_17__["cdSecondBoxBgConst"],
-      dgColorAttrString: "secondDgColor",
-      lbColorAttrString: "secondLbColor",
-      bdColorAttrString: "secondBdrColor"
-    })), /*#__PURE__*/React.createElement(PanelBody, {
       title: __("Digits"),
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_util_color_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -1927,7 +1897,38 @@ function Inspector(_ref) {
       baseLabel: "Typography",
       typographyPrefixConstant: _constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_14__["typoPrefix_separator"],
       resRequiredProps: resRequiredProps
-    })))), tab.name === "advance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
+    }))), /*#__PURE__*/React.createElement(PanelBody, {
+      title: __("Individual Box Styling"),
+      initialOpen: false
+    }, showDays && /*#__PURE__*/React.createElement(_singleBoxControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      resRequiredProps: resRequiredProps,
+      heading: "Days",
+      bgControlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_17__["cdDayBoxBgConst"],
+      dgColorAttrString: "dayDgColor",
+      lbColorAttrString: "dayLbColor",
+      bdColorAttrString: "dayBdrColor"
+    }), showHours && /*#__PURE__*/React.createElement(_singleBoxControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      resRequiredProps: resRequiredProps,
+      heading: "Hours",
+      bgControlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_17__["cdHourBoxBgConst"],
+      dgColorAttrString: "hourDgColor",
+      lbColorAttrString: "hourLbColor",
+      bdColorAttrString: "hourBdrColor"
+    }), showMinutes && /*#__PURE__*/React.createElement(_singleBoxControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      resRequiredProps: resRequiredProps,
+      heading: "Minutes",
+      bgControlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_17__["cdMinuteBoxBgConst"],
+      dgColorAttrString: "minuteDgColor",
+      lbColorAttrString: "minuteLbColor",
+      bdColorAttrString: "minuteBdrColor"
+    }), showSeconds && /*#__PURE__*/React.createElement(_singleBoxControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      resRequiredProps: resRequiredProps,
+      heading: "Seconds",
+      bgControlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_17__["cdSecondBoxBgConst"],
+      dgColorAttrString: "secondDgColor",
+      lbColorAttrString: "secondLbColor",
+      bdColorAttrString: "secondBdrColor"
+    }))), tab.name === "advance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
       title: __("Margin & Padding") // initialOpen={true}
 
     }, /*#__PURE__*/React.createElement(_util_dimensions_control_v2__WEBPACK_IMPORTED_MODULE_2__["default"], {
