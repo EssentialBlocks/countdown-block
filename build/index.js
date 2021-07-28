@@ -363,7 +363,9 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
 })), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateResponsiveRangeAttributes"])(_constants_rangeNames__WEBPACK_IMPORTED_MODULE_4__["boxsSpaceConst"], {
   defaultRange: 30
 })), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateResponsiveRangeAttributes"])(_constants_rangeNames__WEBPACK_IMPORTED_MODULE_4__["separatorPosTop"], {
-  defaultRange: 63
+  defaultRange: 46,
+  defaultUnit: "%" // if 'noUnits: true' is also passed here then 'defaultUnit' won't work, also it doesn't make sense to pass a defaultUnit when No units given
+
 })), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateResponsiveRangeAttributes"])(_constants_rangeNames__WEBPACK_IMPORTED_MODULE_4__["separatorPosRight"], {
   defaultRange: 18,
   defaultUnit: "%" // if 'noUnits: true' is also passed here then 'defaultUnit' won't work, also it doesn't make sense to pass a defaultUnit when No units given
@@ -1314,6 +1316,7 @@ var defaultPresetAttrsObj = {
   contentsAlign: "center",
   flexDirection: "row",
   separatorType: ":",
+  sepRight_Range: 18,
   lblPad_isLinked: true,
   showSeparator: false,
   boxsBg_backgroundColor: undefined,
@@ -1460,6 +1463,7 @@ function Inspector(_ref) {
           lb_FontSize: 21,
           lb_TextTransform: "uppercase",
           minuteBdrColor: "rgba(153,102,13,1)",
+          sepRight_Range: 20,
           secondBdrColor: "rgba(0,91,255,1)"
         }));
         break;
@@ -1571,7 +1575,8 @@ function Inspector(_ref) {
           dg_LineHeight: 1,
           digitsColor: "rgba(0,0,0,0.5)",
           labelsColor: "rgba(0,0,0,0.5)",
-          lb_FontWeight: "600"
+          lb_FontWeight: "600",
+          sepRight_Range: 29
         }));
         break;
     }

@@ -101,6 +101,7 @@ const defaultPresetAttrsObj = {
 	flexDirection: "row",
 	separatorType: ":",
 
+	sepRight_Range: 18,
 	lblPad_isLinked: true,
 	showSeparator: false,
 
@@ -280,6 +281,7 @@ function Inspector({ attributes, setAttributes }) {
 					lb_FontSize: 21,
 					lb_TextTransform: "uppercase",
 					minuteBdrColor: "rgba(153,102,13,1)",
+					sepRight_Range: 20,
 					secondBdrColor: "rgba(0,91,255,1)",
 				});
 				break;
@@ -401,6 +403,7 @@ function Inspector({ attributes, setAttributes }) {
 					digitsColor: "rgba(0,0,0,0.5)",
 					labelsColor: "rgba(0,0,0,0.5)",
 					lb_FontWeight: "600",
+					sepRight_Range: 29,
 				});
 				break;
 		}

@@ -216,7 +216,8 @@ const attributes = {
 		defaultRange: 30,
 	}),
 	...generateResponsiveRangeAttributes(separatorPosTop, {
-		defaultRange: 63,
+		defaultRange: 46,
+		defaultUnit: "%", // if 'noUnits: true' is also passed here then 'defaultUnit' won't work, also it doesn't make sense to pass a defaultUnit when No units given
 	}),
 	...generateResponsiveRangeAttributes(separatorPosRight, {
 		defaultRange: 18,
