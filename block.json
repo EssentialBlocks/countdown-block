@@ -1,5 +1,5 @@
 {
-	"name": "block/countdown",
+	"name": "countdown-block/countdown",
 	"title": "Countdown",
 	"category": "widgets",
 	"description": "Highlight Upcoming Events With Countdown Timer",
@@ -7,6 +7,5 @@
 	"supports": {
 		"html": false
 	},
-	"editorScript": "file:./build/index.js",
-	"style": "file:./build/style-index.css"
+	"editorScript": "file:./build/index.js"
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name:     Countdown Block
  * Plugin URI: 		https://essential-blocks.com
@@ -22,58 +23,62 @@
 
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
+require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
-function create_block_countdown_block_init() {
-	$dir = dirname( __FILE__ );
+
+function create_block_countdown_block_init()
+{
+	$dir = dirname(__FILE__);
 
 	$script_asset_path = "$dir/build/index.asset.php";
-	if ( ! file_exists( $script_asset_path ) ) {
+	if (!file_exists($script_asset_path)) {
 		throw new Error(
 			'You need to run `npm start` or `npm run build` for the "create-block/countdown" block first.'
 		);
 	}
+
 	$index_js     = 'build/index.js';
-	$script_asset = require( $script_asset_path );
 	wp_register_script(
 		'create-block-countdown-block-editor',
-		plugins_url( $index_js, __FILE__ ),
-		$script_asset['dependencies'],
-		$script_asset['version']
+		plugins_url($index_js, __FILE__),
+		array(
+			'wp-blocks',
+			'wp-i18n',
+			'wp-element',
+			'wp-block-editor',
+			'wp-editor',
+		),
+		filemtime("$dir/$index_js")
 	);
 
-
-	$style_css = 'build/style-index.css';
+	$editor_css = 'build/index.css';
 	wp_register_style(
-		'create-block-countdown-block',
-		plugins_url( $style_css, __FILE__ ),
+		'create-block-countdown-block-editor',
+		plugins_url($editor_css, __FILE__),
 		array(),
-		filemtime( "$dir/$style_css" )
+		filemtime("$dir/$editor_css")
 	);
 
-	$datetime_css = 'src/css/react-datetime.css';
-	wp_enqueue_style(
-		'react-datetime-style',
-		plugins_url($datetime_css, __FILE__),
-		array()
-	);
-
-
-	$frontend_js = 'src/frontend.js';
-	wp_enqueue_script(
+	$frontend_js = 'build/frontend.js';
+	wp_register_script(
 		'essential-blocks-countdown-frontend',
 		plugins_url($frontend_js, __FILE__),
-		array( "jquery","wp-editor"),
+		array("jquery", "wp-editor"),
+		filemtime("$dir/$frontend_js"),
 		true
 	);
 
-
-	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/countdown' ) ) {
-    register_block_type( 'block/countdown', array(
-      'editor_script' => 'create-block-countdown-block-editor',
-      'style'         => 'create-block-countdown-block',
-      'datetime_style'=> 'react-datetime-style',
-      'countdown_frontend' => 'essential-blocks-countdown-frontend',
-    ) );
-  }
+	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/countdown')) {
+		register_block_type('countdown-block/countdown', array(
+			'editor_script' => 'create-block-countdown-block-editor',
+			'editor_style' => 'create-block-countdown-block-editor',
+			'render_callback' => function ($attribs, $content) {
+				if (!is_admin()) {
+					wp_enqueue_script('essential-blocks-countdown-frontend');
+				}
+				return $content;
+			}
+		));
+	}
 }
-add_action( 'init', 'create_block_countdown_block_init' );
+add_action('init', 'create_block_countdown_block_init');
