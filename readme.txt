@@ -1,9 +1,9 @@
 === Countdown Block ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89
 Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg, gutenberg blocks
-Requires at least: 5.0
+Requires at least: 5.6
 Tested up to: 5.8
-Stable tag: 1.0.4
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,7 +37,7 @@ This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team
 
 🤝 Join our [Facebook Community](https://www.facebook.com/groups/wpdeveloper.net/) & get connected with expert web creators like yourself.
 
-🧡 LOVED FLIPBOX? Rate us on [WordPress Repository](https://wordpress.org/support/plugin/countdown-block/reviews/#new-post)
+🧡 LOVED COUNTDOWN? Rate us on [WordPress Repository](https://wordpress.org/support/plugin/countdown-block/reviews/#new-post)
 
 🔥 GET FREEBIES FOR YOUR WORDPRESS SITE
 
@@ -81,6 +81,15 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.1.0 - 28/07/2021 =
+* Added: Dynamic asset generation instead of inline styles
+* Added: Responsive controls with preview
+* Added: Design Presets
+* Improved: Controls, styling options and structure. Removed all unnecessary 3rd party libraries.
+* Fixed: Issue [Auto change in block code causes gutenberg to save revision, and browser alert](https://wordpress.org/support/topic/auto-change-in-block-code-causes-gutenberg-to-save-revision-and-browser-alert/)
+
+
 = 1.0.4 =
 * Fixed: Countdown end issue in frontend
 
