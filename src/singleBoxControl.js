@@ -13,7 +13,6 @@ export default function singleBoxControl({
 	bdColorAttrString,
 }) {
 	const { setAttributes, attributes } = resRequiredProps;
-	console.log("-----from single box", attributes.boxsBds_borderStyle);
 	return (
 		<>
 			<h3
@@ -56,15 +55,13 @@ export default function singleBoxControl({
 			/>
 
 			{attributes.boxsBds_borderStyle !== "none" && (
-				<>
-					<ColorControl
-						label={__("Border Color")}
-						color={attributes[`${bdColorAttrString}`]}
-						onChange={(bdColor) =>
-							setAttributes({ [`${bdColorAttrString}`]: bdColor })
-						}
-					/>
-				</>
+				<ColorControl
+					label={__("Border Color")}
+					color={attributes[`${bdColorAttrString}`]}
+					onChange={(bdColor) =>
+						setAttributes({ [`${bdColorAttrString}`]: bdColor })
+					}
+				/>
 			)}
 
 			<hr />

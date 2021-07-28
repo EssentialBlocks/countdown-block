@@ -22,15 +22,10 @@ const {
  * Internal dependencies
  */
 
-import faIcons from "../util/faIcons.js";
 import TypographyDropdown from "../util/typography-control-v2";
 import ResponsiveDimensionsControl from "../util/dimensions-control-v2";
 import ResponsiveRangeController from "../util/responsive-range-control";
-import ImageAvatar from "../util/image-avatar/";
-import GradientColorControl from "../util/gradient-color-controller";
-import UnitControl from "../util/unit-control";
 import ColorControl from "../util/color-control";
-import ResetControl from "../util/reset-control";
 import BorderShadowControl from "../util/border-shadow-control";
 import BackgroundControl from "../util/background-control";
 
