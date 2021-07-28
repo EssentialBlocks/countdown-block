@@ -566,7 +566,7 @@ export default function Edit({
 				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box:before {
 				position: absolute;
-				right: 100%;
+				right: 90%;
 				content: "${separatorType}";
 				color: ${separatorColor};
 				${SeparatorTopDesktop}

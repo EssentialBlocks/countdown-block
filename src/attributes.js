@@ -219,7 +219,8 @@ const attributes = {
 		defaultRange: 63,
 	}),
 	...generateResponsiveRangeAttributes(separatorPosRight, {
-		defaultRange: 10,
+		defaultRange: 18,
+		defaultUnit: "%", // if 'noUnits: true' is also passed here then 'defaultUnit' won't work, also it doesn't make sense to pass a defaultUnit when No units given
 	}),
 
 	// boxs background attributes ⬇
