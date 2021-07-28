@@ -81,6 +81,15 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.1.0 - 28/07/2021 =
+* Added: Dynamic asset generation instead of inline styles
+* Added: Responsive controls with preview
+* Added: Design Presets
+* Improved: Controls, styling options and structure. Removed all unnecessary 3rd party libraries.
+* Fixed: Issue from [WordPres.org](https://wordpress.org/support/topic/auto-change-in-block-code-causes-gutenberg-to-save-revision-and-browser-alert/)
+
+
 = 1.0.4 =
 * Fixed: Countdown end issue in frontend
 
