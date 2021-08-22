@@ -1013,46 +1013,48 @@ export default function Edit({
 				`}
 			</style>
 
-			<div class={`${blockId} eb-cd-wrapper`}>
-				<div class="eb-cd-inner">
+			<div className={`${blockId} eb-cd-wrapper`}>
+				<div className="eb-cd-inner">
 					{showDays ? (
-						<div class="box cd-box-day">
-							<span ref={daysRef} class="eb-cd-digit">
+						<div className="box cd-box-day">
+							<span ref={daysRef} className="eb-cd-digit">
 								00
 							</span>
-							{daysLabel ? <span class="eb-cd-label">{daysLabel}</span> : null}
+							{daysLabel ? (
+								<span className="eb-cd-label">{daysLabel}</span>
+							) : null}
 						</div>
 					) : null}
 
 					{showHours ? (
-						<div class="box cd-box-hour">
-							<span ref={hoursRef} class="eb-cd-digit">
+						<div className="box cd-box-hour">
+							<span ref={hoursRef} className="eb-cd-digit">
 								00
 							</span>
 							{hoursLabel ? (
-								<span class="eb-cd-label">{hoursLabel}</span>
+								<span className="eb-cd-label">{hoursLabel}</span>
 							) : null}
 						</div>
 					) : null}
 
 					{showMinutes ? (
-						<div class="box cd-box-minute">
-							<span ref={minutesRef} class="eb-cd-digit">
+						<div className="box cd-box-minute">
+							<span ref={minutesRef} className="eb-cd-digit">
 								00
 							</span>
 							{minutesLabel ? (
-								<span class="eb-cd-label">{minutesLabel}</span>
+								<span className="eb-cd-label">{minutesLabel}</span>
 							) : null}
 						</div>
 					) : null}
 
 					{showSeconds ? (
-						<div class="box cd-box-second">
-							<span ref={secondsRef} class="eb-cd-digit">
+						<div className="box cd-box-second">
+							<span ref={secondsRef} className="eb-cd-digit">
 								00
 							</span>
 							{secondsLabel ? (
-								<span class="eb-cd-label">{secondsLabel}</span>
+								<span className="eb-cd-label">{secondsLabel}</span>
 							) : null}
 						</div>
 					) : null}
