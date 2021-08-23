@@ -29,6 +29,7 @@ jobs:
       - name: Running NPM Install & Build
         run: |
           npm install
+          npm audit fix
           npm run build
       - name: WordPress Plugin Deploy
         id: deploy
