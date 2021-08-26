@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Plugin Name:     Countdown Block
+ * Plugin Name:   Countdown Block
  * Plugin URI: 		https://essential-blocks.com
- * Description:     Highlight Upcoming Events With Countdown Timer.
- * Version:         1.1.1
- * Author:          WPDeveloper
+ * Description:   Highlight Upcoming Events With Countdown Timer.
+ * Version:       1.1.2
+ * Author:        WPDeveloper
  * Author URI: 		https://wpdeveloper.net
- * License:         GPL-3.0-or-later
- * License URI:     https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:     countdown-block
+ * License:       GPL-3.0-or-later
+ * License URI:   https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain:   countdown-block
  *
- * @package         countdown-block
+ * @package       countdown-block
  */
 
 /**
