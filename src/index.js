@@ -1,29 +1,22 @@
 /**
  * WordPress depencencies
  */
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+import { __ } from "@wordpress/i18n";
 
 /**
  * Internal dependencies
  */
-import { CountdownIcon } from "../util/icons";
+import { CountdownIcon } from "./icon";
 import Edit from "./edit";
 import Save from "./save";
 import attributes from "./attributes";
 import "./style.scss";
-
 import example from "./example";
-
 import metadata from "../block.json";
+const { ebConditionalRegisterBlockType } = EBCountdownControls;
 
-const { name, category } = metadata;
-
-registerBlockType(name, {
-	title: __("Countdown", "essential-blocks"),
-	description: __("Highlight Upcoming Events With Countdown Timer", "block"),
+ebConditionalRegisterBlockType(metadata, {
 	icon: CountdownIcon,
-	category,
 	attributes,
 	keywords: [
 		__("countdown", "essential-blocks"),

@@ -1,8 +1,10 @@
-const { __ } = wp.i18n;
-const { PanelBody } = wp.components;
+import { __ } from "@wordpress/i18n";
+import { PanelBody } from "@wordpress/components";
 
-import ColorControl from "../util/color-control";
-import BackgroundControl from "../util/background-control";
+const {
+	BackgroundControl,
+	ColorControl,
+} = window.EBCountdownControls;
 
 export default function singleBoxControl({
 	heading,
@@ -25,7 +27,7 @@ export default function singleBoxControl({
 				{heading}
 			</h3>
 			<PanelBody
-				title={__("Background")}
+				title={__("Background", "essential-blocks")}
 				// initialOpen={false}
 			>
 				<BackgroundControl
@@ -39,7 +41,7 @@ export default function singleBoxControl({
 			</PanelBody>
 
 			<ColorControl
-				label={__("Digit Color")}
+				label={__("Digit Color", "essential-blocks")}
 				color={attributes[`${dgColorAttrString}`]}
 				onChange={(dgColor) =>
 					setAttributes({ [`${dgColorAttrString}`]: dgColor })
@@ -47,7 +49,7 @@ export default function singleBoxControl({
 			/>
 
 			<ColorControl
-				label={__("Label Color")}
+				label={__("Label Color", "essential-blocks")}
 				color={attributes[`${lbColorAttrString}`]}
 				onChange={(lbColor) =>
 					setAttributes({ [`${lbColorAttrString}`]: lbColor })
@@ -56,7 +58,7 @@ export default function singleBoxControl({
 
 			{attributes.boxsBds_borderStyle !== "none" && (
 				<ColorControl
-					label={__("Border Color")}
+					label={__("Border Color", "essential-blocks")}
 					color={attributes[`${bdColorAttrString}`]}
 					onChange={(bdColor) =>
 						setAttributes({ [`${bdColorAttrString}`]: bdColor })

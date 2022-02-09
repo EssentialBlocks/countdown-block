@@ -1,40 +1,61 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { InspectorControls, MediaUpload } = wp.blockEditor;
-const { useEffect, useState, useRef } = wp.element;
-const { select } = wp.data;
-const {
+import { __ } from "@wordpress/i18n";
+import { InspectorControls } from "@wordpress/block-editor";
+import { useEffect } from "@wordpress/element";
+import { select } from "@wordpress/data";
+import {
 	PanelBody,
 	SelectControl,
 	ToggleControl,
 	TextControl,
 	Button,
-	RangeControl,
 	BaseControl,
 	ButtonGroup,
 	DateTimePicker,
-	TabPanel,
-} = wp.components;
+	TabPanel
+} from "@wordpress/components";
 
 /**
  * Internal dependencies
  */
 
-import TypographyDropdown from "../util/typography-control-v2";
-import ResponsiveDimensionsControl from "../util/dimensions-control-v2";
-import ResponsiveRangeController from "../util/responsive-range-control";
-import ColorControl from "../util/color-control";
-import BorderShadowControl from "../util/border-shadow-control";
-import BackgroundControl from "../util/background-control";
-
 import SingleBoxControl from "./singleBoxControl";
 
-import {
-	mimmikCssForResBtns,
-	mimmikCssOnPreviewBtnClickWhileBlockSelected,
-} from "../util/helpers";
+// import TypographyDropdown from "../../../util/typography-control-v2";
+// import ResponsiveDimensionsControl from "../../../util/dimensions-control-v2";
+// import ResponsiveRangeController from "../../../util/responsive-range-control";
+// import ColorControl from "../../../util/color-control";
+// import ResetControl from "../../../util/reset-control";
+// import BorderShadowControl from "../../../util/border-shadow-control";
+// import BackgroundControl from "../../../util/background-control";
+
+// import {
+// 	mimmikCssForResBtns,
+// 	mimmikCssOnPreviewBtnClickWhileBlockSelected,
+// } from "../../../util/helpers";
+
+//
+
+const {
+	TypographyDropdown,
+	ResponsiveDimensionsControl,
+	ResponsiveRangeController,
+	ColorControl,
+	// ResetControl,
+	BorderShadowControl,
+	BackgroundControl,
+
+	//
+	// mimmikCssForResBtns,
+	// mimmikCssOnPreviewBtnClickWhileBlockSelected,
+} = window.EBCountdownControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
 
 import objAttributes from "./attributes";
 
@@ -197,29 +218,29 @@ function Inspector({ attributes, setAttributes }) {
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
 	useEffect(() => {
 		setAttributes({
-			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+			resOption: select(editorStoreForGettingPreivew).__experimentalGetPreviewDeviceType(),
 		});
 	}, []);
 
-	// this useEffect is for mimmiking css for all the eb blocks on resOption changing
-	useEffect(() => {
-		mimmikCssForResBtns({
-			domObj: document,
-			resOption,
-		});
-	}, [resOption]);
+	// // this useEffect is for mimmiking css for all the eb blocks on resOption changing
+	// useEffect(() => {
+	// 	mimmikCssForResBtns({
+	// 		domObj: document,
+	// 		resOption,
+	// 	});
+	// }, [resOption]);
 
-	// this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
-	useEffect(() => {
-		const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
-			domObj: document,
-			select,
-			setAttributes,
-		});
-		return () => {
-			cleanUp();
-		};
-	}, []);
+	// // this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
+	// useEffect(() => {
+	// 	const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
+	// 		domObj: document,
+	// 		select,
+	// 		setAttributes,
+	// 	});
+	// 	return () => {
+	// 		cleanUp();
+	// 	};
+	// }, []);
 
 	const resRequiredProps = {
 		setAttributes,
@@ -426,12 +447,12 @@ function Inspector({ attributes, setAttributes }) {
 						},
 						{
 							name: "styles",
-							title: "Styles",
+							title: "Style",
 							className: "eb-tab styles",
 						},
 						{
 							name: "advance",
-							title: "Advance",
+							title: "Advanced",
 							className: "eb-tab advance",
 						},
 					]}
@@ -441,12 +462,12 @@ function Inspector({ attributes, setAttributes }) {
 							{tab.name === "general" && (
 								<>
 									<PanelBody
-										title={__("Countdown Settings")}
-										// initialOpen={false}
+										title={__("Countdown Settings", "essential-blocks")}
+									// initialOpen={false}
 									>
-										<BaseControl label={__("Design Preset")}>
+										<BaseControl label={__("Design Preset", "essential-blocks")}>
 											<SelectControl
-												// label={__("Design Preset")}
+												// label={__("Design Preset", "essential-blocks")}
 												value={preset}
 												options={STYLE_PRESETS}
 												// onChange={(preset) => setAttributes({ preset })}
@@ -455,7 +476,7 @@ function Inspector({ attributes, setAttributes }) {
 										</BaseControl>
 										<style>{`.customDatePickerStyle .components-datetime__timezone{display:none;}`}</style>
 										<BaseControl
-											label={__("Countdown Due Date")}
+											label={__("Countdown Due Date", "essential-blocks")}
 											className="customDatePickerStyle"
 										>
 											<DateTimePicker
@@ -468,9 +489,9 @@ function Inspector({ attributes, setAttributes }) {
 										</BaseControl>
 									</PanelBody>
 
-									<PanelBody title={__("Content Settings")} initialOpen={false}>
+									<PanelBody title={__("Content Settings", "essential-blocks")} initialOpen={false}>
 										<ToggleControl
-											label={__("Display Days")}
+											label={__("Display Days", "essential-blocks")}
 											checked={showDays}
 											onChange={() => setAttributes({ showDays: !showDays })}
 										/>
@@ -478,7 +499,7 @@ function Inspector({ attributes, setAttributes }) {
 										{showDays && (
 											<>
 												<TextControl
-													label={__("Custom Label For Days")}
+													label={__("Custom Label For Days", "essential-blocks")}
 													value={daysLabel}
 													type="text"
 													onChange={(daysLabel) => setAttributes({ daysLabel })}
@@ -495,7 +516,7 @@ function Inspector({ attributes, setAttributes }) {
 										)}
 
 										<ToggleControl
-											label={__("Display Hours")}
+											label={__("Display Hours", "essential-blocks")}
 											checked={showHours}
 											onChange={() => setAttributes({ showHours: !showHours })}
 										/>
@@ -503,7 +524,7 @@ function Inspector({ attributes, setAttributes }) {
 										{showHours && (
 											<>
 												<TextControl
-													label={__("Custom Label For Hours")}
+													label={__("Custom Label For Hours", "essential-blocks")}
 													value={hoursLabel}
 													type="text"
 													onChange={(hoursLabel) =>
@@ -522,7 +543,7 @@ function Inspector({ attributes, setAttributes }) {
 										)}
 
 										<ToggleControl
-											label={__("Display Minutes")}
+											label={__("Display Minutes", "essential-blocks")}
 											checked={showMinutes}
 											onChange={() =>
 												setAttributes({ showMinutes: !showMinutes })
@@ -532,7 +553,7 @@ function Inspector({ attributes, setAttributes }) {
 										{showMinutes && (
 											<>
 												<TextControl
-													label={__("Custom Label For Minutes")}
+													label={__("Custom Label For Minutes", "essential-blocks")}
 													value={minutesLabel}
 													type="text"
 													onChange={(minutesLabel) =>
@@ -551,7 +572,7 @@ function Inspector({ attributes, setAttributes }) {
 										)}
 
 										<ToggleControl
-											label={__("Display Seconds")}
+											label={__("Display Seconds", "essential-blocks")}
 											checked={showSeconds}
 											onChange={() =>
 												setAttributes({ showSeconds: !showSeconds })
@@ -561,7 +582,7 @@ function Inspector({ attributes, setAttributes }) {
 										{showSeconds && (
 											<>
 												<TextControl
-													label={__("Custom Label For Seconds")}
+													label={__("Custom Label For Seconds", "essential-blocks")}
 													value={secondsLabel}
 													type="text"
 													onChange={(secondsLabel) =>
@@ -584,14 +605,14 @@ function Inspector({ attributes, setAttributes }) {
 							{tab.name === "styles" && (
 								<>
 									<PanelBody
-										title={__("Boxs Styles")}
-										//  initialOpen={false}
+										title={__("Boxs Styles", "essential-blocks")}
+									//  initialOpen={false}
 									>
 										<BaseControl label="Layout">
 											<ButtonGroup>
 												{LAYOUT_TYPES.map(({ value, label }) => (
 													<Button
-														isLarge
+														// isLarge
 														isSecondary={flexDirection !== value}
 														isPrimary={flexDirection === value}
 														onClick={() =>
@@ -606,7 +627,7 @@ function Inspector({ attributes, setAttributes }) {
 
 										<ResponsiveRangeController
 											noUnits
-											baseLabel={__("Container Max Width")}
+											baseLabel={__("Container Max Width", "essential-blocks")}
 											controlName={wrapperWidth}
 											resRequiredProps={resRequiredProps}
 											min={100}
@@ -616,7 +637,7 @@ function Inspector({ attributes, setAttributes }) {
 
 										<ResponsiveRangeController
 											noUnits
-											baseLabel={__("Space Between Boxs")}
+											baseLabel={__("Space Between Boxs", "essential-blocks")}
 											controlName={boxsSpaceConst}
 											resRequiredProps={resRequiredProps}
 											min={0}
@@ -624,7 +645,7 @@ function Inspector({ attributes, setAttributes }) {
 											step={1}
 										/>
 
-										<BaseControl label={__("Contents Direction")}>
+										<BaseControl label={__("Contents Direction", "essential-blocks")}>
 											<SelectControl
 												value={contentsDirection}
 												options={FLEX_DIRECTIONS}
@@ -636,7 +657,7 @@ function Inspector({ attributes, setAttributes }) {
 
 										{contentsDirection.includes("row") && (
 											<>
-												<BaseControl label={__("Contents Justify Position")}>
+												<BaseControl label={__("Contents Justify Position", "essential-blocks")}>
 													<SelectControl
 														value={contentsJustify}
 														options={JUSTIFY_CONTENTS}
@@ -648,11 +669,11 @@ function Inspector({ attributes, setAttributes }) {
 											</>
 										)}
 
-										<BaseControl label={__("Contents Alignment")}>
+										<BaseControl label={__("Contents Alignment", "essential-blocks")}>
 											<ButtonGroup>
 												{ALIGN_ITEMS.map(({ value, label }) => (
 													<Button
-														isLarge
+														// isLarge
 														isSecondary={contentsAlign !== value}
 														isPrimary={contentsAlign === value}
 														onClick={() =>
@@ -667,17 +688,17 @@ function Inspector({ attributes, setAttributes }) {
 											</ButtonGroup>
 										</BaseControl>
 
-										<PanelBody title={__("Background")} initialOpen={false}>
+										<PanelBody title={__("Background", "essential-blocks")} initialOpen={false}>
 											<BackgroundControl
 												controlName={cdBoxsBgConst}
 												resRequiredProps={resRequiredProps}
 												noOverlay
 												noMainBgi
-												// noOverlayBgi // if U pass 'noOverlay' prop U don't need to pass 'noOverlayBgi'
+											// noOverlayBgi // if U pass 'noOverlay' prop U don't need to pass 'noOverlayBgi'
 											/>
 										</PanelBody>
 
-										<PanelBody title={__("Padding")} initialOpen={false}>
+										<PanelBody title={__("Padding", "essential-blocks")} initialOpen={false}>
 											<ResponsiveDimensionsControl
 												resRequiredProps={resRequiredProps}
 												controlName={cdBoxsPaddingConst}
@@ -691,15 +712,15 @@ function Inspector({ attributes, setAttributes }) {
 											<BorderShadowControl
 												controlName={cdBoxsBdShadowConst}
 												resRequiredProps={resRequiredProps}
-												// noShadow
-												// noBorder
+											// noShadow
+											// noBorder
 											/>
 										</PanelBody>
 									</PanelBody>
 
-									<PanelBody title={__("Digits")} initialOpen={false}>
+									<PanelBody title={__("Digits", "essential-blocks")} initialOpen={false}>
 										<ColorControl
-											label={__("Color")}
+											label={__("Color", "essential-blocks")}
 											color={digitsColor}
 											onChange={(digitsColor) => setAttributes({ digitsColor })}
 										/>
@@ -717,9 +738,9 @@ function Inspector({ attributes, setAttributes }) {
 										/>
 									</PanelBody>
 
-									<PanelBody title={__("Labels")} initialOpen={false}>
+									<PanelBody title={__("Labels", "essential-blocks")} initialOpen={false}>
 										<ColorControl
-											label={__("Color")}
+											label={__("Color", "essential-blocks")}
 											color={labelsColor}
 											onChange={(labelsColor) => setAttributes({ labelsColor })}
 										/>
@@ -737,9 +758,9 @@ function Inspector({ attributes, setAttributes }) {
 									</PanelBody>
 
 									{flexDirection === "row" && (
-										<PanelBody title={__("Separator")} initialOpen={false}>
+										<PanelBody title={__("Separator", "essential-blocks")} initialOpen={false}>
 											<ToggleControl
-												label={__("Show Separator")}
+												label={__("Show Separator", "essential-blocks")}
 												checked={showSeparator}
 												onChange={() =>
 													setAttributes({ showSeparator: !showSeparator })
@@ -749,7 +770,7 @@ function Inspector({ attributes, setAttributes }) {
 											{showSeparator && (
 												<>
 													<SelectControl
-														label={__("Separator Type")}
+														label={__("Separator Type", "essential-blocks")}
 														value={separatorType}
 														options={SEPARATOR_TYPES}
 														onChange={(separatorType) =>
@@ -758,7 +779,7 @@ function Inspector({ attributes, setAttributes }) {
 													/>
 
 													<ResponsiveRangeController
-														baseLabel={__("Position Top")}
+														baseLabel={__("Position Top", "essential-blocks")}
 														controlName={separatorPosTop}
 														resRequiredProps={resRequiredProps}
 														min={0}
@@ -767,7 +788,7 @@ function Inspector({ attributes, setAttributes }) {
 													/>
 
 													<ResponsiveRangeController
-														baseLabel={__("Position Right")}
+														baseLabel={__("Position Right", "essential-blocks")}
 														controlName={separatorPosRight}
 														resRequiredProps={resRequiredProps}
 														min={0}
@@ -776,7 +797,7 @@ function Inspector({ attributes, setAttributes }) {
 													/>
 
 													<ColorControl
-														label={__("Color")}
+														label={__("Color", "essential-blocks")}
 														color={separatorColor}
 														onChange={(separatorColor) =>
 															setAttributes({ separatorColor })
@@ -794,7 +815,7 @@ function Inspector({ attributes, setAttributes }) {
 									)}
 
 									<PanelBody
-										title={__("Individual Box Styling")}
+										title={__("Individual Box Styling", "essential-blocks")}
 										initialOpen={false}
 									>
 										{showDays && (
@@ -844,7 +865,7 @@ function Inspector({ attributes, setAttributes }) {
 								<>
 									<PanelBody
 										title={__("Margin & Padding")}
-										// initialOpen={true}
+									// initialOpen={true}
 									>
 										<ResponsiveDimensionsControl
 											resRequiredProps={resRequiredProps}
@@ -858,7 +879,7 @@ function Inspector({ attributes, setAttributes }) {
 										/>
 									</PanelBody>
 
-									<PanelBody title={__("Background ")} initialOpen={false}>
+									<PanelBody title={__("Background ", "essential-blocks")} initialOpen={false}>
 										<BackgroundControl
 											controlName={WrpBgConst}
 											resRequiredProps={resRequiredProps}
@@ -869,8 +890,8 @@ function Inspector({ attributes, setAttributes }) {
 										<BorderShadowControl
 											controlName={WrpBdShadowConst}
 											resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+										// noShadow
+										// noBorder
 										/>
 									</PanelBody>
 								</>
