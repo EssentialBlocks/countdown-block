@@ -123,4 +123,4 @@ Yes, it will work with any standard WordPress theme.
 * Initial Release
 
 == Upgrade Notice ==
-[Minor update] Bugfix and stability
+[Major update] Bugfix and stability
