@@ -3,7 +3,7 @@ Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89
 Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg, gutenberg blocks
 Requires at least: 5.6
 Tested up to: 5.9
-Stable tag: 1.1.4
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,9 +82,9 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.1.4 - (dev) =
+= 1.2.0 - 10/02/2022 =
 * Added: Wide width & full width support
-* Added: Support for full site editing & wp5.9
+* Added: Support for full site editing & WordPress 5.9
 * Improved: Controls and structure.
 
 = 1.1.3 - 26/08/2021 =

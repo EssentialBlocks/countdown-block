@@ -4,7 +4,7 @@
  * Plugin Name:   Countdown Block
  * Plugin URI: 		https://essential-blocks.com
  * Description:   Highlight Upcoming Events With Countdown Timer.
- * Version:       1.1.4
+ * Version:       1.2.0
  * Author:        WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:       GPL-3.0-or-later
@@ -22,7 +22,7 @@
  */
 
 
-define('COUNTDOWN_VERSION', "1.1.0");
+define('COUNTDOWN_VERSION', "1.2.0");
 define('COUNTDOWN_ADMIN_URL', plugin_dir_url(__FILE__));
 define('COUNTDOWN_ADMIN_PATH', dirname(__FILE__));
 
@@ -78,9 +78,9 @@ function create_block_countdown_block_init()
 	);
 
 
-	// 
-	// 
-	// 
+	//
+	//
+	//
 	$controls_dependencies = require COUNTDOWN_ADMIN_PATH . '/dist/controls.asset.php';
 
 	wp_register_script(
