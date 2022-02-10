@@ -1,20 +1,20 @@
-const { __ } = wp.i18n;
-const { Dashicon } = wp.components;
+import { __ } from "@wordpress/i18n";
+import { Dashicon } from "@wordpress/components";
 
 export const STYLE_PRESETS = [
-	{ label: __("Default"), value: "default" },
-	{ label: __("Preset 1"), value: "preset1" },
-	{ label: __("Preset 2"), value: "preset2" },
-	{ label: __("Preset 3"), value: "preset3" },
-	{ label: __("Preset 4"), value: "preset4" },
-	{ label: __("Preset 5"), value: "preset5" },
-	{ label: __("Preset 6"), value: "preset6" },
-	{ label: __("Preset 7"), value: "preset7" },
+	{ label: __("Default", "essential-blocks"), value: "default" },
+	{ label: __("Preset 1", "essential-blocks"), value: "preset1" },
+	{ label: __("Preset 2", "essential-blocks"), value: "preset2" },
+	{ label: __("Preset 3", "essential-blocks"), value: "preset3" },
+	{ label: __("Preset 4", "essential-blocks"), value: "preset4" },
+	{ label: __("Preset 5", "essential-blocks"), value: "preset5" },
+	{ label: __("Preset 6", "essential-blocks"), value: "preset6" },
+	{ label: __("Preset 7", "essential-blocks"), value: "preset7" },
 ];
 
 export const SEPARATOR_TYPES = [
-	{ label: __("Dotted"), value: ":" },
-	{ label: __("Solid"), value: "|" },
+	{ label: __("Dotted", "essential-blocks"), value: ":" },
+	{ label: __("Solid", "essential-blocks"), value: "|" },
 ];
 export const LAYOUT_TYPES = [
 	{ label: "Grid View", value: "row" },
@@ -29,12 +29,12 @@ export const ALIGN_ITEMS = [
 ];
 
 export const JUSTIFY_CONTENTS = [
-	{ label: __("Start"), value: "flex-start" },
-	{ label: __("Center"), value: "center" },
-	{ label: __("End"), value: "flex-end" },
-	{ label: __("Space-Between"), value: "space-between" },
-	{ label: __("Space-around"), value: "space-around" },
-	{ label: __("Space-Evenly"), value: "space-evenly" },
+	{ label: __("Start", "essential-blocks"), value: "flex-start" },
+	{ label: __("Center", "essential-blocks"), value: "center" },
+	{ label: __("End", "essential-blocks"), value: "flex-end" },
+	{ label: __("Space-Between", "essential-blocks"), value: "space-between" },
+	{ label: __("Space-around", "essential-blocks"), value: "space-around" },
+	{ label: __("Space-Evenly", "essential-blocks"), value: "space-evenly" },
 ];
 
 export const FLEX_DIRECTIONS = [

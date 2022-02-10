@@ -1,28 +1,44 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { useBlockProps, MediaUpload, RichText } = wp.blockEditor;
-const { Button } = wp.components;
-const { useEffect, useRef } = wp.element;
-
-const { select } = wp.data;
+import { __ } from "@wordpress/i18n";
+import { useBlockProps } from "@wordpress/block-editor";
+import { useEffect, useRef } from "@wordpress/element";
+import { select } from "@wordpress/data";
 
 /**
  * Internal dependencies
  */
-import "./editor.scss";
-import {
+
+// import {
+// 	softMinifyCssStrings,
+// 	generateBackgroundControlStyles,
+// 	generateDimensionsControlStyles,
+// 	generateTypographyStyles,
+// 	generateBorderShadowStyles,
+// 	generateResponsiveRangeStyles,
+// 	mimmikCssForPreviewBtnClick,
+// 	duplicateBlockIdFix,
+// } from "../../../util/helpers";
+
+const {
+	//
 	softMinifyCssStrings,
-	isCssExists,
 	generateBackgroundControlStyles,
 	generateDimensionsControlStyles,
 	generateTypographyStyles,
 	generateBorderShadowStyles,
 	generateResponsiveRangeStyles,
-	mimmikCssForPreviewBtnClick,
+	// mimmikCssForPreviewBtnClick,
 	duplicateBlockIdFix,
-} from "../util/helpers";
+} = window.EBCountdownControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
+
+import classnames from "classnames";
 
 import Inspector from "./inspector";
 
@@ -66,6 +82,7 @@ export default function Edit({
 	setAttributes,
 	isSelected,
 	clientId,
+	className,
 }) {
 	const daysRef = useRef(null);
 	const hoursRef = useRef(null);
@@ -141,7 +158,9 @@ export default function Edit({
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
 	useEffect(() => {
 		setAttributes({
-			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
 		});
 	}, []);
 
@@ -157,13 +176,13 @@ export default function Edit({
 		});
 	}, []);
 
-	// this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
-	useEffect(() => {
-		mimmikCssForPreviewBtnClick({
-			domObj: document,
-			select,
-		});
-	}, []);
+	// // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
+	// useEffect(() => {
+	// 	mimmikCssForPreviewBtnClick({
+	// 		domObj: document,
+	// 		select,
+	// 	});
+	// }, []);
 
 	// this useEffect is for the countdown animation effect
 	useEffect(() => {
@@ -211,7 +230,7 @@ export default function Edit({
 	}, [endTimeStamp, showDays, showHours, showMinutes, showSeconds]);
 
 	const blockProps = useBlockProps({
-		className: `eb-guten-block-main-parent-wrapper`,
+		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
 	});
 
 	//
@@ -523,15 +542,10 @@ export default function Edit({
 		}
 		
 		.${blockId}.eb-cd-wrapper .eb-cd-inner {
-			display: flex;
-			justify-content: center;
 			flex-direction: ${flexDirection};
 		}
 		
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box {
-			position:relative;
-			display: flex;
-			width: 100%;
 			${boxsBackgroundStylesDesktop}
 			transition: ${boxsBgTransitionStyle}, ${boxsbdShadowTransitionStyle};
 			${boxsPaddingDesktop}
@@ -549,10 +563,6 @@ export default function Edit({
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box:hover{
 			${boxsHoverBackgroundStylesDesktop}
 			${boxsbdShadowStylesHoverDesktop}
-		}
-		
-		.${blockId}.eb-cd-wrapper .eb-cd-inner .box span {
-			display: block;
 		}
 		
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box span.eb-cd-digit {
@@ -744,7 +754,7 @@ export default function Edit({
 		${
 			showSeparator && flexDirection === "row"
 				? `
-			.${blockId}.eb-cd-wrapper .eb-cd-inner .box:before {
+			.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box:before {
 				${separatorTypoStylesTab}
 				${SeparatorTopTab}
 				${SeparatorRightTab}
@@ -863,7 +873,7 @@ export default function Edit({
 		${
 			showSeparator && flexDirection === "row"
 				? `
-			.${blockId}.eb-cd-wrapper .eb-cd-inner .box:before {
+			.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box:before {
 				${separatorTypoStylesMobile}
 				${SeparatorTopMobile}
 				${SeparatorRightMobile}
@@ -943,21 +953,21 @@ export default function Edit({
 
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStyles = softMinifyCssStrings(`		
-		${isCssExists(wrapperStylesDesktop) ? wrapperStylesDesktop : " "}
+		${wrapperStylesDesktop}
 
 
 	`);
 
 	// all css styles for Tab in strings ⬇
 	const tabAllStyles = softMinifyCssStrings(`
-		${isCssExists(wrapperStylesTab) ? wrapperStylesTab : " "}
+		${wrapperStylesTab}
 
 
 	`);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStyles = softMinifyCssStrings(`
-		${isCssExists(wrapperStylesMobile) ? wrapperStylesMobile : " "}
+		${wrapperStylesMobile}
 
 
 	`);
