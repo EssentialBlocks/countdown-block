@@ -4,7 +4,7 @@
 	"description": "Highlight Upcoming Events With Countdown Timer",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
+	"main": "Gruntfile.js",
 	"scripts": {
 		"build": "wp-scripts build",
 		"format:js": "wp-scripts format-js",
@@ -14,10 +14,8 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"@babel/plugin-proposal-class-properties": "^7.10.4",
-		"@wordpress/scripts": "^12.1.1"
-	},
-	"dependencies": {
-		"node-sass": "^4.14.1"
+		"@babel/plugin-proposal-class-properties": "^7.16.5",
+		"classnames": "^2.3.1",
+		"@wordpress/scripts": "^19.2.2"
 	}
 }

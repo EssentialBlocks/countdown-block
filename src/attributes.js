@@ -29,13 +29,22 @@ import {
 	separatorPosRight,
 } from "./constants/rangeNames";
 
-import {
+// import {
+// 	generateDimensionsAttributes,
+// 	generateTypographyAttributes,
+// 	generateBackgroundAttributes,
+// 	generateBorderShadowAttributes,
+// 	generateResponsiveRangeAttributes,
+// } from "../../../util/helpers";
+
+//
+const {
 	generateDimensionsAttributes,
 	generateTypographyAttributes,
 	generateBackgroundAttributes,
 	generateBorderShadowAttributes,
 	generateResponsiveRangeAttributes,
-} from "../util/helpers";
+} = window.EBCountdownControls;
 
 const attributes = {
 	// the following 4 attributes is must required for responsive options and asset generation for frontend

@@ -2,10 +2,12 @@
 	"name": "countdown-block/countdown",
 	"title": "Countdown",
 	"category": "widgets",
+	"apiVersion": 2,
 	"description": "Highlight Upcoming Events With Countdown Timer",
 	"textdomain": "countdown",
 	"supports": {
-		"html": false
+		"html": false,
+		"align": ["wide", "full"]
 	},
-	"editorScript": "file:./build/index.js"
+	"editorScript": "file:./dist/index.js"
 }
