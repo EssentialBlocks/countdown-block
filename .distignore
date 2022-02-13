@@ -45,9 +45,9 @@ node_modules
 gulpfile.js
 .git
 node_modules/**/*.*
-dist/**/*.*
 **/*.zip
 src
 util
 .wordpress-org
 .idea
+dist/*.*.map
