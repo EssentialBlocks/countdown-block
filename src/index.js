@@ -12,6 +12,7 @@ import Save from "./save";
 import attributes from "./attributes";
 import "./style.scss";
 import example from "./example";
+import deprecated from "./deprecated";
 import metadata from "../block.json";
 const { ebConditionalRegisterBlockType } = EBCountdownControls;
 
@@ -26,4 +27,5 @@ ebConditionalRegisterBlockType(metadata, {
 	edit: Edit,
 	save: Save,
 	example: example,
+	deprecated,
 });

@@ -47,6 +47,7 @@ function create_block_countdown_block_init()
 		'wp-element',
 		'wp-block-editor',
 		'countdown-controls-util',
+		'essential-blocks-eb-animation'
 	));
 
 	$index_js     = COUNTDOWN_ADMIN_URL . 'dist/index.js';
@@ -58,15 +59,31 @@ function create_block_countdown_block_init()
 		true
 	);
 
+	$load_animation_js = COUNTDOWN_ADMIN_URL . 'assets/js/eb-animation-load.js';
+	wp_register_script(
+		'essential-blocks-eb-animation',
+		$load_animation_js,
+		array(),
+		COUNTDOWN_VERSION,
+		true
+	);
+
+	$animate_css = COUNTDOWN_ADMIN_URL . 'assets/css/animate.min.css';
+	wp_register_style(
+		'essential-blocks-animation',
+		$animate_css,
+		array(),
+		COUNTDOWN_VERSION
+	);
+
 	$style_css     = COUNTDOWN_ADMIN_URL . 'dist/style.css';
 	wp_register_style(
-		'create-block-countdown-block-editor',
+		'create-block-countdown-block-editor-css',
 		$style_css,
-		array(),
+		array('essential-blocks-animation'),
 		COUNTDOWN_VERSION,
 		"all"
 	);
-
 
 	$frontend_js = COUNTDOWN_ADMIN_URL . 'dist/frontend/index.js';
 	wp_register_script(
@@ -77,45 +94,17 @@ function create_block_countdown_block_init()
 		true
 	);
 
-
-	//
-	//
-	//
-	$controls_dependencies = require COUNTDOWN_ADMIN_PATH . '/dist/controls.asset.php';
-
-	wp_register_script(
-		"countdown-controls-util",
-		COUNTDOWN_ADMIN_URL . '/dist/controls.js',
-		array_merge($controls_dependencies['dependencies'], array("essential-blocks-edit-post")),
-		$controls_dependencies['version'],
-		true
-	);
-
-	wp_localize_script('countdown-controls-util', 'EssentialBlocksLocalize', array(
-		'eb_wp_version' => (float) get_bloginfo('version'),
-		'rest_rootURL' => get_rest_url(),
-	));
-
-	wp_register_style(
-		'countdown-editor-css',
-		COUNTDOWN_ADMIN_URL . '/dist/controls.css',
-		array(
-			"create-block-countdown-block-editor"
-		),
-		$controls_dependencies['version'],
-		'all'
-	);
-
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/countdown')) {
 		register_block_type(
 			Countdown_Helper::get_block_register_path("countdown-block/countdown", COUNTDOWN_ADMIN_PATH),
 			array(
 				'editor_script'	=> 'create-block-countdown-block-editor',
-				'editor_style' 	=> 'countdown-editor-css',
+				'editor_style' 	=> 'create-block-countdown-block-editor-css',
 				'render_callback' => function ($attributes, $content) {
 					if (!is_admin()) {
+						wp_enqueue_style('create-block-countdown-block-editor-css');
 						wp_enqueue_script('essential-blocks-countdown-frontend');
-						wp_enqueue_style('create-block-countdown-block-editor');
+						wp_enqueue_script('essential-blocks-eb-animation');
 					}
 					return $content;
 				}
@@ -124,4 +113,4 @@ function create_block_countdown_block_init()
 	}
 }
 
-add_action('init', 'create_block_countdown_block_init');
+add_action('init', 'create_block_countdown_block_init', 99);

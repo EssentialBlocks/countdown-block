@@ -10,17 +10,6 @@ import { select } from "@wordpress/data";
  * Internal dependencies
  */
 
-// import {
-// 	softMinifyCssStrings,
-// 	generateBackgroundControlStyles,
-// 	generateDimensionsControlStyles,
-// 	generateTypographyStyles,
-// 	generateBorderShadowStyles,
-// 	generateResponsiveRangeStyles,
-// 	mimmikCssForPreviewBtnClick,
-// 	duplicateBlockIdFix,
-// } from "../../../util/helpers";
-
 const {
 	//
 	softMinifyCssStrings,
@@ -34,7 +23,7 @@ const {
 } = window.EBCountdownControls;
 
 const editorStoreForGettingPreivew =
-	eb_style_handler.editor_type === "edit-site"
+	eb_conditional_localize.editor_type === "edit-site"
 		? "core/edit-site"
 		: "core/edit-post";
 
@@ -153,6 +142,7 @@ export default function Edit({
 
 		//
 		boxsBds_borderStyle,
+		classHook,
 	} = attributes;
 
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
@@ -175,14 +165,6 @@ export default function Edit({
 			clientId,
 		});
 	}, []);
-
-	// // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
-	// useEffect(() => {
-	// 	mimmikCssForPreviewBtnClick({
-	// 		domObj: document,
-	// 		select,
-	// 	});
-	// }, []);
 
 	// this useEffect is for the countdown animation effect
 	useEffect(() => {
@@ -362,15 +344,15 @@ export default function Edit({
 		backgroundStylesMobile: dayBoxBgStylesMobile = "",
 		hoverBackgroundStylesMobile: dayBoxHoverBgStylesMobile = "",
 	} = showDays
-		? generateBackgroundControlStyles({
+			? generateBackgroundControlStyles({
 				noTransition: true,
 				attributes,
 				controlName: cdDayBoxBgConst,
 				noOverlay: true,
 				noMainBgi: true,
 				// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-		  })
-		: {};
+			})
+			: {};
 
 	const {
 		backgroundStylesDesktop: hourBoxBgStylesDesktop = "",
@@ -380,15 +362,15 @@ export default function Edit({
 		backgroundStylesMobile: hourBoxBgStylesMobile = "",
 		hoverBackgroundStylesMobile: hourBoxHoverBgStylesMobile = "",
 	} = showHours
-		? generateBackgroundControlStyles({
+			? generateBackgroundControlStyles({
 				noTransition: true,
 				attributes,
 				controlName: cdHourBoxBgConst,
 				noOverlay: true,
 				noMainBgi: true,
 				// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-		  })
-		: {};
+			})
+			: {};
 
 	const {
 		backgroundStylesDesktop: minuteBoxBgStylesDesktop = "",
@@ -398,15 +380,15 @@ export default function Edit({
 		backgroundStylesMobile: minuteBoxBgStylesMobile = "",
 		hoverBackgroundStylesMobile: minuteBoxHoverBgStylesMobile = "",
 	} = showMinutes
-		? generateBackgroundControlStyles({
+			? generateBackgroundControlStyles({
 				noTransition: true,
 				attributes,
 				controlName: cdMinuteBoxBgConst,
 				noOverlay: true,
 				noMainBgi: true,
 				// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-		  })
-		: {};
+			})
+			: {};
 
 	const {
 		backgroundStylesDesktop: secondBoxBgStylesDesktop = "",
@@ -416,15 +398,15 @@ export default function Edit({
 		backgroundStylesMobile: secondBoxBgStylesMobile = "",
 		hoverBackgroundStylesMobile: secondBoxHoverBgStylesMobile = "",
 	} = showSeconds
-		? generateBackgroundControlStyles({
+			? generateBackgroundControlStyles({
 				noTransition: true,
 				attributes,
 				controlName: cdSecondBoxBgConst,
 				noOverlay: true,
 				noMainBgi: true,
 				// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-		  })
-		: {};
+			})
+			: {};
 
 	// styles related to generateBackgroundControlStyles end
 
@@ -550,11 +532,10 @@ export default function Edit({
 			transition: ${boxsBgTransitionStyle}, ${boxsbdShadowTransitionStyle};
 			${boxsPaddingDesktop}
 			${boxsbdShadowStyesDesktop}
-			${
-				contentsDirection.includes("row")
-					? `justify-content: ${contentsJustify};`
-					: " "
-			}
+			${contentsDirection.includes("row")
+			? `justify-content: ${contentsJustify};`
+			: " "
+		}
 			flex-direction: ${contentsDirection};
 			align-items: ${contentsAlign};
 		}
@@ -571,9 +552,8 @@ export default function Edit({
 			color: ${digitsColor};
 		}
 		
-		${
-			showSeparator && flexDirection === "row"
-				? `
+		${showSeparator && flexDirection === "row"
+			? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box:before {
 				position: absolute;
 				right: 90%;
@@ -588,7 +568,7 @@ export default function Edit({
 				line-height:0;
 			}
 			`
-				: " "
+			: " "
 		}
 		
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box span.eb-cd-label {
@@ -602,16 +582,14 @@ export default function Edit({
 			${BoxsSpaceBetweenDesktop}
 		}
 
-		${
-			showDays
-				? `			
+		${showDays
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day{
 				${dayBoxBgStylesDesktop}
-				${
-					boxsBds_borderStyle !== "none" && dayBdrColor
-						? `border-color: ${dayBdrColor};`
-						: " "
-				}
+				${boxsBds_borderStyle !== "none" && dayBdrColor
+				? `border-color: ${dayBdrColor};`
+				: " "
+			}
 			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day:hover{
@@ -626,19 +604,17 @@ export default function Edit({
 				${dayDgColor ? `color: ${dayDgColor};` : " "}
 			} 
 			`
-				: " "
+			: " "
 		}
 
-		${
-			showHours
-				? `			
+		${showHours
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour{
 				${hourBoxBgStylesDesktop}
-				${
-					boxsBds_borderStyle !== "none" && hourBdrColor
-						? `border-color: ${hourBdrColor};`
-						: " "
-				}
+				${boxsBds_borderStyle !== "none" && hourBdrColor
+				? `border-color: ${hourBdrColor};`
+				: " "
+			}
 			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour:hover{
@@ -653,19 +629,17 @@ export default function Edit({
 				${hourDgColor ? `color: ${hourDgColor};` : " "}
 			} 
 			`
-				: " "
+			: " "
 		}
 
-		${
-			showMinutes
-				? `			
+		${showMinutes
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute{
 				${minuteBoxBgStylesDesktop}
-				${
-					boxsBds_borderStyle !== "none" && minuteBdrColor
-						? `border-color: ${minuteBdrColor};`
-						: " "
-				}
+				${boxsBds_borderStyle !== "none" && minuteBdrColor
+				? `border-color: ${minuteBdrColor};`
+				: " "
+			}
 			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute:hover{
@@ -680,19 +654,17 @@ export default function Edit({
 				${minuteDgColor ? `color: ${minuteDgColor};` : " "}
 			} 
 			`
-				: " "
+			: " "
 		}
 
-		${
-			showSeconds
-				? `			
+		${showSeconds
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second{
 				${secondBoxBgStylesDesktop}
-				${
-					boxsBds_borderStyle !== "none" && secondBdrColor
-						? `border-color: ${secondBdrColor};`
-						: " "
-				}
+				${boxsBds_borderStyle !== "none" && secondBdrColor
+				? `border-color: ${secondBdrColor};`
+				: " "
+			}
 			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second:hover{
@@ -707,7 +679,7 @@ export default function Edit({
 				${secondDgColor ? `color: ${secondDgColor};` : " "}
 			} 
 			`
-				: " "
+			: " "
 		}
 
 	`;
@@ -751,16 +723,15 @@ export default function Edit({
 			${digitsPaddingTab}
 		}
 
-		${
-			showSeparator && flexDirection === "row"
-				? `
+		${showSeparator && flexDirection === "row"
+			? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box:before {
 				${separatorTypoStylesTab}
 				${SeparatorTopTab}
 				${SeparatorRightTab}
 			}
 			`
-				: " "
+			: " "
 		}
 		
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box span.eb-cd-label {
@@ -772,9 +743,8 @@ export default function Edit({
 			${BoxsSpaceBetweenTab}
 		}
 		
-		${
-			showDays
-				? `			
+		${showDays
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day{
 				${dayBoxBgStylesTab}
 			} 
@@ -783,12 +753,11 @@ export default function Edit({
 				${dayBoxHoverBgStylesTab}
 			} 
 			`
-				: " "
+			: " "
 		}
 
-		${
-			showHours
-				? `			
+		${showHours
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour{
 				${hourBoxBgStylesTab}
 			} 
@@ -797,12 +766,11 @@ export default function Edit({
 				${hourBoxHoverBgStylesTab}
 			} 
 			`
-				: " "
+			: " "
 		}
 
-		${
-			showMinutes
-				? `			
+		${showMinutes
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute{
 				${minuteBoxBgStylesTab}
 			} 
@@ -811,12 +779,11 @@ export default function Edit({
 				${minuteBoxHoverBgStylesTab}
 			} 
 			`
-				: " "
+			: " "
 		}
 
-		${
-			showSeconds
-				? `			
+		${showSeconds
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second{
 				${secondBoxBgStylesTab}
 			} 
@@ -826,7 +793,7 @@ export default function Edit({
 			} 
 
 			`
-				: " "
+			: " "
 		}
 
 	`;
@@ -870,16 +837,15 @@ export default function Edit({
 			${digitsPaddingMobile}
 		}
 
-		${
-			showSeparator && flexDirection === "row"
-				? `
+		${showSeparator && flexDirection === "row"
+			? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box:before {
 				${separatorTypoStylesMobile}
 				${SeparatorTopMobile}
 				${SeparatorRightMobile}
 			}
 			`
-				: " "
+			: " "
 		}
 		
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box span.eb-cd-label {
@@ -891,9 +857,8 @@ export default function Edit({
 			${BoxsSpaceBetweenMobile}
 		}
 			
-		${
-			showDays
-				? `			
+		${showDays
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day{
 				${dayBoxBgStylesMobile}
 			} 
@@ -902,12 +867,11 @@ export default function Edit({
 				${dayBoxHoverBgStylesMobile}
 			} 
 			`
-				: " "
+			: " "
 		}
 
-		${
-			showHours
-				? `			
+		${showHours
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour{
 				${hourBoxBgStylesMobile}
 			} 
@@ -916,12 +880,11 @@ export default function Edit({
 				${hourBoxHoverBgStylesMobile}
 			} 
 			`
-				: " "
+			: " "
 		}
 
-		${
-			showMinutes
-				? `			
+		${showMinutes
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute{
 				${minuteBoxBgStylesMobile}
 			} 
@@ -930,12 +893,11 @@ export default function Edit({
 				${minuteBoxHoverBgStylesMobile}
 			} 
 			`
-				: " "
+			: " "
 		}
 
-		${
-			showSeconds
-				? `			
+		${showSeconds
+			? `			
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second{
 				${secondBoxBgStylesMobile}
 			} 
@@ -945,7 +907,7 @@ export default function Edit({
 			} 
 
 			`
-				: " "
+			: " "
 		}
 
 
@@ -988,14 +950,14 @@ export default function Edit({
 		}
 	}, [attributes]);
 
-	return [
-		isSelected && (
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
-		),
-		// Edit view
-		<div {...blockProps}>
-			<style>
-				{`
+	return (
+		<>
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
+			<div {...blockProps}>
+				<style>
+					{`
 				${desktopAllStyles}
 
 				/* mimmikcssStart */
@@ -1021,55 +983,58 @@ export default function Edit({
 				
 				}
 				`}
-			</style>
+				</style>
 
-			<div className={`${blockId} eb-cd-wrapper`}>
-				<div className="eb-cd-inner">
-					{showDays ? (
-						<div className="box cd-box-day">
-							<span ref={daysRef} className="eb-cd-digit">
-								00
-							</span>
-							{daysLabel ? (
-								<span className="eb-cd-label">{daysLabel}</span>
+				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
+					<div className={`${blockId} eb-cd-wrapper`}>
+						<div className="eb-cd-inner">
+							{showDays ? (
+								<div className="box cd-box-day">
+									<span ref={daysRef} className="eb-cd-digit">
+										00
+									</span>
+									{daysLabel ? (
+										<span className="eb-cd-label">{daysLabel}</span>
+									) : null}
+								</div>
+							) : null}
+
+							{showHours ? (
+								<div className="box cd-box-hour">
+									<span ref={hoursRef} className="eb-cd-digit">
+										00
+									</span>
+									{hoursLabel ? (
+										<span className="eb-cd-label">{hoursLabel}</span>
+									) : null}
+								</div>
+							) : null}
+
+							{showMinutes ? (
+								<div className="box cd-box-minute">
+									<span ref={minutesRef} className="eb-cd-digit">
+										00
+									</span>
+									{minutesLabel ? (
+										<span className="eb-cd-label">{minutesLabel}</span>
+									) : null}
+								</div>
+							) : null}
+
+							{showSeconds ? (
+								<div className="box cd-box-second">
+									<span ref={secondsRef} className="eb-cd-digit">
+										00
+									</span>
+									{secondsLabel ? (
+										<span className="eb-cd-label">{secondsLabel}</span>
+									) : null}
+								</div>
 							) : null}
 						</div>
-					) : null}
-
-					{showHours ? (
-						<div className="box cd-box-hour">
-							<span ref={hoursRef} className="eb-cd-digit">
-								00
-							</span>
-							{hoursLabel ? (
-								<span className="eb-cd-label">{hoursLabel}</span>
-							) : null}
-						</div>
-					) : null}
-
-					{showMinutes ? (
-						<div className="box cd-box-minute">
-							<span ref={minutesRef} className="eb-cd-digit">
-								00
-							</span>
-							{minutesLabel ? (
-								<span className="eb-cd-label">{minutesLabel}</span>
-							) : null}
-						</div>
-					) : null}
-
-					{showSeconds ? (
-						<div className="box cd-box-second">
-							<span ref={secondsRef} className="eb-cd-digit">
-								00
-							</span>
-							{secondsLabel ? (
-								<span className="eb-cd-label">{secondsLabel}</span>
-							) : null}
-						</div>
-					) : null}
+					</div>
 				</div>
 			</div>
-		</div>,
-	];
+		</>
+	);
 }
