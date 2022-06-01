@@ -1,5 +1,5 @@
 === Countdown Block ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89, fencermonir
 Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg, gutenberg blocks
 Requires at least: 5.6
 Tested up to: 5.9
@@ -17,7 +17,7 @@ Using **Countdown**, you can notify your visitors about the upcoming events or b
 
 **Super Light-weight:** No extra resources used and it's highly optimized for super fast loading & instant Live editing.
 
-*Dedicated Support:** We’ve an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
+**Dedicated Support:** We’ve an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
 
 
 ## 🚀 BACKED BY A TRUSTED TEAM ##
@@ -82,6 +82,10 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
+= 1.2.2 - dev =
+* Added: Animation, Responsive Controls & Custom CSS options
+* Improved: Controls & structure
+
 = 1.2.1 - 13/02/2022 =
 * Fixed: Frontend js file not enqueued
 
@@ -107,7 +111,6 @@ Yes, it will work with any standard WordPress theme.
 * Added: Design Presets
 * Improved: Controls, styling options and structure. Removed all unnecessary 3rd party libraries.
 * Fixed: Issue [Auto change in block code causes gutenberg to save revision, and browser alert](https://wordpress.org/support/topic/auto-change-in-block-code-causes-gutenberg-to-save-revision-and-browser-alert/)
-
 
 = 1.0.4 =
 * Fixed: Countdown end issue in frontend
