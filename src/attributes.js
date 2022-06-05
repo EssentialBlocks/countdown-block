@@ -239,7 +239,7 @@ const attributes = {
 		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
 	}),
 	...generateBackgroundAttributes(cdBoxsBgConst, {
-		// defaultFillColor: "#7967ff",
+		defaultFillColor: "#7967ff",
 		isBgDefaultGradient: true,
 		noOverlay: true,
 		noMainBgi: true,
