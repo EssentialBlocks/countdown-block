@@ -2,8 +2,8 @@
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89, fencermonir
 Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg, gutenberg blocks
 Requires at least: 5.6
-Tested up to: 5.9
-Stable tag: 1.2.1
+Tested up to: 6.0
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,7 +82,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.2 - dev =
+= 1.2.2 - 05/06/2022 =
 * Added: Animation, Responsive Controls & Custom CSS options
 * Improved: Controls & structure
 
@@ -129,4 +129,3 @@ Yes, it will work with any standard WordPress theme.
 * Initial Release
 
 == Upgrade Notice ==
-[Major update] Bugfix and stability
