@@ -82,6 +82,9 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
+= 1.2.3 - dev =
+* Added: Converted style-handler to php for working perfectly with Reusable blocks and FSE
+
 = 1.2.2 - 05/06/2022 =
 * Added: Animation, Responsive Controls & Custom CSS options
 * Improved: Controls & structure
