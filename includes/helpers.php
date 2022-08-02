@@ -50,7 +50,7 @@ class Countdown_Helper
             wp_register_script(
                 "countdown-controls-util",
                 COUNTDOWN_ADMIN_URL . '/dist/controls.js',
-                array_merge($controls_dependencies['dependencies'], array("essential-blocks-edit-post")),
+                array_merge($controls_dependencies['dependencies']),
                 $controls_dependencies['version'],
                 true
             );
