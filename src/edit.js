@@ -22,11 +22,6 @@ const {
 	duplicateBlockIdFix,
 } = window.EBCountdownControls;
 
-const editorStoreForGettingPreivew =
-	eb_conditional_localize.editor_type === "edit-site"
-		? "core/edit-site"
-		: "core/edit-post";
-
 import classnames from "classnames";
 
 import Inspector from "./inspector";
@@ -144,15 +139,6 @@ export default function Edit({
 		boxsBds_borderStyle,
 		classHook,
 	} = attributes;
-
-	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
-	useEffect(() => {
-		setAttributes({
-			resOption: select(
-				editorStoreForGettingPreivew
-			).__experimentalGetPreviewDeviceType(),
-		});
-	}, []);
 
 	// this useEffect is for creating a unique blockId for each block's unique className
 	useEffect(() => {
