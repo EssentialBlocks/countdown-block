@@ -13,6 +13,12 @@ export default function Save({ attributes }) {
 		minutesLabel,
 		secondsLabel,
 		classHook,
+		isEvergreenTimer,
+		evergreenTimerHours,
+		evergreenTimerMinutes,
+		recurringCountdown,
+		restartTime,
+		recurringCountdownEnd,
 	} = attributes;
 
 	return (
@@ -21,7 +27,14 @@ export default function Save({ attributes }) {
 				<div className={`${blockId} eb-cd-wrapper`}>
 					<div
 						className="eb-cd-inner"
+						blockId={blockId}
 						data-deadline-time={`${endTimeStamp || 0}`}
+						data-is-evergreen-time={isEvergreenTimer || false}
+						data-evergreen-time-hours={evergreenTimerHours || "11"}
+						data-evergreen-time-minutes={evergreenTimerMinutes || "59"}
+						data-evergreen-recurring={recurringCountdown || false}
+						data-evergreen-restart-time={restartTime || "0"}
+						data-evergreen-deadline-time={`${recurringCountdownEnd || 0}`}
 					>
 						{showDays ? (
 							<div className="box cd-box-day">

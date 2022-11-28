@@ -138,6 +138,12 @@ export default function Edit({
 		//
 		boxsBds_borderStyle,
 		classHook,
+		isEvergreenTimer,
+		evergreenTimerHours,
+		evergreenTimerMinutes,
+		recurringCountdown,
+		restartTime,
+		recurringCountdownEnd,
 	} = attributes;
 
 	// this useEffect is for creating a unique blockId for each block's unique className
@@ -160,6 +166,14 @@ export default function Edit({
 		const hoursRefUe = hoursRef.current ? hoursRef : fakeElement;
 		const minutesRefUe = minutesRef.current ? minutesRef : fakeElement;
 		const secondsRefUe = secondsRef.current ? secondsRef : fakeElement;
+
+		const MINUTE_IN_SECONDS = 60;
+		const HOUR_IN_SECONDS = 60 * MINUTE_IN_SECONDS;
+		const DAY_IN_SECONDS = 24 * HOUR_IN_SECONDS;
+		const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+		const MONTH_IN_SECONDS = 30 * DAY_IN_SECONDS;
+		const YEAR_IN_SECONDS = 365 * DAY_IN_SECONDS;
+		const HOUR_IN_MILISECONDS = 60 * 60 * 1000;
 
 		const timeLeft = (deadlineTimeStamp, intervalId = null) => {
 			const now = Date.now();
@@ -186,16 +200,68 @@ export default function Edit({
 				seconds < 10 ? `0${seconds}` : `${seconds}`;
 		};
 
-		timeLeft(endTimeStamp || 0);
+		if (isEvergreenTimer) {
+			let evergreenInterval = blockId + "_evergreen_interval",
+				evergreenTimeKey = blockId + "_evergreen_time",
+				interval = localStorage.getItem(evergreenInterval),
+				date = localStorage.getItem(evergreenTimeKey),
+				hours = parseInt(evergreenTimerHours || 0) * HOUR_IN_SECONDS,
+				minutes = parseInt(evergreenTimerMinutes || 0) * MINUTE_IN_SECONDS,
+				evergreenTime = parseInt(hours + minutes);
 
-		const intervalId = setInterval(() => {
-			timeLeft(endTimeStamp || 0, intervalId);
-		}, 1000);
+			if (date === null || interval === null || interval != evergreenTime) {
+				date = Date.now() + parseInt(evergreenTime) * 1000;
+				localStorage.setItem(evergreenInterval, evergreenTime);
+				localStorage.setItem(evergreenTimeKey, date);
+			}
 
-		return () => {
-			clearInterval(intervalId);
-		};
-	}, [endTimeStamp, showDays, showHours, showMinutes, showSeconds]);
+			if (recurringCountdown) {
+				let recurringAfter = parseFloat(restartTime) * HOUR_IN_MILISECONDS;
+
+				if (parseInt(date) + recurringAfter < Date.now()) {
+					date = Date.now() + parseInt(evergreenTime) * 1000;
+					localStorage.setItem(evergreenTimeKey, date);
+				}
+
+				if (recurringCountdownEnd < date) {
+					date = recurringCountdownEnd;
+				}
+			}
+
+			timeLeft(date || 0);
+			const intervalIdEver = setInterval(() => {
+				timeLeft(date || 0, intervalIdEver);
+			}, 1000);
+
+			return () => {
+				clearInterval(intervalIdEver);
+			};
+		}
+
+		if (!isEvergreenTimer) {
+			timeLeft(endTimeStamp || 0);
+
+			const intervalId = setInterval(() => {
+				timeLeft(endTimeStamp || 0, intervalId);
+			}, 1000);
+
+			return () => {
+				clearInterval(intervalId);
+			};
+		}
+	}, [
+		endTimeStamp,
+		showDays,
+		showHours,
+		showMinutes,
+		showSeconds,
+		isEvergreenTimer,
+		evergreenTimerHours,
+		evergreenTimerMinutes,
+		recurringCountdown,
+		restartTime,
+		recurringCountdownEnd,
+	]);
 
 	const blockProps = useBlockProps({
 		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
@@ -330,15 +396,15 @@ export default function Edit({
 		backgroundStylesMobile: dayBoxBgStylesMobile = "",
 		hoverBackgroundStylesMobile: dayBoxHoverBgStylesMobile = "",
 	} = showDays
-			? generateBackgroundControlStyles({
+		? generateBackgroundControlStyles({
 				noTransition: true,
 				attributes,
 				controlName: cdDayBoxBgConst,
 				noOverlay: true,
 				noMainBgi: true,
 				// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-			})
-			: {};
+		  })
+		: {};
 
 	const {
 		backgroundStylesDesktop: hourBoxBgStylesDesktop = "",
@@ -348,15 +414,15 @@ export default function Edit({
 		backgroundStylesMobile: hourBoxBgStylesMobile = "",
 		hoverBackgroundStylesMobile: hourBoxHoverBgStylesMobile = "",
 	} = showHours
-			? generateBackgroundControlStyles({
+		? generateBackgroundControlStyles({
 				noTransition: true,
 				attributes,
 				controlName: cdHourBoxBgConst,
 				noOverlay: true,
 				noMainBgi: true,
 				// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-			})
-			: {};
+		  })
+		: {};
 
 	const {
 		backgroundStylesDesktop: minuteBoxBgStylesDesktop = "",
@@ -366,15 +432,15 @@ export default function Edit({
 		backgroundStylesMobile: minuteBoxBgStylesMobile = "",
 		hoverBackgroundStylesMobile: minuteBoxHoverBgStylesMobile = "",
 	} = showMinutes
-			? generateBackgroundControlStyles({
+		? generateBackgroundControlStyles({
 				noTransition: true,
 				attributes,
 				controlName: cdMinuteBoxBgConst,
 				noOverlay: true,
 				noMainBgi: true,
 				// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-			})
-			: {};
+		  })
+		: {};
 
 	const {
 		backgroundStylesDesktop: secondBoxBgStylesDesktop = "",
@@ -384,15 +450,15 @@ export default function Edit({
 		backgroundStylesMobile: secondBoxBgStylesMobile = "",
 		hoverBackgroundStylesMobile: secondBoxHoverBgStylesMobile = "",
 	} = showSeconds
-			? generateBackgroundControlStyles({
+		? generateBackgroundControlStyles({
 				noTransition: true,
 				attributes,
 				controlName: cdSecondBoxBgConst,
 				noOverlay: true,
 				noMainBgi: true,
 				// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-			})
-			: {};
+		  })
+		: {};
 
 	// styles related to generateBackgroundControlStyles end
 
@@ -489,57 +555,59 @@ export default function Edit({
 			${wrpBdShdStyesDesktop}
 			transition: ${wrpBgTransitionStyle}, ${wrpBdShdTransitionStyle};
 		}
-		
+
 		div.${blockId}.eb-cd-wrapper{
 			margin-left: auto;
 			margin-right: auto;
 		}
-		
-		.${blockId}.eb-cd-wrapper:hover{			
+
+		.${blockId}.eb-cd-wrapper:hover{
 			${wrpHoverBackgroundStylesDesktop}
 			${wrpBdShdStylesHoverDesktop}
 		}
-		
-		.${blockId}.eb-cd-wrapper:before{			
+
+		.${blockId}.eb-cd-wrapper:before{
 			${wrpOverlayStylesDesktop}
 			transition: ${wrpOvlTransitionStyle};
 		}
-		
-		.${blockId}.eb-cd-wrapper:hover:before{			
+
+		.${blockId}.eb-cd-wrapper:hover:before{
 			${wrpHoverOverlayStylesDesktop}
 		}
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner {
 			flex-direction: ${flexDirection};
 		}
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box {
 			${boxsBackgroundStylesDesktop}
 			transition: ${boxsBgTransitionStyle}, ${boxsbdShadowTransitionStyle};
 			${boxsPaddingDesktop}
 			${boxsbdShadowStyesDesktop}
-			${contentsDirection.includes("row")
-			? `justify-content: ${contentsJustify};`
-			: " "
-		}
+			${
+				contentsDirection.includes("row")
+					? `justify-content: ${contentsJustify};`
+					: " "
+			}
 			flex-direction: ${contentsDirection};
 			align-items: ${contentsAlign};
 		}
 
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box:hover{
 			${boxsHoverBackgroundStylesDesktop}
 			${boxsbdShadowStylesHoverDesktop}
 		}
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box span.eb-cd-digit {
 			${digitsTypoStylesDesktop}
 			${digitsPaddingDesktop}
 			color: ${digitsColor};
 		}
-		
-		${showSeparator && flexDirection === "row"
-			? `
+
+		${
+			showSeparator && flexDirection === "row"
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box:before {
 				position: absolute;
 				right: 90%;
@@ -554,118 +622,126 @@ export default function Edit({
 				line-height:0;
 			}
 			`
-			: " "
+				: " "
 		}
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box span.eb-cd-label {
 			${labelsTypoStylesDesktop}
 			${labelsPaddingDesktop}
 			color: ${labelsColor};
 		}
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box {
 			margin: 0;
 			${BoxsSpaceBetweenDesktop}
 		}
 
-		${showDays
-			? `			
+		${
+			showDays
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day{
 				${dayBoxBgStylesDesktop}
-				${boxsBds_borderStyle !== "none" && dayBdrColor
-				? `border-color: ${dayBdrColor};`
-				: " "
+				${
+					boxsBds_borderStyle !== "none" && dayBdrColor
+						? `border-color: ${dayBdrColor};`
+						: " "
+				}
 			}
-			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day:hover{
 				${dayBoxHoverBgStylesDesktop}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day span.eb-cd-label{
 				${dayLbColor ? `color: ${dayLbColor};` : " "}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day span.eb-cd-digit{
 				${dayDgColor ? `color: ${dayDgColor};` : " "}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
-		${showHours
-			? `			
+		${
+			showHours
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour{
 				${hourBoxBgStylesDesktop}
-				${boxsBds_borderStyle !== "none" && hourBdrColor
-				? `border-color: ${hourBdrColor};`
-				: " "
+				${
+					boxsBds_borderStyle !== "none" && hourBdrColor
+						? `border-color: ${hourBdrColor};`
+						: " "
+				}
 			}
-			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour:hover{
 				${hourBoxHoverBgStylesDesktop}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour span.eb-cd-label{
 				${hourLbColor ? `color: ${hourLbColor};` : " "}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour span.eb-cd-digit{
 				${hourDgColor ? `color: ${hourDgColor};` : " "}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
-		${showMinutes
-			? `			
+		${
+			showMinutes
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute{
 				${minuteBoxBgStylesDesktop}
-				${boxsBds_borderStyle !== "none" && minuteBdrColor
-				? `border-color: ${minuteBdrColor};`
-				: " "
+				${
+					boxsBds_borderStyle !== "none" && minuteBdrColor
+						? `border-color: ${minuteBdrColor};`
+						: " "
+				}
 			}
-			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute:hover{
 				${minuteBoxHoverBgStylesDesktop}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute span.eb-cd-label{
 				${minuteLbColor ? `color: ${minuteLbColor};` : " "}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute span.eb-cd-digit{
 				${minuteDgColor ? `color: ${minuteDgColor};` : " "}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
-		${showSeconds
-			? `			
+		${
+			showSeconds
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second{
 				${secondBoxBgStylesDesktop}
-				${boxsBds_borderStyle !== "none" && secondBdrColor
-				? `border-color: ${secondBdrColor};`
-				: " "
+				${
+					boxsBds_borderStyle !== "none" && secondBdrColor
+						? `border-color: ${secondBdrColor};`
+						: " "
+				}
 			}
-			} 
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second:hover{
 				${secondBoxHoverBgStylesDesktop}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second span.eb-cd-label{
 				${secondLbColor ? `color: ${secondLbColor};` : " "}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second span.eb-cd-digit{
 				${secondDgColor ? `color: ${secondDgColor};` : " "}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
 	`;
@@ -677,18 +753,18 @@ export default function Edit({
 			${wrpPaddingTab}
 			${wrpBackgroundStylesTab}
 			${wrpBdShdStyesTab}
-		}		
-		
-		.${blockId}.eb-cd-wrapper:hover{			
+		}
+
+		.${blockId}.eb-cd-wrapper:hover{
 			${wrpHoverBackgroundStylesTab}
 			${wrpBdShdStylesHoverTab}
 		}
-		
-		.${blockId}.eb-cd-wrapper:before{			
+
+		.${blockId}.eb-cd-wrapper:before{
 			${wrpOverlayStylesTab}
 		}
-		
-		.${blockId}.eb-cd-wrapper:hover:before{			
+
+		.${blockId}.eb-cd-wrapper:hover:before{
 			${wrpHoverOverlayStylesTab}
 		}
 
@@ -698,7 +774,7 @@ export default function Edit({
 			${boxsbdShadowStyesTab}
 		}
 
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box:hover{
 			${boxsHoverBackgroundStylesTab}
 			${boxsbdShadowStylesHoverTab}
@@ -709,17 +785,18 @@ export default function Edit({
 			${digitsPaddingTab}
 		}
 
-		${showSeparator && flexDirection === "row"
-			? `
+		${
+			showSeparator && flexDirection === "row"
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box:before {
 				${separatorTypoStylesTab}
 				${SeparatorTopTab}
 				${SeparatorRightTab}
 			}
 			`
-			: " "
+				: " "
 		}
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box span.eb-cd-label {
 			${labelsTypoStylesTab}
 			${labelsPaddingTab}
@@ -728,58 +805,62 @@ export default function Edit({
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box {
 			${BoxsSpaceBetweenTab}
 		}
-		
-		${showDays
-			? `			
+
+		${
+			showDays
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day{
 				${dayBoxBgStylesTab}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day:hover{
 				${dayBoxHoverBgStylesTab}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
-		${showHours
-			? `			
+		${
+			showHours
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour{
 				${hourBoxBgStylesTab}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour:hover{
 				${hourBoxHoverBgStylesTab}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
-		${showMinutes
-			? `			
+		${
+			showMinutes
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute{
 				${minuteBoxBgStylesTab}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute:hover{
 				${minuteBoxHoverBgStylesTab}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
-		${showSeconds
-			? `			
+		${
+			showSeconds
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second{
 				${secondBoxBgStylesTab}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second:hover{
 				${secondBoxHoverBgStylesTab}
-			} 
+			}
 
 			`
-			: " "
+				: " "
 		}
 
 	`;
@@ -791,18 +872,18 @@ export default function Edit({
 			${wrpMarginMobile}
 			${wrpPaddingMobile}
 			${wrpBdShdStyesMobile}
-		}		
-		
-		.${blockId}.eb-cd-wrapper:hover{			
+		}
+
+		.${blockId}.eb-cd-wrapper:hover{
 			${wrpHoverBackgroundStylesMobile}
 			${wrpBdShdStylesHoverMobile}
 		}
-		
-		.${blockId}.eb-cd-wrapper:before{			
+
+		.${blockId}.eb-cd-wrapper:before{
 			${wrpOverlayStylesMobile}
 		}
-		
-		.${blockId}.eb-cd-wrapper:hover:before{			
+
+		.${blockId}.eb-cd-wrapper:hover:before{
 			${wrpHoverOverlayStylesMobile}
 		}
 
@@ -812,7 +893,7 @@ export default function Edit({
 			${boxsbdShadowStyesMobile}
 		}
 
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box:hover{
 			${boxsHoverBackgroundStylesMobile}
 			${boxsbdShadowStylesHoverMobile}
@@ -823,17 +904,18 @@ export default function Edit({
 			${digitsPaddingMobile}
 		}
 
-		${showSeparator && flexDirection === "row"
-			? `
+		${
+			showSeparator && flexDirection === "row"
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box:before {
 				${separatorTypoStylesMobile}
 				${SeparatorTopMobile}
 				${SeparatorRightMobile}
 			}
 			`
-			: " "
+				: " "
 		}
-		
+
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box span.eb-cd-label {
 			${labelsTypoStylesMobile}
 			${labelsPaddingMobile}
@@ -842,65 +924,69 @@ export default function Edit({
 		.${blockId}.eb-cd-wrapper .eb-cd-inner .box + .box {
 			${BoxsSpaceBetweenMobile}
 		}
-			
-		${showDays
-			? `			
+
+		${
+			showDays
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day{
 				${dayBoxBgStylesMobile}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-day:hover{
 				${dayBoxHoverBgStylesMobile}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
-		${showHours
-			? `			
+		${
+			showHours
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour{
 				${hourBoxBgStylesMobile}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-hour:hover{
 				${hourBoxHoverBgStylesMobile}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
-		${showMinutes
-			? `			
+		${
+			showMinutes
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute{
 				${minuteBoxBgStylesMobile}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-minute:hover{
 				${minuteBoxHoverBgStylesMobile}
-			} 
+			}
 			`
-			: " "
+				: " "
 		}
 
-		${showSeconds
-			? `			
+		${
+			showSeconds
+				? `
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second{
 				${secondBoxBgStylesMobile}
-			} 
+			}
 
 			.${blockId}.eb-cd-wrapper .eb-cd-inner .box.cd-box-second:hover{
 				${secondBoxHoverBgStylesMobile}
-			} 
+			}
 
 			`
-			: " "
+				: " "
 		}
 
 
 	`;
 
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
-	const desktopAllStyles = softMinifyCssStrings(`		
+	const desktopAllStyles = softMinifyCssStrings(`
 		${wrapperStylesDesktop}
 
 
@@ -953,20 +1039,20 @@ export default function Edit({
 
 				/* mimmikcssEnd */
 
-				@media all and (max-width: 1024px) {	
+				@media all and (max-width: 1024px) {
 
-					/* tabcssStart */			
+					/* tabcssStart */
 					${softMinifyCssStrings(tabAllStyles)}
-					/* tabcssEnd */			
-				
+					/* tabcssEnd */
+
 				}
-				
+
 				@media all and (max-width: 767px) {
-					
-					/* mobcssStart */			
+
+					/* mobcssStart */
 					${softMinifyCssStrings(mobileAllStyles)}
-					/* mobcssEnd */			
-				
+					/* mobcssEnd */
+
 				}
 				`}
 				</style>
