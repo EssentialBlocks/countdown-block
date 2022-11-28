@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	for (let i = 0; i < countdowns.length; i++) {
 		const element = countdowns[i];
 
-		const deadlineTimeStamp = parseInt(
-			element.getAttribute("data-deadline-time")
-		);
-
 		const fakeElement = { textContent: "3e" };
 
 		const daySpan =
@@ -22,8 +18,36 @@ document.addEventListener("DOMContentLoaded", function () {
 		const secondSpan =
 			element.querySelector(".cd-box-second > .eb-cd-digit") || fakeElement;
 
+		const MINUTE_IN_SECONDS = 60;
+		const HOUR_IN_SECONDS = 60 * MINUTE_IN_SECONDS;
+		const DAY_IN_SECONDS = 24 * HOUR_IN_SECONDS;
+		const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+		const MONTH_IN_SECONDS = 30 * DAY_IN_SECONDS;
+		const YEAR_IN_SECONDS = 365 * DAY_IN_SECONDS;
+		const HOUR_IN_MILISECONDS = 60 * 60 * 1000;
+
+		const blockId = element.getAttribute("blockId");
+		const evergreenTimer = element.getAttribute("data-is-evergreen-time");
+		const evergreenTimerHours = element.getAttribute(
+			"data-evergreen-time-hours"
+		);
+
+		const evergreenTimerMinutes = element.getAttribute(
+			"data-evergreen-time-minutes"
+		);
+		const evergreenTimerRecurring = element.getAttribute(
+			"data-evergreen-recurring"
+		);
+		const evergreenTimerRestartTime = element.getAttribute(
+			"data-evergreen-restart-time"
+		);
+		const evergreenTimerDeadlineTime = element.getAttribute(
+			"data-evergreen-deadline-time"
+		);
+
 		const timeLeft = (deadlineTimeStamp, intervalId = null) => {
 			const now = Date.now();
+
 			const secondsLeft = Math.round((deadlineTimeStamp - now) / 1000);
 			const seconds = secondsLeft % 60;
 			const minutes = Math.floor(secondsLeft / 60) % 60;
@@ -45,10 +69,49 @@ document.addEventListener("DOMContentLoaded", function () {
 			secondSpan.textContent = seconds < 10 ? `0${seconds}` : `${seconds}`;
 		};
 
-		timeLeft(deadlineTimeStamp || 0);
+		if ("true" === evergreenTimer) {
+			let evergreenInterval = blockId + "_evergreen_interval",
+				evergreenTimeKey = blockId + "_evergreen_time",
+				interval = localStorage.getItem(evergreenInterval),
+				date = localStorage.getItem(evergreenTimeKey),
+				hours = parseInt(evergreenTimerHours || 0) * HOUR_IN_SECONDS,
+				minutes = parseInt(evergreenTimerMinutes || 0) * MINUTE_IN_SECONDS,
+				evergreenTime = parseInt(hours + minutes);
 
-		const intervalId = setInterval(() => {
-			timeLeft(deadlineTimeStamp || 0, intervalId);
-		}, 1000);
+			if (date === null || interval === null || interval != evergreenTime) {
+				date = Date.now() + parseInt(evergreenTime) * 1000;
+				localStorage.setItem(evergreenInterval, evergreenTime);
+				localStorage.setItem(evergreenTimeKey, date);
+			}
+
+			if ("false" !== evergreenTimerRecurring) {
+				let recurringAfter =
+					parseFloat(evergreenTimerRestartTime) * HOUR_IN_MILISECONDS;
+
+				if (parseInt(date) + recurringAfter < Date.now()) {
+					date = Date.now() + parseInt(evergreenTime) * 1000;
+					localStorage.setItem(evergreenTimeKey, date);
+				}
+
+				if (evergreenTimerDeadlineTime < date) {
+					date = evergreenTimerDeadlineTime;
+				}
+			}
+
+			timeLeft(date || 0);
+			const intervalIdEver = setInterval(() => {
+				timeLeft(date || 0, intervalIdEver);
+			}, 1000);
+		}
+		if (null == evergreenTimer || "false" == evergreenTimer) {
+			let deadlineTimeStamp = parseInt(
+				element.getAttribute("data-deadline-time")
+			);
+			timeLeft(deadlineTimeStamp || 0);
+
+			const intervalId = setInterval(() => {
+				timeLeft(deadlineTimeStamp || 0, intervalId);
+			}, 1000);
+		}
 	}
 });

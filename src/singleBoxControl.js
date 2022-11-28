@@ -1,10 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { PanelBody } from "@wordpress/components";
 
-const {
-	BackgroundControl,
-	ColorControl,
-} = window.EBCountdownControls;
+const { BackgroundControl, ColorControl } = window.EBCountdownControls;
 
 export default function singleBoxControl({
 	heading,

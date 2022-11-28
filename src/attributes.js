@@ -109,30 +109,13 @@ const attributes = {
 		type: "string",
 		default: ":",
 	},
-
-	// //
-	// sepPositionRight: {
-	// 	type: "number",
-	// 	default: 48,
-	// },
-
-	// //
-	// sepPositionTop: {
-	// 	type: "number",
-	// 	default: 35,
-	// },
-
-	//
 	separatorColor: {
 		type: "string",
 	},
-
 	//  deadline Date timestamp
 	endTimeStamp: {
 		type: "number",
 	},
-
-	//
 	showDays: {
 		type: "boolean",
 		default: true,
@@ -149,8 +132,6 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
-
-	//
 	daysLabel: {
 		type: "string",
 		default: "Days",
@@ -167,8 +148,6 @@ const attributes = {
 		type: "string",
 		default: "Seconds",
 	},
-
-	//
 	digitsColor: {
 		type: "string",
 	},
@@ -184,7 +163,6 @@ const attributes = {
 	secondDgColor: {
 		type: "string",
 	},
-
 	labelsColor: {
 		type: "string",
 	},
@@ -200,7 +178,6 @@ const attributes = {
 	secondLbColor: {
 		type: "string",
 	},
-
 	dayBdrColor: {
 		type: "string",
 	},
@@ -212,6 +189,29 @@ const attributes = {
 	},
 	secondBdrColor: {
 		type: "string",
+	},
+	isEvergreenTimer: {
+		type: "boolean",
+		default: false,
+	},
+	evergreenTimerHours: {
+		type: "string",
+		default: "11",
+	},
+	evergreenTimerMinutes: {
+		type: "string",
+		default: "59",
+	},
+	recurringCountdown: {
+		type: "boolean",
+		default: false,
+	},
+	restartTime: {
+		type: "string",
+		default: "0",
+	},
+	recurringCountdownEnd: {
+		type: "number",
 	},
 
 	// typography attributes

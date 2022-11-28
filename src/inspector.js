@@ -3,8 +3,6 @@
  */
 import { __ } from "@wordpress/i18n";
 import { InspectorControls } from "@wordpress/block-editor";
-import { useEffect } from "@wordpress/element";
-import { select } from "@wordpress/data";
 import {
 	PanelBody,
 	SelectControl,
@@ -78,6 +76,7 @@ import {
 	JUSTIFY_CONTENTS,
 	FLEX_DIRECTIONS,
 } from "./constants";
+import { useEffect } from "react";
 
 const defaultPresetAttrsObj = {
 	boxsBds_Bdr_Bottom: "1",
@@ -143,9 +142,6 @@ const defaultPresetAttrsObj = {
 function Inspector({ attributes, setAttributes }) {
 	const {
 		resOption,
-		blockId,
-		blockRoot,
-		blockMeta,
 
 		//  deadline Date timestamp
 		endTimeStamp,
@@ -189,6 +185,14 @@ function Inspector({ attributes, setAttributes }) {
 
 		//
 		labelsColor,
+
+		// evergreen timer
+		isEvergreenTimer,
+		evergreenTimerHours,
+		evergreenTimerMinutes,
+		recurringCountdown,
+		restartTime,
+		recurringCountdownEnd,
 	} = attributes;
 
 	const resRequiredProps = {
@@ -198,9 +202,24 @@ function Inspector({ attributes, setAttributes }) {
 		objAttributes,
 	};
 
+	useEffect(() => {
+		if (recurringCountdownEnd) {
+			return;
+		}
+		let recurringDefaultDate = new Date();
+		recurringDefaultDate.setDate(recurringDefaultDate.getDate() + 7);
+
+		setAttributes({ recurringCountdownEnd: recurringDefaultDate.getTime() });
+	}, []);
+
 	const handleDateChange = (newDate) => {
 		const endTimeStamp = new Date(newDate).getTime();
 		setAttributes({ endTimeStamp });
+	};
+
+	const handleRecurringEndDateChange = (newDate) => {
+		const recurringCountdownEnd = new Date(newDate).getTime();
+		setAttributes({ recurringCountdownEnd });
 	};
 
 	const handlePresetChange = (preset) => {
@@ -425,19 +444,98 @@ function Inspector({ attributes, setAttributes }) {
 												onChange={handlePresetChange}
 											/>
 										</BaseControl>
-										<style>{`.customDatePickerStyle .components-datetime__timezone{display:none;}`}</style>
-										<BaseControl
-											label={__("Countdown Due Date", "essential-blocks")}
-											className="customDatePickerStyle"
-										>
-											<DateTimePicker
-												currentDate={
-													endTimeStamp ? new Date(endTimeStamp) : new Date()
-												}
-												onChange={(newDate) => handleDateChange(newDate)}
-												is12Hour={true}
-											/>
-										</BaseControl>
+										<ToggleControl
+											label={__("Evergreen Timer?", "essential-blocks")}
+											checked={isEvergreenTimer}
+											onChange={() =>
+												setAttributes({ isEvergreenTimer: !isEvergreenTimer })
+											}
+										/>
+										{!isEvergreenTimer && (
+											<>
+												<style>{`.customDatePickerStyle .components-datetime__timezone{display:none;}`}</style>
+												<BaseControl
+													label={__("Countdown Due Date", "essential-blocks")}
+													className="customDatePickerStyle"
+												>
+													<DateTimePicker
+														currentDate={
+															endTimeStamp ? new Date(endTimeStamp) : new Date()
+														}
+														onChange={(newDate) => handleDateChange(newDate)}
+														is12Hour={true}
+													/>
+												</BaseControl>
+											</>
+										)}
+										{isEvergreenTimer && (
+											<>
+												<TextControl
+													label={__("Hours", "essential-blocks")}
+													value={evergreenTimerHours}
+													type="number"
+													onChange={(evergreenTimerHours) =>
+														setAttributes({ evergreenTimerHours })
+													}
+												/>
+												<TextControl
+													label={__("Minutes", "essential-blocks")}
+													value={evergreenTimerMinutes}
+													type="text"
+													onChange={(evergreenTimerMinutes) =>
+														setAttributes({ evergreenTimerMinutes })
+													}
+												/>
+												<ToggleControl
+													label={__("Recurring Countdown", "essential-blocks")}
+													checked={recurringCountdown}
+													onChange={() =>
+														setAttributes({
+															recurringCountdown: !recurringCountdown,
+														})
+													}
+													help={__(
+														"Specify how much time it will take to restart the countdown. If you set 0, the countdown will restart immediately.",
+														"essential-blocks"
+													)}
+												/>
+												{recurringCountdown && (
+													<>
+														<TextControl
+															label={__(
+																"Restart After(In Hours)",
+																"essential-blocks"
+															)}
+															value={restartTime}
+															type="text"
+															onChange={(restartTime) =>
+																setAttributes({ restartTime })
+															}
+														/>
+														<style>{`.customDatePickerStyle .components-datetime__timezone{display:none;}`}</style>
+														<BaseControl
+															label={__(
+																"Recurring Countdown End Date",
+																"essential-blocks"
+															)}
+															className="customDatePickerStyle"
+														>
+															<DateTimePicker
+																currentDate={
+																	recurringCountdownEnd
+																		? new Date(recurringCountdownEnd)
+																		: recurringDefaultDate
+																}
+																onChange={(newDate) =>
+																	handleRecurringEndDateChange(newDate)
+																}
+																is12Hour={true}
+															/>
+														</BaseControl>
+													</>
+												)}
+											</>
+										)}
 									</PanelBody>
 
 									<PanelBody
@@ -885,7 +983,10 @@ function Inspector({ attributes, setAttributes }) {
 										/>
 									</PanelBody>
 
-									<AdvancedControls attributes={attributes} setAttributes={setAttributes} />
+									<AdvancedControls
+										attributes={attributes}
+										setAttributes={setAttributes}
+									/>
 								</>
 							)}
 						</div>
