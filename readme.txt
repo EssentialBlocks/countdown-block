@@ -82,7 +82,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.5 - dev =
+= 1.2.5 - 28/11/2022 =
 * Added: Auto repeater feature in Countdown Block
 
 = 1.2.4 - 13/09/2022 =
