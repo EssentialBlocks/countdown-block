@@ -17,17 +17,9 @@ import {
 	WrpBgConst,
 } from "./constants/backgroundsConstants";
 
-import {
-	cdBoxsBdShadowConst,
-	WrpBdShadowConst,
-} from "./constants/borderShadowConstants";
+import { cdBoxsBdShadowConst, WrpBdShadowConst } from "./constants/borderShadowConstants";
 
-import {
-	wrapperWidth,
-	boxsSpaceConst,
-	separatorPosTop,
-	separatorPosRight,
-} from "./constants/rangeNames";
+import { wrapperWidth, boxsSpaceConst, separatorPosTop, separatorPosRight } from "./constants/rangeNames";
 
 // import {
 // 	generateDimensionsAttributes,
@@ -249,30 +241,22 @@ const attributes = {
 	...generateBackgroundAttributes(cdDayBoxBgConst, {
 		noTransition: true,
 		noOverlay: true,
-		noMainBgi: true,
-		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
-		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+		noMainBgi: true
 	}),
 	...generateBackgroundAttributes(cdHourBoxBgConst, {
 		noTransition: true,
 		noOverlay: true,
-		noMainBgi: true,
-		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
-		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+		noMainBgi: true
 	}),
 	...generateBackgroundAttributes(cdMinuteBoxBgConst, {
 		noTransition: true,
 		noOverlay: true,
-		noMainBgi: true,
-		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
-		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+		noMainBgi: true
 	}),
 	...generateBackgroundAttributes(cdSecondBoxBgConst, {
 		noTransition: true,
 		noOverlay: true,
-		noMainBgi: true,
-		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
-		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+		noMainBgi: true
 	}),
 
 	// boxs BorderShadow attributes ⬇

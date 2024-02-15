@@ -45,11 +45,11 @@ class Countdown_Helper
          */
         if ($pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || ($pagenow == 'themes.php' && !empty($_SERVER['QUERY_STRING']) && str_contains($_SERVER['QUERY_STRING'], 'gutenberg-edit-site'))) {
 
-            $controls_dependencies = include_once COUNTDOWN_ADMIN_PATH . '/dist/controls.asset.php';
+            $controls_dependencies = include_once COUNTDOWN_ADMIN_PATH . '/dist/modules.asset.php';
 
             wp_register_script(
                 "countdown-controls-util",
-                COUNTDOWN_ADMIN_URL . '/dist/controls.js',
+                COUNTDOWN_ADMIN_URL . '/dist/modules.js',
                 array_merge($controls_dependencies['dependencies']),
                 $controls_dependencies['version'],
                 true
@@ -72,7 +72,7 @@ class Countdown_Helper
 
             wp_enqueue_style(
                 'countdown-editor-css',
-                COUNTDOWN_ADMIN_URL . '/dist/controls.css',
+                COUNTDOWN_ADMIN_URL . 'dist/modules.css',
                 array(),
                 $controls_dependencies['version'],
                 'all'

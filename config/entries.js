@@ -1,5 +1,5 @@
-//Export All Controls
-import "../controls/src/backend-css";
+// Export All Controls
+import "../controls/src/backend.scss";
 
 //Export All Controls
 export { default as ResponsiveDimensionsControl } from "../controls/src/controls/dimensions-control-v2";
@@ -31,4 +31,5 @@ export {
 	getFlipTransform,
 	getButtonClasses,
 	ebConditionalRegisterBlockType,
+	StyleComponent
 } from "../controls/src/helpers";
