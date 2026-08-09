@@ -236,11 +236,11 @@ I resolved it toward the safe side: fixed the code so it genuinely runs on the o
 The trade-off: declaring 7.0 rather than 7.4 keeps a window (PHP 7.0–7.3) that nobody tests and
 that no supported WordPress can pair with.
 
-**Recommendation, not applied:** raise both floors to `Requires PHP: 7.4` and
-`Requires at least: 6.0`. That matches WP core's own minimum, drops five untested PHP minors and
-four untested WP minors, and lets you delete the WP 5.6 fork in
-`Countdown_Helper::get_block_register_path()` entirely. Your call — it's a support-policy
-decision, not a technical one.
+**Recommendation — now APPLIED (follow-up pass, see §9).** Both floors were raised to
+`Requires PHP: 7.4` and `Requires at least: 6.0`. That matches WP core's own minimum and drops
+five untested PHP minors and four untested WP minors. The WP 5.6 fork in
+`Countdown_Helper::get_block_register_path()` is now unreachable on any supported install but
+was deliberately left in place — see §9.
 
 Separately: `register_block_type( <path> )` only started accepting a directory in **WP 5.8**, but
 the fork at `helpers.php:88` switches to the path form from **5.7** onward. So WP 5.7 is broken
@@ -254,12 +254,12 @@ finding **P19** and it's yours to approve.
 
 | Field | Before | After |
 |---|---|---|
-| Plugin header `Requires at least` | *(absent)* | **5.6** |
+| Plugin header `Requires at least` | *(absent)* | **6.0** |
 | Plugin header `Tested up to` | *(absent)* | **7.0** |
-| Plugin header `Requires PHP` | *(absent)* | **7.0** |
-| `readme.txt` `Requires at least` | 5.6 | 5.6 |
+| Plugin header `Requires PHP` | *(absent)* | **7.4** |
+| `readme.txt` `Requires at least` | 5.6 | **6.0** |
 | `readme.txt` `Tested up to` | 6.5 | **7.0** |
-| `readme.txt` `Requires PHP` | *(absent)* | **7.0** |
+| `readme.txt` `Requires PHP` | *(absent)* | **7.4** |
 | `readme.txt` `Stable tag` | 1.2.8 | **1.5.0** |
 | `package.json` `version` | 1.2.8 | **1.5.0** |
 | `COUNTDOWN_VERSION` | 1.2.8 | **1.5.0** |
@@ -324,3 +324,51 @@ nothing committed, nothing pushed.
  M package.json             |  2 +-
  M readme.txt               | 12 ++++++++++--
 ```
+
+---
+
+## 9. Follow-up pass — support floors raised to WP 6.0 / PHP 7.4
+
+Requested change: minimum WordPress **6.0**, minimum PHP **7.4**. This supersedes the `5.6 / 7.0`
+values recorded in §4 rows P9 and P12.
+
+| File | Line | Before | After |
+|---|---|---|---|
+| `countdown-block.php` | 8 | `Requires at least: 5.6` | `Requires at least: 6.0` |
+| `countdown-block.php` | 10 | `Requires PHP:  7.0` | `Requires PHP:  7.4` |
+| `readme.txt` | 4 | `Requires at least: 5.6` | `Requires at least: 6.0` |
+| `readme.txt` | 6 | `Requires PHP: 7.0` | `Requires PHP: 7.4` |
+
+`Tested up to: 7.0` unchanged in both files. `Stable tag`, `COUNTDOWN_VERSION`, and
+`package.json` `version` are release identifiers, not compatibility floors — untouched.
+
+**No other file declares a floor.** Checked and confirmed clean:
+
+- no `composer.json` in this plugin, so there is no `require.php` constraint to raise;
+- `block.json` carries no `requiresAtLeast` / `wpVersion` key (it is `apiVersion: 2` only);
+- `.github/workflows/deploy.yml` and `assets.yml` pin only `node-version: '14'`; neither sets up
+  PHP nor passes a WP version to the 10up deploy actions, so nothing in CI contradicts the new
+  floors;
+- no runtime `version_compare()` guard anywhere enforces a *minimum* — the only one present is the
+  block-registration fork below.
+
+### Consequence: dead branch in `get_block_register_path()`
+
+`includes/helpers.php:102` still reads:
+
+```php
+if (version_compare(get_bloginfo('version'), '5.7', '<')) {
+    return $blockname;
+}
+```
+
+With a declared floor of WP 6.0 this branch is unreachable on any install WordPress will let the
+plugin onto. It was **left in place on purpose**: `Requires at least` is enforced by WP on
+install/update, but not on a plugin copied into `wp-content/plugins` by hand or shipped inside a
+pre-built site, so the fork is still a live safety net for that path. Deleting it plus finding
+**P19** (`'5.7'` → `'5.8'`) is now a pure cleanup with no behavioural risk on supported versions —
+still your call, still not applied.
+
+**Verification for this pass:** `php -l` clean on both edited PHP files. Header and `readme.txt`
+values re-read after editing and confirmed. No code paths changed, so the §8 runtime smoke tests
+remain valid as-is.

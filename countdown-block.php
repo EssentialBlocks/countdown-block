@@ -5,9 +5,9 @@
  * Plugin URI:         https://essential-blocks.com
  * Description:   Highlight Upcoming Events With Countdown Timer.
  * Version:       1.5.0
- * Requires at least: 5.6
+ * Requires at least: 6.0
  * Tested up to:  7.0
- * Requires PHP:  7.0
+ * Requires PHP:  7.4
  * Author:        WPDeveloper
  * Author URI:         https://wpdeveloper.net
  * License:       GPL-3.0-or-later
