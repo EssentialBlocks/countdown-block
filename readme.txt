@@ -2,8 +2,9 @@
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89, fencermonir
 Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg, gutenberg blocks
 Requires at least: 5.6
-Tested up to: 6.5
-Stable tag: 1.2.8
+Tested up to: 7.0
+Requires PHP: 7.0
+Stable tag: 1.2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +82,13 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.2.9 - 09/08/2026 =
+* Fixed: PHP 8.0-8.5 compatibility (deprecated null arguments, array-offset warnings)
+* Fixed: WordPress version detection no longer uses a float cast
+* Fixed: removed PHP 8.0-only str_contains() call that could fatal on PHP 7.x
+* Improved: hardened asset-manifest loading and added missing ABSPATH guard
+* Tested up to WordPress 7.0
 
 = 1.2.8 - 09/04/2024 =
 * Fixed: compatibility support with wordpress 6.5 version
