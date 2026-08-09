@@ -4,7 +4,7 @@ Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg
 Requires at least: 5.6
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 1.2.9
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,7 +83,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.9 - 09/08/2026 =
+= 1.5.0 - 09/08/2026 =
 * Fixed: PHP 8.0-8.5 compatibility (deprecated null arguments, array-offset warnings)
 * Fixed: WordPress version detection no longer uses a float cast
 * Fixed: removed PHP 8.0-only str_contains() call that could fatal on PHP 7.x

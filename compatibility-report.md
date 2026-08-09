@@ -3,7 +3,7 @@
 - **Plugin:** Countdown Block (`countdown-block`)
 - **Base branch:** `latest` @ `d23adee` (the branch that actually holds 1.2.8; `master` is stale at 1.2.6)
 - **Work branch:** `countdown-block-dev`
-- **Version:** 1.2.8 → **1.2.9** (patch)
+- **Version:** 1.2.8 → **1.5.0** (minor)
 - **Date audited:** 2026-08-09
 - **Committed:** no. Working tree left dirty for review.
 
@@ -155,7 +155,7 @@ Mapped 1:1 to the audit table. All are behaviour-identical on every version in t
 | P10 | `$_SERVER['QUERY_STRING']` → `sanitize_text_field( wp_unslash( … ) )` into `$query_string`, hoisted above the branch. The `gutenberg-edit-site` substring survives sanitisation, so matching is unchanged. | `includes/helpers.php:41` |
 | P11 | `add_filter( 'init', … )` → `add_action( 'init', … )`. | `includes/post-meta.php:12` |
 | P12 | `readme.txt`: `Tested up to: 6.5` → `7.0`, added `Requires PHP: 7.0`. | `readme.txt:5-6` |
-| — | Version bumped 1.2.8 → 1.2.9 in all four places: plugin header, `COUNTDOWN_VERSION`, `readme.txt` `Stable tag`, `package.json`. Changelog entry added. No `composer.json` in this plugin. | 4 files |
+| — | Version bumped 1.2.8 → 1.5.0 in all four places: plugin header, `COUNTDOWN_VERSION`, `readme.txt` `Stable tag`, `package.json`. Changelog entry added. No `composer.json` in this plugin. | 4 files |
 
 ### Why `Requires PHP: 7.0` and not `5.6`
 
@@ -260,9 +260,9 @@ finding **P19** and it's yours to approve.
 | `readme.txt` `Requires at least` | 5.6 | 5.6 |
 | `readme.txt` `Tested up to` | 6.5 | **7.0** |
 | `readme.txt` `Requires PHP` | *(absent)* | **7.0** |
-| `readme.txt` `Stable tag` | 1.2.8 | **1.2.9** |
-| `package.json` `version` | 1.2.8 | **1.2.9** |
-| `COUNTDOWN_VERSION` | 1.2.8 | **1.2.9** |
+| `readme.txt` `Stable tag` | 1.2.8 | **1.5.0** |
+| `package.json` `version` | 1.2.8 | **1.5.0** |
+| `COUNTDOWN_VERSION` | 1.2.8 | **1.5.0** |
 
 ---
 
