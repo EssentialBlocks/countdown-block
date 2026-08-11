@@ -8,6 +8,5 @@
 	"supports": {
 		"html": false,
 		"align": ["wide", "full"]
-	},
-	"editorScript": "file:./dist/index.js"
+	}
 }

@@ -48,8 +48,9 @@ class Countdown_Font_Loader {
      * @access public
      */
     public function get_fonts_on_render_block( $block_content, $block ) {
-        if ( isset( $block['attrs'] ) ) {
-            if ( 'essential-blocks' === self::$block_name || $block['blockName'] === self::$block_name ) {
+        if ( is_array( $block ) && isset( $block['attrs'] ) ) {
+            $block_name = isset( $block['blockName'] ) ? $block['blockName'] : '';
+            if ( 'essential-blocks' === self::$block_name || $block_name === self::$block_name ) {
                 $fonts        = self::get_fonts_family( $block['attrs'] );
                 self::$gfonts = array_unique( array_merge( self::$gfonts, $fonts ) );
             }
@@ -64,9 +65,20 @@ class Countdown_Font_Loader {
      * @access public
      */
     public static function get_fonts_family( $attributes ) {
-        $keys             = preg_grep( '/^(\w+)FontFamily/i', array_keys( $attributes ), 0 );
         $googleFontFamily = [];
+        if ( ! is_array( $attributes ) ) {
+            return $googleFontFamily;
+        }
+        $keys = preg_grep( '/^(\w+)FontFamily/i', array_keys( $attributes ), 0 );
+        if ( empty( $keys ) ) {
+            return $googleFontFamily;
+        }
         foreach ( $keys as $key ) {
+            // A null / non-scalar attribute would become an empty array key and,
+            // on PHP 8.1+, a deprecation when passed to trim()/str_replace().
+            if ( ! isset( $attributes[$key] ) || ! is_string( $attributes[$key] ) || '' === $attributes[$key] ) {
+                continue;
+            }
             $googleFontFamily[$attributes[$key]] = $attributes[$key];
         }
         return $googleFontFamily;
@@ -94,7 +106,12 @@ class Countdown_Font_Loader {
                 $gfonts      = '';
                 $gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
                 foreach ( $fonts as $font ) {
-                    $gfonts .= str_replace( ' ', '+', trim( $font ) ) . $gfonts_attr . '|';
+                    // Cast: passing null to trim()/str_replace() is deprecated on PHP 8.1+.
+                    $font = trim( (string) $font );
+                    if ( '' === $font ) {
+                        continue;
+                    }
+                    $gfonts .= str_replace( ' ', '+', $font ) . $gfonts_attr . '|';
                 }
                 if ( ! empty( $gfonts ) ) {
                     $query_args = [
