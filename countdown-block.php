@@ -4,7 +4,10 @@
  * Plugin Name:   Countdown Block
  * Plugin URI:         https://essential-blocks.com
  * Description:   Highlight Upcoming Events With Countdown Timer.
- * Version:       1.2.8
+ * Version:       1.5.0
+ * Requires at least: 6.0
+ * Tested up to:  7.0
+ * Requires PHP:  7.4
  * Author:        WPDeveloper
  * Author URI:         https://wpdeveloper.net
  * License:       GPL-3.0-or-later
@@ -14,6 +17,11 @@
  * @package       countdown-block
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Registers all block assets so that they can be enqueued through the block editor
  * in the corresponding context.
@@ -21,7 +29,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'COUNTDOWN_VERSION', "1.2.8" );
+define( 'COUNTDOWN_VERSION', "1.5.0" );
 define( 'COUNTDOWN_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'COUNTDOWN_ADMIN_PATH', dirname( __FILE__ ) );
 
@@ -39,7 +47,12 @@ function create_block_countdown_block_init() {
         );
     }
     $script_asset     = require $script_asset_path;
-    $all_dependencies = array_merge( $script_asset['dependencies'], [
+    if ( ! is_array( $script_asset ) ) {
+        $script_asset = [];
+    }
+    $asset_dependencies = isset( $script_asset['dependencies'] ) && is_array( $script_asset['dependencies'] ) ? $script_asset['dependencies'] : [];
+    $asset_version      = isset( $script_asset['version'] ) ? $script_asset['version'] : COUNTDOWN_VERSION;
+    $all_dependencies   = array_merge( $asset_dependencies, [
         'wp-blocks',
         'wp-i18n',
         'wp-element',
@@ -53,7 +66,7 @@ function create_block_countdown_block_init() {
         'create-block-countdown-block-editor',
         $index_js,
         $all_dependencies,
-        $script_asset['version'],
+        $asset_version,
         true
     );
 
