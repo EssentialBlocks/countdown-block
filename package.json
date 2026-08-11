@@ -5,6 +5,12 @@
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"main": "Gruntfile.js",
+	"engines": {
+		"node": ">=20"
+	},
+	"overrides": {
+		"typescript": "^4.9.5"
+	},
 	"scripts": {
 		"build": "wp-scripts build",
 		"format:js": "wp-scripts format-js",
