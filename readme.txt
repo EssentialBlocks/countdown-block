@@ -4,7 +4,7 @@ Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,16 @@ Consider checking out our other WordPress solutions & boost your WordPress websi
 ⚡ [Flexia](http://wordpress.org/plugins/flexia): Most lightweight, customizable & multi purpose theme for WordPress
 
 
+== External services ==
+
+This plugin connects to Google Fonts to load the fonts you pick in a Countdown block's typography settings.
+
+* What it is used for: displaying the selected font on the front end of your site.
+* When data is sent: on every front-end page that contains a Countdown block whose typography uses any font family other than Default.
+* What is sent: the visitor's browser requests the stylesheet from fonts.googleapis.com and the font files from fonts.gstatic.com, so Google receives the visitor's IP address, user agent and the referring page, together with the requested font family names.
+
+The service is provided by Google: [Terms of Service](https://policies.google.com/terms), [Privacy Policy](https://policies.google.com/privacy).
+
 == Installation ==
 
 = Modern Way: =
@@ -82,6 +92,13 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.5.1 - 19/10/2026 =
+* Security: Hardened block style generation
+* Fixed: Animation stylesheet replaced with animate.css 3.7.2 (MIT licence)
+* Removed: Unused `_eb_attr` post meta registration
+* Improved: Release package no longer includes development sources, source maps or the unused frontend helper script
+* Added: External services section documenting Google Fonts
 
 = 1.5.0 - 09/08/2026 =
 * Fixed: PHP 8.0-8.5 compatibility (deprecated null arguments, array-offset warnings)
