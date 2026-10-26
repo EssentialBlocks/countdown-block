@@ -62,7 +62,12 @@ export default function Edit(props) {
 		recurringCountdown,
 		restartTime,
 		recurringCountdownEnd,
+		boxsBg_backgroundType,
+		boxsBg_backgroundColor,
 	} = attributes;
+
+	// styles as saved, captured before the Style component regenerates blockMeta
+	const savedBlockMeta = useRef(blockMeta);
 
 	// this useEffect is for creating a unique blockId for each block's unique className
 	useEffect(() => {
@@ -74,6 +79,23 @@ export default function Edit(props) {
 			select,
 			clientId,
 		});
+	}, []);
+
+	// Presets 3, 4 and 7 used to clear the box background color to undefined, which isn't
+	// saved, so it came back as the #7967ff default. Restore the intended empty color unless
+	// the saved styles show the purple was really in use.
+	useEffect(() => {
+		const savedDesktopCss = savedBlockMeta.current?.desktop;
+		if (
+			["preset3", "preset4", "preset7"].includes(preset) &&
+			boxsBg_backgroundType === "classic" &&
+			boxsBg_backgroundColor === "#7967ff" &&
+			typeof savedDesktopCss === "string" &&
+			savedDesktopCss.length > 0 &&
+			!/\.box\s*\{[^}]*background-color:\s*#7967ff/i.test(savedDesktopCss)
+		) {
+			setAttributes({ boxsBg_backgroundColor: "" });
+		}
 	}, []);
 
 	// this useEffect is for the countdown animation effect

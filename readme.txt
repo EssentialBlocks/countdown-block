@@ -96,6 +96,7 @@ Yes, it will work with any standard WordPress theme.
 = 1.5.1 - 19/10/2026 =
 * Security: Hardened block style generation
 * Fixed: Animation stylesheet replaced with animate.css 3.7.2 (MIT licence)
+* Fixed: Presets 3, 4 and 7 turning the boxes purple after the page was reopened in the editor
 * Removed: Unused `_eb_attr` post meta registration
 * Improved: Release package no longer includes development sources, source maps or the unused frontend helper script
 * Added: External services section documenting Google Fonts
