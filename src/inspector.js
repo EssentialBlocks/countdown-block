@@ -273,6 +273,7 @@ function Inspector({ attributes, setAttributes }) {
 					...defaultPresetAttrsObj,
 					WrpBg_backgroundColor: "rgba(255,255,255,1)",
 					boxsBg_backgroundType: "classic",
+					boxsBg_backgroundColor: "",
 					dayDgColor: "rgba(52,219,213,1)",
 					dg_FontSize: 62,
 					dg_LineHeight: 1.1,
@@ -301,6 +302,7 @@ function Inspector({ attributes, setAttributes }) {
 					...defaultPresetAttrsObj,
 
 					boxsBg_backgroundType: "classic",
+					boxsBg_backgroundColor: "",
 					boxsP_Bottom: "27",
 					contentsDirection: "row",
 					dayBg_backgroundColor: "rgba(253,121,139,1)",
@@ -379,6 +381,7 @@ function Inspector({ attributes, setAttributes }) {
 					boxsBds_Rds_Unit: "%",
 					boxsBds_borderStyle: "solid",
 					boxsBg_backgroundType: "classic",
+					boxsBg_backgroundColor: "",
 					boxsP_Bottom: "16",
 					boxsP_Top: "16",
 					dg_FontSize: 46,
