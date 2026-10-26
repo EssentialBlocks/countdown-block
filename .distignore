@@ -52,3 +52,23 @@ util
 .wordpress-org
 .idea
 dist/*.*.map
+
+# Sources compiled into dist/, never shipped
+controls
+config
+
+# Submodules carry their own .git file
+**/.git
+
+# Source maps: development only
+*.map
+
+# Controls' eb_frontend helper bundle: built by webpack but never registered or
+# enqueued by this plugin. dist/frontend/index.js (the countdown timer) ships.
+dist/frontend.js
+dist/frontend.asset.php
+
+# style-handler submodule: ship the PHP, not the JS sources
+lib/style-handler/style-handler.js
+lib/style-handler/helpers.js
+lib/style-handler/README.md
