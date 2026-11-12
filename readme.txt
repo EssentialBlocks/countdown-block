@@ -4,7 +4,7 @@ Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,13 +93,11 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.5.2 - 02/11/2026 =
+= 1.5.2 - 12/11/2026 =
+* Fixed: Frontend conflict with Essential Blocks
+* Fixed: Animation preview in editor
 * Improved: Security enhancements
-* Fixed: Existing Countdown blocks stopped working on the front end when Essential Blocks is active
-* Fixed: Animated blocks appeared without playing their animation when Essential Blocks is active
-* Fixed: Entrance animations not previewing in the block editor
-* Fixed: Block icon hard to see when highlighted in the inserter and List View
-* Fixed: Chrome console warning about a deprecated DOM event
+* Few minor bug fixes & improvements
 
 = 1.5.1 - 26/10/2026 =
 * Improved: Security enhancements
