@@ -84,23 +84,37 @@ document.addEventListener("DOMContentLoaded", function () {
 				localStorage.setItem(evergreenTimeKey, date);
 			}
 
-			if ("false" !== evergreenTimerRecurring) {
-				let recurringAfter =
-					parseFloat(evergreenTimerRestartTime) * HOUR_IN_MILISECONDS;
+			date = parseInt(date) || 0;
 
-				if (parseInt(date) + recurringAfter < Date.now()) {
-					date = Date.now() + parseInt(evergreenTime) * 1000;
+			const isRecurring = "false" !== evergreenTimerRecurring;
+			const recurringAfter =
+				(parseFloat(evergreenTimerRestartTime) || 0) * HOUR_IN_MILISECONDS;
+			// 0 means no end date: keep recurring.
+			const recurringEnd = parseInt(evergreenTimerDeadlineTime) || 0;
+
+			// Runs on every tick, so the countdown restarts once the restart delay
+			// has passed instead of waiting for a page reload.
+			const evergreenTarget = () => {
+				if (!isRecurring) {
+					return date;
+				}
+				const now = Date.now();
+				const ended = recurringEnd && now >= recurringEnd;
+				if (!ended && date + recurringAfter < now) {
+					date = now + evergreenTime * 1000;
 					localStorage.setItem(evergreenTimeKey, date);
 				}
+				return recurringEnd && recurringEnd < date ? recurringEnd : date;
+			};
 
-				if (evergreenTimerDeadlineTime < date) {
-					date = evergreenTimerDeadlineTime;
-				}
-			}
+			// A recurring timer keeps ticking at zero until it restarts, and stops
+			// only once its end date has passed.
+			const canStop = () =>
+				!isRecurring || (recurringEnd && Date.now() >= recurringEnd);
 
-			timeLeft(date || 0);
+			timeLeft(evergreenTarget());
 			const intervalIdEver = setInterval(() => {
-				timeLeft(date || 0, intervalIdEver);
+				timeLeft(evergreenTarget(), canStop() ? intervalIdEver : null);
 			}, 1000);
 		}
 		if (null == evergreenTimer || "false" == evergreenTimer) {
