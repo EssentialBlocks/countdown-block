@@ -118,10 +118,17 @@ export default function Edit(props) {
 		const timeLeft = (deadlineTimeStamp, intervalId = null) => {
 			const now = Date.now();
 			const secondsLeft = Math.round((deadlineTimeStamp - now) / 1000);
-			const seconds = secondsLeft % 60;
-			const minutes = Math.floor(secondsLeft / 60) % 60;
-			const hours = Math.floor(secondsLeft / 3600) % 24;
-			const days = Math.floor(secondsLeft / 86400);
+
+			// Fill units from the largest shown one down, so time from a hidden unit
+			// carries into the next shown one (Days off: 3 days → 72 hours).
+			let rest = secondsLeft;
+			const days = showDays ? Math.floor(rest / DAY_IN_SECONDS) : 0;
+			rest -= days * DAY_IN_SECONDS;
+			const hours = showHours ? Math.floor(rest / HOUR_IN_SECONDS) : 0;
+			rest -= hours * HOUR_IN_SECONDS;
+			const minutes = showMinutes ? Math.floor(rest / MINUTE_IN_SECONDS) : 0;
+			rest -= minutes * MINUTE_IN_SECONDS;
+			const seconds = rest;
 
 			if (secondsLeft < 0) {
 				clearInterval(intervalId);
