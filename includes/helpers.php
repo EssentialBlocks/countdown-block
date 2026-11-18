@@ -19,6 +19,37 @@ class Countdown_Helper
     public function __construct()
     {
         add_action('admin_enqueue_scripts', array($this, 'enqueues'));
+        add_action('enqueue_block_assets', array($this, 'editor_canvas_styles'));
+    }
+
+    /**
+     * Load the controls stylesheet inside the iframed editor canvas too.
+     *
+     * The parent window needs it for the inspector. Without its own copy in the
+     * iframe, WordPress clones it in and warns that it "was added to the iframe
+     * incorrectly". The same handle in both places stops the clone.
+     */
+    public function editor_canvas_styles()
+    {
+        if (!is_admin()) {
+            return;
+        }
+
+        $modules_asset_path = COUNTDOWN_ADMIN_PATH . '/dist/modules.asset.php';
+        if (!file_exists($modules_asset_path)) {
+            return;
+        }
+
+        $controls_dependencies = require $modules_asset_path;
+        $controls_version      = is_array($controls_dependencies) && isset($controls_dependencies['version']) ? $controls_dependencies['version'] : COUNTDOWN_VERSION;
+
+        wp_enqueue_style(
+            'countdown-editor-css',
+            COUNTDOWN_ADMIN_URL . 'dist/modules.css',
+            array(),
+            $controls_version,
+            'all'
+        );
     }
 
     /**

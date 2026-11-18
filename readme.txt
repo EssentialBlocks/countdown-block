@@ -2,7 +2,7 @@
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, RahatSheikhLeon
 Tags: block, blocks, countdown, count down, coming soon, clock, timer, gutenberg, gutenberg blocks
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.5.3
 License: GPLv2 or later

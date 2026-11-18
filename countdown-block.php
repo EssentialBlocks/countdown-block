@@ -6,7 +6,7 @@
  * Description:   Highlight Upcoming Events With Countdown Timer.
  * Version:       1.5.3
  * Requires at least: 6.0
- * Tested up to:  7.0
+ * Tested up to:  7.1
  * Requires PHP:  7.4
  * Author:        WPDeveloper
  * Author URI:         https://wpdeveloper.net
@@ -32,6 +32,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'COUNTDOWN_VERSION', "1.5.3" );
 define( 'COUNTDOWN_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'COUNTDOWN_ADMIN_PATH', dirname( __FILE__ ) );
+
+// lib/style-handler is a git submodule. A clone without --recursive leaves it empty,
+// and requiring it would fatal on activation, so show a notice and stop instead.
+if ( ! file_exists( __DIR__ . '/lib/style-handler/style-handler.php' ) ) {
+    add_action( 'admin_notices', function () {
+        if ( ! current_user_can( 'activate_plugins' ) ) {
+            return;
+        }
+        echo '<div class="notice notice-error"><p>' . esc_html__(
+            'Countdown Block is missing lib/style-handler. Run "git submodule update --init --recursive" in the plugin folder, or install a release build.',
+            'countdown-block'
+        ) . '</p></div>';
+    } );
+    return;
+}
 
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/helpers.php';

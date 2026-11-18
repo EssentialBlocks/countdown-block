@@ -16,7 +16,7 @@ Using **Countdown**, you can notify visitors about upcoming events or big days. 
 
 | | Minimum | Tested up to |
 |---|---|---|
-| WordPress | 6.0 | 7.0 |
+| WordPress | 6.0 | 7.1 |
 | PHP | 7.4 | 8.5 |
 
 ## Installation
