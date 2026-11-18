@@ -30,7 +30,8 @@ export default function Save({ attributes }) {
                 <div className={`${blockId} eb-cd-wrapper ${preset}`}>
                     <div
                         className="eb-cd-inner"
-                        blockId={blockId}
+                        role="timer"
+                        data-block-id={blockId}
                         data-deadline-time={`${endTimeStamp || 0}`}
                         data-is-evergreen-time={isEvergreenTimer || false}
                         data-evergreen-time-hours={evergreenTimerHours || "11"}

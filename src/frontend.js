@@ -1,11 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
-	const countdowns = document.querySelectorAll(".eb-cd-wrapper > .eb-cd-inner");
+(function () {
+	const SELECTOR = ".eb-cd-wrapper > .eb-cd-inner";
 
-	// Return if there is no countdown block
-	if (!countdowns) return;
-
-	for (let i = 0; i < countdowns.length; i++) {
-		const element = countdowns[i];
+	const initCountdown = (element) => {
+		// Each countdown starts once, even if init runs again over the same markup.
+		if (element.hasAttribute("data-eb-cd-init")) return;
+		element.setAttribute("data-eb-cd-init", "");
 
 		const fakeElement = { textContent: "3e" };
 
@@ -26,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		const YEAR_IN_SECONDS = 365 * DAY_IN_SECONDS;
 		const HOUR_IN_MILISECONDS = 60 * 60 * 1000;
 
-		const blockId = element.getAttribute("blockId");
+		// Blocks saved by 1.5.3 and earlier use the non-standard blockId attribute.
+		const blockId =
+			element.getAttribute("data-block-id") || element.getAttribute("blockId");
 		const evergreenTimer = element.getAttribute("data-is-evergreen-time");
 		const evergreenTimerHours = element.getAttribute(
 			"data-evergreen-time-hours"
@@ -113,5 +114,38 @@ document.addEventListener("DOMContentLoaded", function () {
 				timeLeft(deadlineTimeStamp || 0, intervalId);
 			}, 1000);
 		}
+	};
+
+	const initAll = (root = document) => {
+		if (root.matches && root.matches(SELECTOR)) {
+			initCountdown(root);
+		}
+		root.querySelectorAll(SELECTOR).forEach(initCountdown);
+	};
+
+	// Lets themes and plugins start countdowns they insert later (AJAX, popups).
+	window.ebCountdownInit = initAll;
+
+	const start = () => {
+		initAll();
+
+		// Also pick up countdowns added to the page after load.
+		if ("MutationObserver" in window) {
+			new MutationObserver((mutations) => {
+				mutations.forEach((mutation) => {
+					mutation.addedNodes.forEach((node) => {
+						if (node.nodeType === 1) {
+							initAll(node);
+						}
+					});
+				});
+			}).observe(document.body, { childList: true, subtree: true });
+		}
+	};
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", start);
+	} else {
+		start();
 	}
-});
+})();
