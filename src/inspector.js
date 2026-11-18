@@ -66,7 +66,6 @@ import {
 	JUSTIFY_CONTENTS,
 	FLEX_DIRECTIONS,
 } from "./constants";
-import { useEffect } from "react";
 
 const defaultPresetAttrsObj = {
 	boxsBds_Bdr_Bottom: "1",
@@ -191,18 +190,6 @@ function Inspector({ attributes, setAttributes }) {
 		attributes,
 		objAttributes,
 	};
-
-	useEffect(() => {
-		if (recurringCountdownEnd) {
-			return;
-		}
-		let recurringDefaultDate = new Date();
-		recurringDefaultDate.setDate(recurringDefaultDate.getDate() + 7);
-
-		setAttributes({
-			recurringCountdownEnd: recurringDefaultDate.getTime(),
-		});
-	}, []);
 
 	const handleDateChange = (newDate) => {
 		const endTimeStamp = new Date(newDate).getTime();
@@ -510,26 +497,45 @@ function Inspector({ attributes, setAttributes }) {
 																})
 															}
 														/>
-														<style>{`.customDatePickerStyle .components-datetime__timezone{display:none;}`}</style>
-														<BaseControl
+														<ToggleControl
 															label={__(
-																"Recurring Countdown End Date",
+																"Stop Recurring On a Date",
 																"essential-blocks"
 															)}
-															className="customDatePickerStyle"
-														>
-															<DateTimePicker
-																currentDate={
-																	recurringCountdownEnd
-																		? new Date(recurringCountdownEnd)
-																		: recurringDefaultDate
-																}
-																onChange={(newDate) =>
-																	handleRecurringEndDateChange(newDate)
-																}
-																is12Hour={true}
-															/>
-														</BaseControl>
+															checked={!!recurringCountdownEnd}
+															onChange={(stopOnDate) =>
+																setAttributes({
+																	// Default to a week ahead; off means it recurs forever.
+																	recurringCountdownEnd: stopOnDate
+																		? Date.now() + 7 * 24 * 60 * 60 * 1000
+																		: undefined,
+																})
+															}
+															help={__(
+																"When off, the countdown keeps recurring with no end date.",
+																"essential-blocks"
+															)}
+														/>
+														{!!recurringCountdownEnd && (
+															<>
+																<style>{`.customDatePickerStyle .components-datetime__timezone{display:none;}`}</style>
+																<BaseControl
+																	label={__(
+																		"Recurring Countdown End Date",
+																		"essential-blocks"
+																	)}
+																	className="customDatePickerStyle"
+																>
+																	<DateTimePicker
+																		currentDate={new Date(recurringCountdownEnd)}
+																		onChange={(newDate) =>
+																			handleRecurringEndDateChange(newDate)
+																		}
+																		is12Hour={true}
+																	/>
+																</BaseControl>
+															</>
+														)}
 													</>
 												)}
 											</>

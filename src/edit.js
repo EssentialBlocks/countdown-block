@@ -161,23 +161,37 @@ export default function Edit(props) {
 				localStorage.setItem(evergreenTimeKey, date);
 			}
 
-			if (recurringCountdown) {
-				let recurringAfter =
-					parseFloat(restartTime) * HOUR_IN_MILISECONDS;
+			date = parseInt(date) || 0;
 
-				if (parseInt(date) + recurringAfter < Date.now()) {
-					date = Date.now() + parseInt(evergreenTime) * 1000;
+			const recurringAfter =
+				(parseFloat(restartTime) || 0) * HOUR_IN_MILISECONDS;
+			// Empty means no end date: keep recurring.
+			const recurringEnd = parseInt(recurringCountdownEnd) || 0;
+
+			// Runs on every tick, so the countdown restarts once the restart delay
+			// has passed instead of waiting for a reload.
+			const evergreenTarget = () => {
+				if (!recurringCountdown) {
+					return date;
+				}
+				const now = Date.now();
+				const ended = recurringEnd && now >= recurringEnd;
+				if (!ended && date + recurringAfter < now) {
+					date = now + evergreenTime * 1000;
 					localStorage.setItem(evergreenTimeKey, date);
 				}
+				return recurringEnd && recurringEnd < date ? recurringEnd : date;
+			};
 
-				if (recurringCountdownEnd < date) {
-					date = recurringCountdownEnd;
-				}
-			}
+			// A recurring timer keeps ticking at zero until it restarts, and stops
+			// only once its end date has passed.
+			const canStop = () =>
+				!recurringCountdown ||
+				(recurringEnd && Date.now() >= recurringEnd);
 
-			timeLeft(date || 0);
+			timeLeft(evergreenTarget());
 			const intervalIdEver = setInterval(() => {
-				timeLeft(date || 0, intervalIdEver);
+				timeLeft(evergreenTarget(), canStop() ? intervalIdEver : null);
 			}, 1000);
 
 			return () => {
